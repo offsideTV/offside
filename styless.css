@@ -131,3 +131,54 @@ h1 {
         margin: 20px auto; /* Ajusta el margen superior e inferior */
     }
 }
+/* Nuevos estilos para eventos y subeventos */
+.event-btn {
+    background: #2575fc;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    margin: 5px 0;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    border-radius: 8px;
+}
+
+.event-btn:hover {
+    background: #6a11cb;
+    transform: scale(1.02);
+}
+
+.sub-events {
+    display: none;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.sub-events a {
+    display: block;
+    color: #2575fc;
+    text-decoration: none;
+    padding: 8px;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.sub-events a:hover {
+    color: #6a11cb;
+    transform: translateX(10px);
+}
+
+.sub-events a::before {
+    content: '→';
+    margin-right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sub-events a:hover::before {
+    opacity: 1;
+}
