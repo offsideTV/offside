@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor - OffsideTV</title>
+    <link rel="stylesheet" href="styless.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/offside/main/logopestaña2-.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="https://raw.githubusercontent.com/OffsideTV/offside/main/logotvoriginal-.png" alt="OffsideTV Logo" class="logo">
+    </header>
+    
+    <div class="container">
+        <h2>Reproduciendo contenido</h2>
+        
+        <!-- Contenedor para el iframe -->
+        <div id="video-container">
+            <iframe id="video-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Obtener la URL del contenido desde los parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoSrc = urlParams.get('src');
+
+        // Cargar la URL en el iframe
+        if (videoSrc) {
+            document.getElementById('video-iframe').setAttribute('src', videoSrc);
+        } else {
+            document.getElementById('video-container').innerHTML = '<p>No se ha seleccionado ningún contenido para reproducir.</p>';
+        }
+    </script>
+</body>
+</html>
