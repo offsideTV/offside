@@ -9,6 +9,7 @@ body {
     overflow-x: hidden;
 }
 
+
 h1, h2, h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -97,6 +98,8 @@ h1 {
     margin-top: 10px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     overflow: visible; /* Asegúrate de que el contenido no esté recortado */
+    position: relative;
+    z-index: 10;
 }
 
 .panel a {
@@ -191,74 +194,6 @@ h1 {
 .sub-events a:hover::before {
     opacity: 1;
 }
-/* Estilos del modal mejorados */
-.modal {
-    display: flex;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Reduce la opacidad */
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px); /* Aplica desenfoque sutil */
-}
-
-.modal-content {
-    background: rgba(255, 255, 255, 0.95); /* Color de fondo con ligera transparencia */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 400px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Animación de entrada */
-.modal.show .modal-content {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Animación de salida */
-.modal.hide .modal-content {
-    transform: translateY(-20px);
-    opacity: 0;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    font-size: 1.8em;
-}
-
-.modal-content a {
-    color: #2575fc;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.modal-content a:hover {
-    text-decoration: underline;
-}
-
-#closeModal {
-    margin-top: 15px;
-    padding: 10px 18px;
-    background-color: #2575fc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-#closeModal:hover {
-    background-color: #6a11cb;
-}
-/* Estilos existentes... */
 
 /* Nuevos estilos para la cuadrícula de canales */
 .channels-grid {
@@ -382,12 +317,51 @@ h1 {
 /* Estilos para la sección de la agenda */
 .agenda {
     margin-bottom: 40px; /* Espacio entre la agenda y los canales */
+    max-height: 400px; /* Ajusta la altura según necesites */
+    overflow-y: auto; /* Agrega scroll vertical cuando sea necesario */
+    border: 1px solid #ccc; /* Opcional: solo para darle un borde */
+    padding: 10px;
+    scrollbar-width: thin; /* Hace la barra de desplazamiento más delgada */
+    scrollbar-color: #888 #f1f1f1; /* Personaliza los colores */
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 50px;
+    width: 100%;
+}
+/* Estilo para la scrollbar en navegadores WebKit (Chrome, Edge, Safari) */
+.agenda::-webkit-scrollbar {
+    width: 8px;
 }
 
+.agenda::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.agenda::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.agenda::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 .agenda h2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    z-index: 10;
+    background-color: white; /* Asegura que el fondo sea visible */
     font-size: 1.5em;
     margin-bottom: 20px;
     color: #1b1b1b;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box; /* Evita que el padding afecte el ancho total */
+    overflow: hidden; /* Asegura que no cause desbordes */
 }
 
 /* Estilos para la sección de los canales */
