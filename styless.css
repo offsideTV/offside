@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #3072d4, #c3cfe2);
@@ -191,74 +192,6 @@ h1 {
 .sub-events a:hover::before {
     opacity: 1;
 }
-/* Estilos del modal mejorados */
-.modal {
-    display: flex;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Reduce la opacidad */
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px); /* Aplica desenfoque sutil */
-}
-
-.modal-content {
-    background: rgba(255, 255, 255, 0.95); /* Color de fondo con ligera transparencia */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 400px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Animación de entrada */
-.modal.show .modal-content {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Animación de salida */
-.modal.hide .modal-content {
-    transform: translateY(-20px);
-    opacity: 0;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-    font-size: 1.8em;
-}
-
-.modal-content a {
-    color: #2575fc;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.modal-content a:hover {
-    text-decoration: underline;
-}
-
-#closeModal {
-    margin-top: 15px;
-    padding: 10px 18px;
-    background-color: #2575fc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-#closeModal:hover {
-    background-color: #6a11cb;
-}
-/* Estilos existentes... */
 
 /* Nuevos estilos para la cuadrícula de canales */
 .channels-grid {
@@ -377,18 +310,76 @@ h1 {
     height: 100%;
     border: none;
 }
-/* Estilos existentes... */
+
 
 /* Estilos para la sección de la agenda */
 .agenda {
     margin-bottom: 40px; /* Espacio entre la agenda y los canales */
+    max-height: 400px; /* Ajusta la altura según necesites */
+    overflow-y: auto; /* Agrega scroll vertical cuando sea necesario */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Borde sutil */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    position: relative;
+    overflow-x: hidden; /* Evita el scroll horizontal */
 }
 
+/* Estilo para la scrollbar en navegadores WebKit (Chrome, Edge, Safari) */
+.agenda::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.agenda::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.5); /* Fondo de la pista */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.agenda::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.7); /* Color del thumb */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: background 0.3s ease; /* Transición suave */
+}
+
+.agenda::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.9); /* Color del thumb al hacer hover */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .agenda {
+        max-height: 250px; /* Menos altura para pantallas pequeñas */
+        padding: 10px; /* Menos padding en móviles */
+    }
+
+    /* Ajustar la barra de desplazamiento para móviles */
+    .agenda::-webkit-scrollbar {
+        width: 6px; /* Barra más delgada en móviles */
+    }
+
+    .agenda::-webkit-scrollbar-thumb {
+        background: rgba(136, 136, 136, 0.8); /* Color más visible en móviles */
+    }
+}
+
+/* Estilos para el título de la agenda */
 .agenda h2 {
     font-size: 1.5em;
-    margin-bottom: 20px;
+    
     color: #1b1b1b;
+    text-align: center; /* Centrar el título */
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+    padding: 10px;
+    z-index: 10;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Línea divisoria */
 }
+
 
 /* Estilos para la sección de los canales */
 .canales h2 {
@@ -536,4 +527,13 @@ h1 {
 /* Estilos para los canales ocultos */
 .channel[style*="display: none"] {
     display: none !important;
+}
+@media (max-width: 768px) {
+    .channels-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .accordion {
+        font-size: 16px;
+    }
 }
