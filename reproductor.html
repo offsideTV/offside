@@ -23,18 +23,101 @@
             <iframe id="video-iframe" src="" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-
     <script>
-        // Obtener la URL del contenido desde los parámetros de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoSrc = urlParams.get('src');
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mapa de streams
+            const streams = {
+                "espnop1": "https://streamtp3.com/global1.php?stream=espn",
+                "espnop2": "https://streamdz4.lat/player/embed.php?channel=espn",
+                "espnop3": "https://la12hd.com/vivo/canal.php?stream=espn",
+                
 
-        // Cargar la URL en el iframe
-        if (videoSrc) {
-            document.getElementById('video-iframe').setAttribute('src', videoSrc);
-        } else {
-            document.getElementById('video-container').innerHTML = '<p>No se ha seleccionado ningún contenido para reproducir.</p>';
-        }
+                "espn2op1": "https://streamtp3.com/global1.php?stream=espn2",
+                "espn2op2": "https://streamdz3.lat/player/embed.php?channel=espn2",
+                "espn2op3": "https://la12hd.com/vivo/canal.php?stream=espn2",
+                
+                "espn3op1": "https://streamtp3.com/global1.php?stream=espn3",
+                "espn3op2": "https://streamdz3.lat/player/embed.php?channel=espn3",
+                "espn3op3": "https://la12hd.com/vivo/canal.php?stream=espn3",
+
+                "espn4op1": "https://streamtp3.com/global1.php?stream=espn4",
+                "espn4op2": "https://streamdz3.lat/player/embed.php?channel=espn4",
+                "espn4op3": "https://la12hd.com/vivo/canal.php?stream=espn4",
+
+                "espn5op1": "https://streamtp3.com/global1.php?stream=espn5",
+                "espn5op2": "https://streamdz3.lat/player/embed.php?channel=espn5",
+                "espn5op3": "https://la12hd.com/vivo/canal.php?stream=espn5",
+
+                "espn6op1": "https://streamtp3.com/global1.php?stream=espn6",
+                "espn6op2":"https://streamdz3.lat/player/embed.php?channel=espn6",
+                "espn6op3":"https://la12hd.com/vivo/canal.php?stream=espn6",
+
+                "espn7op1": "https://streamtp3.com/global1.php?stream=espn7",
+                "espn7op2": "https://streamdz3.lat/player/embed.php?channel=espn7",
+                "espn7op3": "https://la12hd.com/vivo/canal.php?stream=espn7",
+
+                "espnpremiumop1": "https://streamtp3.com/global1.php?stream=espnpremium",
+                "espnpremiumop2": "https://streamdz3.lat/player/embed.php?channel=espnpremium",
+                "espnpremiumop3": "https://la12hd.com/vivo/canal.php?stream=espnpremium",
+
+                "tntsportsop1": "https://streamtp3.com/global1.php?stream=tntsports",
+                "tntsportsop2": "https://streamdz3.lat/player/embed.php?channel=tntar",
+                "tntsportsop3": "https://la12hd.com/vivo/canal.php?stream=tntsports", 
+
+                "fox1op1": "https://streamtp3.com/global1.php?stream=fox1ar",
+                "fox1op2": "https://streamdz3.lat/player/embed.php?channel=foxar",
+                "fox1op3": "https://la12hd.com/vivo/canal.php?stream=foxsports",
+
+                "fox2op1": "https://streamtp3.com/global1.php?stream=fox2ar",
+                "fox2op2": "https://streamdz3.lat/player/embed.php?channel=fox2ar",
+                "fox2op3": "https://la12hd.com/vivo/canal.php?stream=foxsports2", 
+
+                "fox3op1": "https://streamtp3.com/global1.php?stream=fox3ar",
+                "fox3op2": "https://streamdz3.lat/player/embed.php?channel=fox3ar",
+                "fox3op3": "https://la12hd.com/vivo/canal.php?stream=foxsports3",
+
+                "dsportsop1": "https://streamtp3.com/global1.php?stream=dsports",
+                "dsportsop2": "https://streamdz3.lat/player/embed.php?channel=dsports",
+                "dsportsop3": "https://la12hd.com/vivo/canal.php?stream=dsports",
+
+                "dsports2op1": "https://streamtp3.com/global1.php?stream=dsports2",
+                "dsports2op2": "https://streamdz3.lat/player/embed.php?channel=dsports2",
+                "dsports2op3": "https://la12hd.com/vivo/canal.php?stream=dsports2",
+
+                "dsports+op1": "https://streamtp3.com/global1.php?stream=dsportsplus",
+                "dsports+op2": "https://streamdz3.lat/player/embed.php?channel=dsportsplus",
+                "dsports+op3": "https://la12hd.com/vivo/canal.php?stream=dsportsplus",
+
+                "tycsportsop1": "https://streamtp3.com/global1.php?stream=tycsports",
+                "tycsportsop2": "https://streamdz3.lat/player/embed.php?channel=tyc",
+                "tycsportsop3": "https://la12hd.com/vivo/canal.php?stream=tycsports",
+
+                "tycintop1": "https://la12hd.com/vivo/canal.php?stream=tycinternacional",
+                
+
+                "telefeop1": "https://streamtp3.com/global1.php?stream=telefe",
+                "telefeop2": "https://la12hd.com/vivo/canal.php?stream=telefe",
+
+                "disney3": "https://streamdz4.lat/player/embed.php?channel=disney3",
+                "disney6": "https://streamdz4.lat/player/embed.php?channel=disney6",
+                "disney7": "https://streamdz4.lat/player/embed.php?channel=disney7",
+                "disney8": "https://streamdz4.lat/player/embed.php?channel=disney8"
+                 
+
+            };
+    
+            // Obtener el canal desde la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const channel = urlParams.get("ch");
+    
+            if (channel && streams[channel]) {
+                document.getElementById("video-iframe").setAttribute("src", streams[channel]);
+            } else {
+                document.getElementById("video-container").innerHTML = '<p>No se ha seleccionado ningún contenido para reproducir.</p>';
+            }
+        });
     </script>
+    
+
 </body>
 </html>
