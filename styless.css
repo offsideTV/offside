@@ -1,4 +1,3 @@
-
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #3072d4, #c3cfe2);
@@ -56,16 +55,16 @@ h1 {
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
     cursor: pointer;
-    padding: 15px;
+    padding: 18px;
     width: 100%;
     border: none;
-    text-align: left;
+    text-align: center;
     outline: none;
     font-size: 18px;
     font-weight: bold;
     transition: background 0.3s ease, transform 0.2s ease;
-    border-radius: 8px;
-    margin: 5px 0;
+    border-radius: 12px;
+    margin: 10px 0;
     position: relative;
     overflow: hidden;
 }
@@ -392,6 +391,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
+    margin-top: 20px;
 }
 
 .channel {
@@ -535,5 +535,34 @@ h1 {
 
     .accordion {
         font-size: 16px;
+    }
+}
+@media (max-width: 768px) {
+    .agenda {
+        max-height: 250px;
+        padding: 10px;
+    }
+
+    .agenda::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .agenda::-webkit-scrollbar-thumb {
+        background: rgba(136, 136, 136, 0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .agenda {
+        max-height: 250px;
+        padding: 10px;
+    }
+
+    .agenda::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .agenda::-webkit-scrollbar-thumb {
+        background: rgba(136, 136, 136, 0.8);
     }
 }
