@@ -566,3 +566,33 @@ h1 {
         background: rgba(136, 136, 136, 0.8);
     }
 }
+/* Estilos para el botón de DMCA */
+.dmca-button-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#dmcaButton {
+    background-color: #007BFF;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#dmcaButton:hover {
+    background-color: #0056b3;
+}
+
+.dmca-text {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
