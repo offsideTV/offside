@@ -90,5 +90,14 @@ document.getElementById('dmcaButton').addEventListener('click', function() {
     document.getElementById('dmcaText').scrollIntoView({ behavior: 'smooth' });
 });
 
+document.getElementById('donateButton').addEventListener('click', function() {
+    window.open('donaciones.html', '_blank');
+});
+
+function closeBanner() {
+    document.getElementById("donationBanner").style.display = "none";
+    
+}
+
 
 
