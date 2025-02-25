@@ -649,3 +649,10 @@ h1 {
 .custom-donation button:hover {
     background-color: #4f94df;
 }
+.secure-donation {
+    font-size: 16px;
+    color: #064908; /* Verde para transmitir confianza */
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
