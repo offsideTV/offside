@@ -745,6 +745,9 @@ h1 {
     }
 }
 
+
+
+
 /* Estilo del botón destacado */
 .event.featured .accordion {
     background: linear-gradient(45deg, #ff0000, #ff9900);
@@ -809,3 +812,28 @@ h1 {
         font-size: 12px; /* Mejora la legibilidad en móviles */
     }
 }
+/* Ajustes específicos para móviles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Alinear los elementos verticalmente */
+        padding: 10px; /* Reducir el padding */
+    }
+
+    .donate-button {
+        width: 55%; /* Hacer que los botones ocupen todo el ancho */
+        margin: 5px 0; /* Ajustar el margen entre botones */
+        padding: 8px 12px; /* Ajustar el padding para móviles */
+        font-size: 14px; /* Reducir el tamaño de la fuente para móviles */
+    }
+
+    .header-content {
+        flex-direction: column; /* Alinear los elementos verticalmente */
+        align-items: center; /* Centrar los elementos */
+    }
+
+    .logo {
+        margin-bottom: 10px; /* Añadir margen inferior al logo */
+    }
+}
+
+
