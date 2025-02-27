@@ -23,6 +23,7 @@
         <a href="index.html">
             <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
         </a>
+        <button id="chanels" class="donate-button"> Ir al incio</button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
     </header>
     
@@ -112,6 +113,7 @@
 
                 "telefeop1": "https://streamtp3.com/global1.php?stream=telefe",
                 "telefeop2": "https://la12hd.com/vivo/canal.php?stream=telefe",
+                "telefeop3": "https://streamdz4.lat/player/embed.php?channel=telefe",
 
                 //disney streamdz4
                 "disney1": "https://streamdz4.lat/player/embed.php?channel=disney1",
@@ -169,8 +171,8 @@
                 "mls10": "https://streamdz4.lat/player/embed.php?channel=mls10",
                 "mls11": "https://streamdz4.lat/player/embed.php?channel=mls11",
 
-                "espnplus": "https://streamdz4.lat/player/embed.php?channel=espnplus1",
-                  "foxdeport": "https://streamdz4.lat/player/embed.php?channel=foxdeportes",
+
+                "foxdeport": "https://streamdz4.lat/player/embed.php?channel=foxdeportes",
             };
     
             // Obtener el canal desde la URL
@@ -183,6 +185,8 @@
                 document.getElementById("video-container").innerHTML = '<p>No se ha seleccionado ningún contenido para reproducir.</p>';
             }
         });
+
+        
     </script>
      <div class="dmca-button-container">
         <button id="dmcaButton">DMCA</button>
@@ -218,7 +222,10 @@
         });
 
         document.getElementById('donateButton').addEventListener('click', function() {
-    window.open('donaciones.html', '_blank');
+    window.location.href = 'donaciones.html'; 
+});
+document.getElementById('chanels').addEventListener('click', function() {
+    window.location.href = 'index.html'; // Redirige a la página de inicio
 });
     </script>
   
