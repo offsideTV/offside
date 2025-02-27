@@ -91,9 +91,8 @@ document.getElementById('dmcaButton').addEventListener('click', function() {
 });
 
 document.getElementById('donateButton').addEventListener('click', function() {
-    window.open('donaciones.html', '_blank');
+    window.location.href = 'donaciones.html'; 
 });
-
 function closeBanner() {
     document.getElementById("donationBanner").style.display = "none";
     
@@ -101,3 +100,25 @@ function closeBanner() {
 
 
 
+
+function cerrarPopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+// Mostrar el popup solo al entrar
+window.onload = function () {
+    document.getElementById("popup").style.display = "flex";
+};
+
+
+
+function cerrarPopup() {
+    document.getElementById("popup").style.display = "none";
+    localStorage.setItem("popupMostrado", "true");
+}
+
+window.onload = function () {
+    if (!localStorage.getItem("popupMostrado")) {
+        document.getElementById("popup").style.display = "flex";
+    }
+};
