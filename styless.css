@@ -836,4 +836,26 @@ h1 {
     }
 }
 
+/* Estilos específicos para móviles */
+@media (max-width: 768px) {
+    .panel {
+        padding: 10px; /* Reducir el padding para ahorrar espacio */
+        margin-top: 5px; /* Reducir el margen superior */
+        border-radius: 5px; /* Bordes más suaves */
+    }
+
+    .panel a {
+        padding: 8px; /* Reducir el padding de los enlaces */
+        font-size: 14px; /* Reducir el tamaño de la fuente */
+    }
+
+    .panel a:hover {
+        transform: translateX(5px); /* Reducir la transformación en hover */
+    }
+
+    .panel a::before {
+        margin-right: 5px; /* Reducir el margen del ícono */
+    }
+}
+
 
