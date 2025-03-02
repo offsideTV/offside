@@ -15,20 +15,20 @@ h1, h2, h3 {
     color: #1b1b1b;
 }
 header {
-    background: linear-gradient(135deg, #a32929, #1e1e1e);
-    padding: 10px 20px;
+    background: linear-gradient(135deg, #3072d4, #c3cfe2); /* Color de fondo del header */
+    padding: 10px 20px; /* Espaciado interno */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; /* Centra verticalmente los elementos */
     position: relative;
-    border-bottom: 3px solid #ff1801;
 }
 
 .header-content {
     display: flex;
-    align-items: center;
-    width: 100%;
+    align-items: center; /* Alinea el logo y el botón verticalmente */
+    width: 100%; /* Ocupa todo el ancho disponible */
 }
+
 
 
 .logo {
