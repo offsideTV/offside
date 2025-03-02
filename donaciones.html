@@ -21,8 +21,8 @@
     <header>
         <a href="index.html">
             <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
-            <button id="chanels" class="donate-button"> Ir al incio</button>
         </a>
+        <button id="chanels" class="donate-button"> Ir al incio</button>
     </header>
     <div class="donation-container">
         <p class="secure-donation">🔒 Tus donaciones son seguras y se procesan a través de Mercado Pago.</p>
@@ -50,6 +50,10 @@
             document.getElementById('customDonateButton').addEventListener('click', function() {
                 window.open('https://link.mercadopago.com.ar/offsidetv', '_blank');
             });
+
+             document.getElementById('chanels').addEventListener('click', function() {
+    window.location.href = 'index.html'; 
+});
         </script>
         
         
