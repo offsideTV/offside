@@ -864,3 +864,46 @@ h1 {
         margin-right: 5px; /* Reducir el margen del ícono */
     }
 }
+#searchInput2 {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ae00f3;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#searchInput2:focus {
+    border-color: #042366;
+    box-shadow: 0 0 8px rgba(1, 10, 24, 0.5);
+}
+#noResultsMessage {
+    display: none; /* Oculto por defecto */
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    #searchInput2 {
+        width: 90%; /* Ocupa más espacio en pantallas medianas */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
+        padding: 8px; /* Reduce el padding */
+    }
+}
+
+@media (max-width: 480px) {
+    #searchInput2 {
+        width: 95%; /* Ocupa todo el ancho en pantallas muy pequeñas */
+        font-size: 14px; /* Reduce aún más el tamaño de la fuente */
+        padding: 10px; /* Reduce el padding */
+        border-radius: 7px; /* Reduce el radio del borde */
+    }
+}
+
+
+
