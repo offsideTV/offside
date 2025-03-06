@@ -122,3 +122,34 @@ window.onload = function () {
         document.getElementById("popup").style.display = "flex";
     }
 };
+function filterEvents() {
+    // Obtén el valor del campo de búsqueda
+    const searchTerm = document.getElementById('searchInput2').value.toLowerCase();
+
+    // Obtén todos los eventos
+    const events = document.querySelectorAll('.event');
+
+    // Contador para eventos visibles
+    let visibleEvents = 0;
+
+    // Recorre cada evento y verifica si coincide con el término de búsqueda
+    events.forEach(event => {
+        const eventText = event.textContent.toLowerCase();
+
+        // Si el evento coincide con el término de búsqueda, lo muestra; de lo contrario, lo oculta
+        if (eventText.includes(searchTerm)) {
+            event.style.display = 'block';
+            visibleEvents++; // Incrementa el contador de eventos visibles
+        } else {
+            event.style.display = 'none';
+        }
+    });
+
+    // Muestra u oculta el mensaje de "No encontrado"
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    if (visibleEvents === 0) {
+        noResultsMessage.style.display = 'block'; // Muestra el mensaje
+    } else {
+        noResultsMessage.style.display = 'none'; // Oculta el mensaje
+    }
+}
