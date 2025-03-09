@@ -194,12 +194,37 @@ document.getElementById('copyLink').addEventListener('click', function(event) {
         confirmButtonText: 'OK'
     });
 });
-// Generar QR
 document.getElementById('shareQR').addEventListener('click', function(event) {
     event.preventDefault();
-    var url = encodeURIComponent(window.location.href);
-    var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${url}`;
-    window.open(qrCodeUrl, '_blank');
+    var url = window.location.href;
+
+    // Crear un contenedor para el QR
+    var qrContainer = document.createElement('div');
+    qrContainer.id = 'qr-code';
+    qrContainer.style.textAlign = 'center'; // Centrar el contenido
+
+    // Generar el QR
+    new QRCode(qrContainer, {
+        text: url,
+        width: 200, // Tamaño del QR
+        height: 200,
+        colorDark: "#000000", // Color del QR (negro)
+        colorLight: "#ffffff", // Color de fondo (blanco)
+        correctLevel: QRCode.CorrectLevel.H // Nivel de corrección de errores (alto)
+    });
+
+    // Mostrar el QR en un modal con SweetAlert
+    Swal.fire({
+        title: '¡Escanea el QR y no te pierdas de ningún partido!',
+        html: qrContainer,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+            popup: 'qr-modal', // Clase CSS personalizada para el modal
+            title: 'qr-title', // Clase CSS para el título
+            htmlContainer: 'qr-html-container' // Clase CSS para el contenido del modal
+        }
+    });
 });
 
 function isMobile() {
