@@ -905,5 +905,81 @@ h1 {
     }
 }
 
+/* Estilos para el botón de compartir redondo */
+.share-button-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+}
 
+.share-button {
+    background-color: #007bff; /* Color de fondo del botón */
+    border: none;
+    border-radius: 50%; /* Hace el botón redondo */
+    width: 50px; /* Tamaño del botón */
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto elevado */
+    padding: 0; /* Elimina el padding por defecto */
+    transition: background-color 0.3s ease; /* Transición suave solo para el hover */
+}
+
+.share-button:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el mouse */
+}
+
+.share-icon {
+    width: 24px; /* Tamaño de la imagen */
+    height: 24px;
+    filter: brightness(0) invert(1); /* Convierte la imagen en blanco (opcional) */
+}
+
+/* Estilos para el menú desplegable */
+.share-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 60px; /* Ajusta la posición del menú */
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 0;
+    width: 180px;
+}
+
+.share-menu a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.share-menu a:hover {
+    background-color: #f8f9fa; /* Color de fondo al pasar el mouse */
+}
+
+.share-menu a i {
+    margin-right: 10px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    color: #007bff; /* Color de los íconos */
+}
+
+.share-menu.show {
+    display: block;
+}
+/* Oculta el botón en móviles al hacer scroll */
+@media (max-width: 768px) {
+    .hidden {
+        display: none;
+    }
+}
 
