@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styless.css">
     <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+     <!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
 <script>
@@ -241,7 +246,22 @@
             <p><strong>Correo electrónico:</strong> <a href="mailto:offsidetve@gmail.com">offsideteve@gmail.com</a></p>
         </div>
     </div>
-    
+    <!-- Botón de compartir con imagen redonda -->
+<div class="share-button-container">
+    <button id="shareButton" class="share-button">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/compartir.png" alt="Compartir" class="share-icon">
+    </button>
+    <div id="shareMenu" class="share-menu">
+        <!-- Opción para compartir enlace -->
+        <a href="#" class="share-link" id="copyLink">
+            <i class="fas fa-link"></i> Compartir partido
+        </a>
+        <!-- Opción para generar QR -->
+        <a href="#" class="share-link" id="shareQR">
+            <i class="fas fa-qrcode"></i> Compartir por QR
+        </a>
+    </div>
+</div>
     <script>
         // Agrega un evento al botón DMCA para mostrar/ocultar el texto y desplazar la página
         document.getElementById('dmcaButton').addEventListener('click', function() {
@@ -263,6 +283,56 @@ document.getElementById('chanels').addEventListener('click', function() {
     window.location.href = 'index.html'; // Redirige a la página de inicio
 });
     </script>
-  
+   <script>
+    // Mostrar/ocultar el menú de compartir
+document.getElementById('shareButton').addEventListener('click', function() {
+    var shareMenu = document.getElementById('shareMenu');
+    shareMenu.classList.toggle('show');
+});
+
+// Cerrar el menú si se hace clic fuera de él
+window.addEventListener('click', function(event) {
+    var shareMenu = document.getElementById('shareMenu');
+    var shareButton = document.getElementById('shareButton');
+    if (event.target !== shareButton && !shareButton.contains(event.target)) {
+        shareMenu.classList.remove('show');
+    }
+});
+
+// Copiar el enlace al portapapeles (compatible con móviles)
+document.getElementById('copyLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    var url = window.location.href; // Obtiene la URL actual
+
+    // Crea un elemento de texto temporal
+    var tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+
+    // Selecciona y copia el texto
+    tempInput.select();
+    document.execCommand('copy');
+
+    // Elimina el elemento temporal
+    document.body.removeChild(tempInput);
+
+    // Muestra un mensaje de confirmación con SweetAlert
+    Swal.fire({
+        icon: 'success',
+        title: '¡Enlace copiado!',
+        text: 'El enlace se ha copiado al portapapeles.',
+        confirmButtonText: 'OK'
+    });
+});
+
+// Generar QR
+document.getElementById('shareQR').addEventListener('click', function(event) {
+    event.preventDefault();
+    var url = encodeURIComponent(window.location.href);
+    var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${url}`;
+    window.open(qrCodeUrl, '_blank');
+});
+
+  </script>
 </body>
 </html>
