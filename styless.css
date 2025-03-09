@@ -983,3 +983,40 @@ h1 {
     }
 }
 
+/* Estilos para el modal del QR */
+.qr-modal {
+    max-width: 400px; /* Ancho máximo del modal */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center; /* Centrar el contenido */
+    position: relative; /* Para posicionar el botón de cierre */
+}
+
+/* Estilos para el título */
+.qr-title {
+    margin-bottom: 5px; /* Espacio entre el título y el QR */
+    font-size: 1.5em; /* Tamaño del título */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilos para el contenedor del QR */
+#qr-code {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+}
+
+/* Estilos para el botón de cierre (la "X") */
+.qr-close-button {
+    position: absolute;
+    top: 10px; /* Distancia desde la parte superior */
+    right: 10px; /* Distancia desde la derecha */
+    font-size: 1.5em; /* Tamaño de la "X" */
+    color: #000000; /* Color de la "X" */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+}
+
+.qr-close-button:hover {
+    color: #007bff; /* Cambiar el color al pasar el mouse */
+}
+
