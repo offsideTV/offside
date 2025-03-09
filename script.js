@@ -153,3 +153,74 @@ function filterEvents() {
         noResultsMessage.style.display = 'none'; // Oculta el mensaje
     }
 }
+
+// Mostrar/ocultar el menú de compartir
+document.getElementById('shareButton').addEventListener('click', function() {
+    var shareMenu = document.getElementById('shareMenu');
+    shareMenu.classList.toggle('show');
+});
+
+// Cerrar el menú si se hace clic fuera de él
+window.addEventListener('click', function(event) {
+    var shareMenu = document.getElementById('shareMenu');
+    var shareButton = document.getElementById('shareButton');
+    if (event.target !== shareButton && !shareButton.contains(event.target)) {
+        shareMenu.classList.remove('show');
+    }
+});
+
+// Copiar el enlace al portapapeles (con SweetAlert)
+document.getElementById('copyLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    var url = window.location.href; // Obtiene la URL actual
+
+    // Crea un elemento de texto temporal
+    var tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+
+    // Selecciona y copia el texto
+    tempInput.select();
+    document.execCommand('copy');
+
+    // Elimina el elemento temporal
+    document.body.removeChild(tempInput);
+
+    // Muestra un mensaje de confirmación con SweetAlert
+    Swal.fire({
+        icon: 'success',
+        title: '¡Enlace copiado!',
+        text: 'El enlace se ha copiado al portapapeles.',
+        confirmButtonText: 'OK'
+    });
+});
+// Generar QR
+document.getElementById('shareQR').addEventListener('click', function(event) {
+    event.preventDefault();
+    var url = encodeURIComponent(window.location.href);
+    var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${url}`;
+    window.open(qrCodeUrl, '_blank');
+});
+
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobile()) {
+    var lastScrollTop = 0;
+    var shareButton = document.getElementById('shareButton');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scroll hacia abajo y más de 100px: oculta el botón
+            shareButton.classList.add('hidden');
+        } else {
+            // Scroll hacia arriba o menos de 100px: muestra el botón
+            shareButton.classList.remove('hidden');
+        }
+
+        lastScrollTop = scrollTop;
+    });
+}
