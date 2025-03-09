@@ -198,7 +198,7 @@ document.getElementById('copyLink').addEventListener('click', function(event) {
 document.getElementById('shareQR').addEventListener('click', function(event) {
     event.preventDefault();
     var url = encodeURIComponent(window.location.href);
-    var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${url}`;
+    var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${url}`;
     window.open(qrCodeUrl, '_blank');
 });
 
