@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OffsideTV - Multicam</title>
+    <link rel="stylesheet" href="estilocam.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PS1PQ89GCR');
+    </script>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
+        </a>
+        <button id="chanels" class="donate-button"> Canales y agenda</button>
+        <button id="donateButton" class="donate-button">Dejar una donación</button>
+    </header>
+
+    <!-- Botón de menú hamburguesa -->
+    <div id="menu-toggle" class="menu-toggle" aria-label="Abrir menú de selección de cámaras" role="button" tabindex="0">
+        <i class="fas fa-bars"></i> <span>Menú</span>
+    </div>
+    <!-- Overlay para el menú lateral -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Menú lateral -->
+    <div id="sidebar" class="sidebar">
+        <button id="close-sidebar" class="close-sidebar" aria-label="Cerrar menú">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3>Seleccionar cámaras</h3>
+        <label for="cam1">Cámara 1:</label>
+        <select id="cam1" onchange="changeStream(1)">
+            <option value="">Seleccionar canal</option>
+        </select>
+        <br>
+        <label for="cam2">Cámara 2:</label>
+        <select id="cam2" onchange="changeStream(2)">
+            <option value="">Seleccionar canal</option>
+        </select>
+        <br>
+        <label for="cam3">Cámara 3:</label>
+        <select id="cam3" onchange="changeStream(3)">
+            <option value="">Seleccionar canal</option>
+        </select>
+        <br>
+        <label for="cam4">Cámara 4:</label>
+        <select id="cam4" onchange="changeStream(4)">
+            <option value="">Seleccionar canal</option>
+        </select>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="grid">
+        
+        <div class="player" id="player1">Cámara 1</div>
+        <div class="player" id="player2">Cámara 2</div>
+        <div class="player" id="player3">Cámara 3</div>
+        <div class="player" id="player4">Cámara 4</div>
+    </div>
+
+    <script>
+         const streams = [
+            { name: "ESPN opción 1", url: "https://streamtp3.com/global1.php?stream=espn" },
+            { name: "ESPN opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn" },
+            { name: "ESPN opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espn" },
+
+            { name: "ESPN 2 opción 1", url: "https://streamtp3.com/global1.php?stream=espn2"},
+            { name: "ESPN 2 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn2"},
+            { name: "ESPN 2 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espn2"},
+
+            { name: "ESPN 3 opción 1", url: "https://streamtp3.com/global1.php?stream=espn3"},
+            { name: "ESPN 3 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn3"},
+            { name: "ESPN 3 opción 4", url: "https://la12hd.com/vivo/canal.php?stream=espn3"},
+
+            { name: "ESPN 4 opción 1", url: "https://streamtp3.com/global1.php?stream=espn4"},
+            { name: "ESPN 4 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn4"},
+            { name: "ESPN 4 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espn4"},
+
+            { name: "ESPN 5 opción 1", url: "https://streamtp3.com/global1.php?stream=espn5"},
+            { name: "ESPN 5 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn5"},
+            { name: "ESPN 5 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espn5"},
+
+            { name: "ESPN 6 opción 1", url: "https://streamtp3.com/global1.php?stream=espn6"},
+            { name: "ESPN 6 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn6"},
+            { name: "ESPN 6 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espn6"},
+
+            { name: "ESPN 7 opción 1", url: "https://streamtp3.com/global1.php?stream=espn7"},
+            { name: "ESPN 7 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espn7"},
+            { name: "ESPN 7 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espn7"},
+
+            { name: "ESPN Premium opción 1", url: "https://streamtp3.com/global1.php?stream=espnpremium"},
+            { name: "ESPN Premium opción 2", url: "https://streamdz4.lat/player/embed.php?channel=espnpremium"},
+            { name: "ESPN Premium opción 3", url: "https://la12hd.com/vivo/canal.php?stream=espnpremium"},
+
+            { name: "TNT Sports opción 1", url: "https://streamtp3.com/global1.php?stream=tntsports"},
+            { name: "TNT Sports opción 2", url: "https://streamdz4.lat/player/embed.php?channel=tntar"},
+            { name: "TNT Sports opción 3", url: "https://la12hd.com/vivo/canal.php?stream=tntsports"},
+
+            { name: "Fox Sports opción 1", url: "https://streamtp3.com/global1.php?stream=fox1ar"},
+            { name: "Fox Sports opción 2", url: "https://streamdz4.lat/player/embed.php?channel=foxar"},
+            { name: "Fox Sports opción 3", url: "https://la12hd.com/vivo/canal.php?stream=foxsports"},
+
+            { name: "Fox Sports 2 opción 1", url: "https://streamtp3.com/global1.php?stream=fox2ar"},
+            { name: "Fox Sports 2 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=fox2ar"},
+            { name: "Fox Sports 2 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=foxsports2"},
+
+            { name: "Fox Sports 3 opción 1", url: "https://streamtp3.com/global1.php?stream=fox3ar"},
+            { name: "Fox Sports 3 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=fox3ar"},
+            { name: "Fox Sports 3 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=foxsports3"},
+
+            { name: "Dsports opción 1", url: "https://streamtp3.com/global1.php?stream=dsports" },
+            { name: "Dsports opción 2", url: "https://streamdz4.lat/player/embed.php?channel=dsports" },
+            { name: "Dsports opción 3", url: "https://la12hd.com/vivo/canal.php?stream=dsports" },
+
+            { name: "Dsports 2 opción 1", url: "https://streamtp3.com/global1.php?stream=dsports2" },
+            { name: "Dsports 2 opción 2", url: "https://streamdz4.lat/player/embed.php?channel=dsports2" },
+            { name: "Dsports 2 opción 3", url: "https://la12hd.com/vivo/canal.php?stream=dsports2" },
+
+            { name: "Dsports+ opción 1", url: "https://streamtp3.com/global1.php?stream=dsportsplus" },
+            { name: "Dsports+ opción 2", url: "https://streamdz4.lat/player/embed.php?channel=dsportsplus" },
+            { name: "Dsports+ opción 3", url: "https://la12hd.com/vivo/canal.php?stream=dsportsplus" },
+
+            { name: "TyC Sports opción 1", url: "https://streamtp3.com/global1.php?stream=tycsports" },
+            { name: "TyC Sports opción 2", url: "https://streamdz4.lat/player/embed.php?channel=tyc" },
+            { name: "TyC Sports opción 3", url: "https://la12hd.com/vivo/canal.php?stream=tycsports" },
+
+            { name: "Telefe opción 1", url: "https://streamtp3.com/global1.php?stream=telefe" },
+            { name: "Telefe opción 2", url: "https://la12hd.com/vivo/canal.php?stream=telefe" },
+            { name: "Telefe opción 3", url: "https://streamdz4.lat/player/embed.php?channel=telefe" },
+            
+        ];
+        function populateSelects() {
+            document.querySelectorAll("select").forEach(select => {
+                streams.forEach(stream => {
+                    const option = document.createElement("option");
+                    option.value = stream.url;
+                    option.textContent = stream.name;
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        function changeStream(camIndex) {
+            const selectedUrl = document.getElementById(`cam${camIndex}`).value;
+            const player = document.getElementById(`player${camIndex}`);
+
+            if (!selectedUrl) {
+                player.innerHTML = `Cámara ${camIndex}`;
+            } else {
+                player.innerHTML = `<iframe src="${selectedUrl}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
+            }
+        }
+
+       // Función para abrir/cerrar el menú lateral
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const menuToggle = document.getElementById('menu-toggle');
+const closeSidebar = document.getElementById('close-sidebar');
+
+menuToggle.addEventListener('click', () => {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    menuToggle.classList.add('hidden'); // Ocultar el botón del menú hamburguesa
+});
+
+closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    menuToggle.classList.remove('hidden'); // Mostrar el botón del menú hamburguesa
+});
+
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    menuToggle.classList.remove('hidden'); // Mostrar el botón del menú hamburguesa
+});
+        populateSelects();
+        function changeStream(camIndex) {
+    const selectedUrl = document.getElementById(`cam${camIndex}`).value;
+    const player = document.getElementById(`player${camIndex}`);
+
+    if (!selectedUrl) {
+        player.innerHTML = `Cámara ${camIndex}`;
+    } else {
+        player.innerHTML = `<iframe src="${selectedUrl}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
+    }
+
+    adjustGrid(); // Ajustar el grid después de cambiar la cámara
+}
+
+function adjustGrid() {
+    const players = document.querySelectorAll('.player');
+    let activePlayers = 0;
+
+    players.forEach(player => {
+        if (player.querySelector('iframe')) {
+            activePlayers++;
+        }
+    });
+
+    const grid = document.querySelector('.grid');
+    grid.className = 'grid'; // Resetear clases
+
+    if (activePlayers === 1) {
+        grid.classList.add('grid-1');
+    } else if (activePlayers === 2) {
+        grid.classList.add('grid-2');
+    } else if (activePlayers === 3) {
+        grid.classList.add('grid-3');
+    } else if (activePlayers === 4) {
+        grid.classList.add('grid-4');
+    }
+}
+document.getElementById('chanels').addEventListener('click', function() {
+        window.location.href = 'index.html'; // Redirige a la página de inicio
+        });
+
+    </script>
+
+    <!-- Botón de compartir con imagen redonda -->
+<div class="share-button-container">
+    <button id="shareButton" class="share-button">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/compartir.png" alt="Compartir" class="share-icon">
+    </button>
+    <div id="shareMenu" class="share-menu">
+        <a href="https://www.instagram.com/offsidetv_" class="share-link" id="shareInstagram" target="_blank">
+            <i class="fab fa-instagram"></i> ¡Seguinos en IG!
+        </a>
+        <a href="https://x.com/offsideteve" class="share-link" id="shareTwitter" target="_blank">
+            <i class="fab fa-x-twitter"></i> ¡Seguinos en X!
+        </a>
+        <!-- Opción para compartir enlace -->
+        <a href="#" class="share-link" id="copyLink">
+            <i class="fas fa-link"></i> Compartir web
+        </a>
+        <!-- Opción para generar QR -->
+        <a href="#" class="share-link" id="shareQR">
+            <i class="fas fa-qrcode"></i> Generar QR
+        </a>
+    </div>
+</div>
+<script>
+    // Mostrar/ocultar el menú de compartir
+document.getElementById('shareButton').addEventListener('click', function(event) {
+    event.stopPropagation(); // Evita que el clic se propague al documento
+    var shareMenu = document.getElementById('shareMenu');
+    shareMenu.classList.toggle('show');
+});
+
+// Cerrar el menú si se hace clic fuera de él
+document.addEventListener('click', function(event) {
+    var shareMenu = document.getElementById('shareMenu');
+    var shareButton = document.getElementById('shareButton');
+    if (event.target !== shareButton && !shareButton.contains(event.target)) {
+        shareMenu.classList.remove('show');
+    }
+});
+
+// Copiar el enlace al portapapeles (con SweetAlert)
+document.getElementById('copyLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    var url = window.location.href; // Obtiene la URL actual
+
+    // Crea un elemento de texto temporal
+    var tempInput = document.createElement('input');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+
+    // Selecciona y copia el texto
+    tempInput.select();
+    document.execCommand('copy');
+
+    // Elimina el elemento temporal
+    document.body.removeChild(tempInput);
+
+    // Muestra un mensaje de confirmación con SweetAlert
+    Swal.fire({
+        icon: 'success',
+        title: '¡Enlace copiado!',
+        text: 'El enlace se copió correctamente. ¡Compártelo!',
+        confirmButtonText: 'OK'
+    });
+});
+
+// Generar QR
+document.getElementById('shareQR').addEventListener('click', function(event) {
+    event.preventDefault();
+    var url = window.location.href;
+
+    // Crear un contenedor para el QR
+    var qrContainer = document.createElement('div');
+    qrContainer.id = 'qr-code';
+    qrContainer.style.textAlign = 'center'; // Centrar el contenido
+
+    // Generar el QR
+    new QRCode(qrContainer, {
+        text: url,
+        width: 200, // Tamaño del QR
+        height: 200,
+        colorDark: "#000000", // Color del QR (negro)
+        colorLight: "#ffffff", // Color de fondo (blanco)
+        correctLevel: QRCode.CorrectLevel.H // Nivel de corrección de errores (alto)
+    });
+
+    // Mostrar el QR en un modal con SweetAlert
+    Swal.fire({
+        title: '¡Escanea el QR y no te pierdas de ningún partido!',
+        html: qrContainer,
+        showCloseButton: true,
+        showConfirmButton: false,
+        customClass: {
+            popup: 'qr-modal', // Clase CSS personalizada para el modal
+            title: 'qr-title', // Clase CSS para el título
+            htmlContainer: 'qr-html-container' // Clase CSS para el contenido del modal
+        }
+    });
+});
+
+// Ocultar el botón de compartir en móviles al hacer scroll
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobile()) {
+    var lastScrollTop = 0;
+    var shareButton = document.getElementById('shareButton');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scroll hacia abajo y más de 100px: oculta el botón
+            shareButton.classList.add('hidden');
+        } else {
+            // Scroll hacia arriba o menos de 100px: muestra el botón
+            shareButton.classList.remove('hidden');
+        }
+
+        lastScrollTop = scrollTop;
+    });
+}
+</script>
+<script>
+    
+</script>
+</body>
+</html>
