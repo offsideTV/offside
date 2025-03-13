@@ -9,16 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Incluye SweetAlert en tu HTML -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PS1PQ89GCR');
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PS1PQ89GCR');
 </script>
 </head>
 <body>
@@ -26,14 +25,18 @@
         <a href="index.html">
             <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
         </a>
+        <button id="camButton" class="cam-button">
+            Multicamaras
+            <span class="tooltip">Solo recomendable usarlo en PC</span>
+        </button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
        
     </header>
     
- <div class="container">
+    <div class="container">
         <!-- Sección de la agenda -->
     <section class="agenda">
-        <h2>Agenda del miércoles 12 de Marzo</h2>
+        <h2>Agenda del jueves 13 de Marzo</h2>
         <!-- Campo de búsqueda -->
     <input type="text" id="searchInput2" placeholder="Buscar evento (competencia, equipo, etc...)" oninput="filterEvents()">
     <!-- Mensaje de "No encontrado" -->
@@ -42,8 +45,8 @@
    </div>
         <div class="event">
             <button class="accordion">
-                <h3>Champions League</h3>
-                <p>14:45 - Lille Vs. Borussia Dortmund</p>
+                <h3>Europa League</h3>
+                <p>14:45 - Athletic Club Vs. Roma</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
@@ -57,22 +60,36 @@
         <div class="event">
             <button class="accordion">
                 <h3>Champions League</h3>
-                <p>17:00 - Atlético Madrid Vs. Real Madrid</p>
+                <p>14:45 - Frankfurt Vs. Ajax</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
                     <a href="reproductor.html?ch=disney2" class="video-link">Disney + opción 1</a>
-                     <a href="reproductor.html?ch=fox1op1" class="video-link">Fox Sports opción 2</a>
-            <a href="reproductor.html?ch=fox1op2" class="video-link">Fox Sports opción 3</a>
-            <a href="reproductor.html?ch=fox1op3" class="video-link">Fox Sports opción 4</a>
+                    <a href="reproductor.html?ch=espn3op1" class="video-link">ESPN 3 opción 2</a>
+                    <a href="reproductor.html?ch=espn3op2" class="video-link">ESPN 3 opción 3</a>
+                    <a href="reproductor.html?ch=espn3op3" class="video-link">ESPN 3 opción 4</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Europa League</h3>
+                <p>14:45 - Lazio Vs. Viktoria Plzen</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney3" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=espn4op1" class="video-link">ESPN 4 opción 2</a>
+                    <a href="reproductor.html?ch=espn4op2" class="video-link">ESPN 4 opción 3</a>
+                    <a href="reproductor.html?ch=espn4op3" class="video-link">ESPN 4 opción 4</a>
                 </div>
             </div>
         </div>
         
         <div class="event">
             <button class="accordion">
-                <h3>Champions League</h3>
-                <p>17:00 - Aston Villa Vs. Brujas</p>
+                <h3>Europa League</h3>
+                <p>14:45 - Olympiacos Vs. Bodø/Glimt</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
@@ -83,71 +100,173 @@
                 </div>
             </div>
         </div>
-       
         <div class="event">
             <button class="accordion">
-                <h3>Champions League</h3>
-                <p>17:00 - Arsenal Vs. PSV</p>
+                <h3>Conference League</h3>
+                <p>14:45 - Cercle Brugge Vs. Jagiellonia</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=disney3" class="video-link">Disney + opción 1</a>
-                    <a href="reproductor.html?ch=espn2op1" class="video-link">ESPN opción 2</a>
-                    <a href="reproductor.html?ch=espn2op2" class="video-link">ESPN opción 3</a>
-                    <a href="reproductor.html?ch=espn2op3" class="video-link">ESPN opción 4</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Argentina</h3>
-                <p>17:00 - Platense Vs. Argentinos Quilmes</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
-                    <a href="reproductor.html?ch=tycsportsop2" class="video-link">TyC Sports opción 2</a>
-                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
+                    <a href="reproductor.html?ch=disney8" class="video-link">Disney + opción 1</a>
                 </div>
             </div>
         </div>
        
         <div class="event">
             <button class="accordion">
+                <h3>Conference League</h3>
+                <p>14:45 - Rapid Wien Vs. Borac Banja Luka</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney6" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Conference League</h3>
+                <p>14:45 - Lugano Vs. NK Celje</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney5" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Conference League</h3>
+                <p>14:45 - Djurgårdens Vs. Paphos</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney7" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Europa League</h3>
+                <p>17:00 - Tottenham Vs. AZ Alkmaar</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney10" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=espn3op1" class="video-link">ESPN 3 opción 2</a>
+                    <a href="reproductor.html?ch=espn3op2" class="video-link">ESPN 3 opción 3</a>
+                    <a href="reproductor.html?ch=espn3op3" class="video-link">ESPN 3 opción 4</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Europa League</h3>
+                <p>17:00 - Manchester United Vs. Real Sociedad</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney9" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 2</a>
+                    <a href="reproductor.html?ch=espnop2" class="video-link">ESPN opción 3</a>
+                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 4</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Europa League</h3>
+                <p>17:00 - Rangers Vs. Fenerbahçe</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney12" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=espn5op1" class="video-link">ESPN 5 opción 2</a>
+                    <a href="reproductor.html?ch=espn5op2" class="video-link">ESPN 5 opción 3</a>
+                    <a href="reproductor.html?ch=espn5op3" class="video-link">ESPN 5 opción 4</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Europa League</h3>
+                <p>17:00 - Lyon Vs. FCSB</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney11" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=espn4op1" class="video-link">ESPN 4 opción 2</a>
+                    <a href="reproductor.html?ch=espn4op2" class="video-link">ESPN 4 opción 3</a>
+                    <a href="reproductor.html?ch=espn4op3" class="video-link">ESPN 4 opción 4</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Conference League</h3>
+                <p>17:00 - Fiorentina Vs. Panathinaikos</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney15" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Conference League</h3>
+                <p>17:00 - Chelsea Vs. København</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney13" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Conference League</h3>
+                <p>17:00 - Vitória Vs. Real Betis</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney14" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Conference League</h3>
+                <p>17:00 - Legia Warszawa Vs. Molde</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney16" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Champions Cup</h3>
+                <p>21:00 - Cavalier Vs. Inter Miami</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=disney19" class="video-link">Disney + opción 1</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
                 <h3>Copa Libertadores</h3>
-                <p>19:00 - Cerro Porteño Vs. Melgar</p>
+                <p>21:30 - Bahía Vs. Boston River</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
                     <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
                     <a href="reproductor.html?ch=espnop2" class="video-link">ESPN opción 2</a>
                     <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Argentina</h3>
-                <p>21:10 - Huracan Vs. San Martín Formosa</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
-                    <a href="reproductor.html?ch=tycsportsop2" class="video-link">TyC Sports opción 2</a>
-                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>21:30 - Corinthians Vs. Barcelona SC</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
-                    <a href="reproductor.html?ch=espnop2" class="video-link">ESPN opción 2</a>
-                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
+
                 </div>
             </div>
         </div>
@@ -311,7 +430,7 @@
     </div>
     <div class="channel">
         <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/TyCSportsinternacional-logo.webp" alt="TyCInt Logo" class="channel-logo">
-        <button class="accordion">TyC Sports Internacional</button>
+        <button class="accordion">TyC Sports Internacional </button>
         <div class="panel">
             <a href="reproductor.html?ch=tycintop1" class="video-link">Opción 1</a>
         </div>
@@ -325,7 +444,7 @@
             <a href="reproductor.html?ch=telefeop3" class="video-link">Opción 3</a>
         </div>
     </div>
-        <div class="channel">
+    <div class="channel">
         <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere logo" class="channel-logo">
         <button class="accordion">Premiere</button>
         <div class="panel">
@@ -389,7 +508,7 @@
         <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="Sportv Logo" class="channel-logo">
         <button class="accordion">Sportv</button>
         <div class="panel">
-            <a href="reproductor.html?ch=sportv1" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=sportv" class="video-link">Opción 1</a>
         </div>
     </div>
     <div class="channel">
@@ -413,7 +532,7 @@
             <a href="reproductor.html?ch=sportv4" class="video-link">Opción 1</a>
         </div>
     </div>
-     <div class="channel">
+    <div class="channel">
         <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="sportv Logo" class="channel-logo">
         <button class="accordion">Sportv 5</button>
         <div class="panel">
@@ -446,8 +565,7 @@
         <button onclick="window.open('https://link.mercadopago.com.ar/offsidetv', '_blank')">Donar ahora</button>
         <button class="close-btn" onclick="closeBanner()">✖</button>
     </div>
-
-  <!-- Botón de compartir con imagen redonda -->
+<!-- Botón de compartir con imagen redonda -->
 <div class="share-button-container">
     <button id="shareButton" class="share-button">
         <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/compartir.png" alt="Compartir" class="share-icon">
