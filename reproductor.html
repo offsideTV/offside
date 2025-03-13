@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="styless.css">
     <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-     <!-- FontAwesome -->
+    <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
      <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
 <script>
@@ -28,7 +29,7 @@
         <a href="index.html">
             <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
         </a>
-        <button id="chanels" class="donate-button"> Ir al inicio</button>
+        <button id="chanels" class="donate-button">Canales y agenda</button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
     </header>
     
@@ -44,7 +45,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
             const streams = {
-               "espnop1": "https://streamtp3.com/global1.php?stream=espn",
+                "espnop1": "https://streamtp3.com/global1.php?stream=espn",
                 "espnop2": "https://streamdz4.lat/player/embed.php?channel=espn",
                 "espnop3": "https://la12hd.com/vivo/canal.php?stream=espn",
                 "espnar": "https://streamdz4.lat/player/embed.php?channel=espnar",
@@ -181,7 +182,8 @@
 
 
                 "foxdeport": "https://streamdz4.lat/player/embed.php?channel=foxdeportes",
-        
+                "sportv5": "https://streamdz4.lat/player/embed.php?channel=sportv5",
+
                 //Partidos Brasil
                 "premiere1": "https://la12hd.com/vivo/canal.php?stream=premiere1",
                 "premiere2": "https://la12hd.com/vivo/canal.php?stream=premiere2",
@@ -195,9 +197,9 @@
                 "sportv1": "https://la12hd.com/vivo/canal.php?stream=sportv",
                 "sportv2": "https://la12hd.com/vivo/canal.php?stream=sportv2",
                 "sportv3": "https://la12hd.com/vivo/canal.php?stream=sportv3",
-                 "sportv4": "https://streamdz4.lat/player/embed.php?channel=sportv4",
+                "sportv4": "https://streamdz4.lat/player/embed.php?channel=sportv4",
                 "sportv5": "https://streamdz4.lat/player/embed.php?channel=sportv5",
-                
+
                 "premiere1op2": "https://dpstream1.my/fun1.html?channel=premiere",
                 "premiere2op2": "https://dpstream1.my/fun1.html?channel=premiere2",
                 "premiere3op2": "https://dpstream1.my/fun1.html?channel=premiere3",
@@ -209,10 +211,11 @@
                 "ziggo2": "https://streamdz4.lat/player/embed.php?channel=ziggo2",
                 "tntuk": "https://streamdz4.lat/player/embed.php?channel=tntuk",
                 "paramount5": "https://streamdz4.lat/player/embed.php?channel=paramount5",
-                
+
                 "beinsportsextran": "https://streamdz4.lat/player/embed.php?channel=beinsportsextran",
                 "dsportsplus": "https://streamdz4.lat/player/embed.php?channel=dsportsplus",
                 "eventos1": "https://streamdz4.lat/player/embed.php?channel=eventos1",
+
             };
     
             // Obtener el canal desde la URL
@@ -252,6 +255,7 @@
         <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/compartir.png" alt="Compartir" class="share-icon">
     </button>
     <div id="shareMenu" class="share-menu">
+        
         <!-- Opción para compartir enlace -->
         <a href="#" class="share-link" id="copyLink">
             <i class="fas fa-link"></i> Compartir canal
@@ -277,13 +281,15 @@
         });
 
         document.getElementById('donateButton').addEventListener('click', function() {
-    window.location.href = 'donaciones.html'; 
-});
-document.getElementById('chanels').addEventListener('click', function() {
-    window.location.href = 'index.html'; // Redirige a la página de inicio
-});
+        window.location.href = 'donaciones.html'; 
+        });
+       
+        document.getElementById('chanels').addEventListener('click', function() {
+        window.location.href = 'index.html'; // Redirige a la página de inicio
+        });
+       
     </script>
-   <script>
+  <script>
     // Mostrar/ocultar el menú de compartir
 document.getElementById('shareButton').addEventListener('click', function() {
     var shareMenu = document.getElementById('shareMenu');
