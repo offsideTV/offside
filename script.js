@@ -93,35 +93,15 @@ document.getElementById('dmcaButton').addEventListener('click', function() {
 document.getElementById('donateButton').addEventListener('click', function() {
     window.location.href = 'donaciones.html'; 
 });
+document.getElementById('camButton').addEventListener('click', function() {
+    window.location.href = 'multicam.html'; 
+});
 function closeBanner() {
     document.getElementById("donationBanner").style.display = "none";
     
 }
 
 
-
-
-function cerrarPopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-// Mostrar el popup solo al entrar
-window.onload = function () {
-    document.getElementById("popup").style.display = "flex";
-};
-
-
-
-function cerrarPopup() {
-    document.getElementById("popup").style.display = "none";
-    localStorage.setItem("popupMostrado", "true");
-}
-
-window.onload = function () {
-    if (!localStorage.getItem("popupMostrado")) {
-        document.getElementById("popup").style.display = "flex";
-    }
-};
 function filterEvents() {
     // Obtén el valor del campo de búsqueda
     const searchTerm = document.getElementById('searchInput2').value.toLowerCase();
@@ -226,7 +206,6 @@ document.getElementById('shareQR').addEventListener('click', function(event) {
         }
     });
 });
-
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -248,4 +227,23 @@ if (isMobile()) {
 
         lastScrollTop = scrollTop;
     });
+}
+
+// Función para detectar si es un dispositivo móvil
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobile()) {
+    document.getElementById('camButton').innerHTML = 'Multicamaras <span>(⚠️ Sólo para PC)</span>';
+}
+
+// Función para detectar si es un dispositivo móvil
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Ocultar el botón si es un dispositivo móvil
+if (isMobile()) {
+    document.getElementById('camButton').style.display = 'none';
 }
