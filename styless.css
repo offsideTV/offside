@@ -1086,3 +1086,18 @@ h1 {
         display: none;
     }
 }
+.cam {
+    text-align: center;
+    margin-top: 20px; /* Ajusta este valor según sea necesario */
+}
+.cam-logo {
+    cursor: pointer;
+    width: 80px; /* Ajusta el tamaño según necesites */
+}
+.warning-text {
+    font-size: 15px;
+    color: rgb(33, 11, 116);
+    margin-top: 4px;
+    font-weight: bold;
+}
+
