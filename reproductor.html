@@ -30,6 +30,10 @@
             <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
         </a>
         <button id="chanels" class="donate-button">Canales y agenda</button>
+         <button id="extButton" class="cam-button">
+            Descargar Extensión
+            <span class="tooltip">En la webstore darle a "Agregar a Chrome"</span>
+        </button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
     </header>
     
@@ -333,7 +337,9 @@
         document.getElementById('chanels').addEventListener('click', function() {
         window.location.href = 'index.html'; // Redirige a la página de inicio
         });
-       
+       document.getElementById("extButton").addEventListener("click", function() {
+    window.open("https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb", "_blank");
+});
     </script>
   <script>
     // Mostrar/ocultar el menú de compartir
