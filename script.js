@@ -96,6 +96,9 @@ document.getElementById('donateButton').addEventListener('click', function() {
 document.getElementById('camButton').addEventListener('click', function() {
     window.location.href = 'multicam.html'; 
 });
+document.getElementById("extButton").addEventListener("click", function() {
+    window.open("https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb", "_blank");
+});
 function closeBanner() {
     document.getElementById("donationBanner").style.display = "none";
     
