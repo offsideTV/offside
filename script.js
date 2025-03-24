@@ -239,6 +239,7 @@ function isMobile() {
 
 if (isMobile()) {
     document.getElementById('camButton').innerHTML = 'Multicamaras <span>(⚠️ Sólo para PC)</span>';
+    document.getElementById('extButton').innerHTML = 'Multicamaras <span>En la webstore darle a "Agregar a Chrome"</span>';
 }
 
 // Función para detectar si es un dispositivo móvil
@@ -249,4 +250,6 @@ function isMobile() {
 // Ocultar el botón si es un dispositivo móvil
 if (isMobile()) {
     document.getElementById('camButton').style.display = 'none';
+    document.getElementById('extButton').style.display = 'none';
 }
+
