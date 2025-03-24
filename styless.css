@@ -1105,4 +1105,31 @@ h1 {
             display: none;
         }
     }
-
+ .highlight-argentina {
+        position: relative;
+        display: inline-block;
+        padding: 0 15px 0 5px;
+        color: transparent;
+        font-weight: 900;
+        background: linear-gradient(180deg, 
+            #75AADB 0%, #75AADB 33%, 
+            white 33%, white 66%, 
+            #75AADB 66%, #75AADB 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        text-shadow: none;
+        z-index: 1;
+    }
+    
+    .highlight-argentina::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20"><circle cx="15" cy="10" r="4" fill="%23FFD700"/></svg>') center center no-repeat;
+        background-size: 20px;
+        z-index: -1;
+        opacity: 0.8;
+    }
