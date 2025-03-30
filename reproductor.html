@@ -30,9 +30,8 @@
             <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
         </a>
         <button id="chanels" class="donate-button">Canales y agenda</button>
-         <button id="extButton" class="cam-button">
-            Descargar Extensión
-            <span class="tooltip">En la webstore darle a "Agregar a Chrome"</span>
+        <button id="reportButton" class="report-button">
+            Reportar fallos
         </button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
     </header>
@@ -49,7 +48,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
             const streams = {
-                "espnop1": "https://streamtp3.com/global1.php?stream=espn",
+                "espnop1": "https://streamtp3.com/global2.php?stream=espn",
                 "espnop2": "https://streamdz4.lat/player/embed.php?channel=espn",
                 "espnop3": "https://la12hd.com/vivo/canal.php?stream=espn",
                 "espnar": "https://streamdz4.lat/player/embed.php?channel=espnar",
@@ -116,7 +115,7 @@
                 "dsportsplus2": "https://streamdz4.lat/player/embed.php?channel=dsportsplus",
                 "dsportsplus3": "https://la12hd.com/vivo/canal.php?stream=dsportsplus",
 
-               "tycsportsop1": "https://streamtp3.com/global1.php?stream=tycsports",
+                "tycsportsop1": "https://streamtp3.com/global1.php?stream=tycsports",
                 "tyc-dp": "https://dpstream1.my/global1.html?channel=tyc",
                 "tycsportsop3": "https://la12hd.com/vivo/canal.php?stream=tycsports",
                 "tycsportsop4": "https://vivofytv.com/vod.html?get=https://embed.sdfgnksbounce.com/embed2/tycsports.html",
@@ -205,8 +204,6 @@
                 "mls10": "https://streamdz4.lat/player/embed.php?channel=mls10",
                 "mls11": "https://streamdz4.lat/player/embed.php?channel=mls11",
                 "mls12": "https://streamdz4.lat/player/embed.php?channel=mls12",
-                //mls streamtp3
-                "mls1es": "https://streamtp3.com/global1.php?stream=mls1es", 
 
 
                 "foxdeport": "https://streamdz4.lat/player/embed.php?channel=foxdeportes",
@@ -264,20 +261,24 @@
                "dsports-dp": "https://dpstream1.my/fun1.html?channel=dsports",
                "dsportsplus-dp": "https://dpstream1.my/fun1.html?channel=dsportsplus",
 
-               "tyc-dp": "https://dpstream1.my/global1.html?channel=tyc",
+               
+               "telefe-dp": "https://dpstream1.my/fun1.html?channel=telefe",
                "espnplus": "https://streamtp3.com/global1.php?stream=espnplus8",
                 "caracoltv": "https://streamtp3.com/global1.php?stream=caracoltv",
                 "eventos5": "https://streamtp3.com/global1.php?stream=eventos5",
-                "eventos7": " https://streamtp3.com/global1.php?stream=eventos7",
-                "eventos8": "https://streamtp3.com/global1.php?stream=eventos8",
                 "movistar": "https://streamtp3.com/global1.php?stream=movistar_deportes_peru",
 
-              
-                "tvpublica": "https://streamtp3.com/global1.php?stream=tv_publica",
-                "tv-publica": "https://la12hd.com/vivo/canal.php?stream=tvpublica",
-                "tv-publica3": "https://vivofytv.com/vod.html?get=https://embed.sdfgnksbounce.com/embed2/tvpublica.html",
-                 "tycyt": "https://www.youtube.com/embed/HHZ1kSda7Js?si=n3yrrahKSKS_LapP",
+                "eltrece": "https://vivofytv.com/vod.html?get=https://embed.sdfgnksbounce.com/embed2/eltrece.html",
 
+                    "espn-n": "https://nuskt.directory/cvatt.html?get=RVNQTjJIRA",
+                    "tvpublica": "https://streamtp3.com/global1.php?stream=tv_publica",
+                    "tv-publica": "https://la12hd.com/vivo/canal.php?stream=tvpublica",
+                    "tv-publica3": "https://vivofytv.com/vod.html?get=https://embed.sdfgnksbounce.com/embed2/tvpublica.html",
+
+
+                "tycyt": "https://www.youtube.com/embed/HHZ1kSda7Js?si=n3yrrahKSKS_LapP",
+
+             
             };
     
             // Obtener el canal desde la URL
@@ -326,6 +327,13 @@
         <a href="#" class="share-link" id="shareQR">
             <i class="fas fa-qrcode"></i> Generar QR
         </a>
+        <!-- Nueva opción para la extensión -->
+        <a href="https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb" 
+           class="share-link" 
+           id="extensionLink" 
+           target="_blank">
+            <i class="fas fa-puzzle-piece"></i> Extensión M3U8
+        </a>
     </div>
 </div>
     <script>
@@ -349,9 +357,10 @@
         document.getElementById('chanels').addEventListener('click', function() {
         window.location.href = 'index.html'; // Redirige a la página de inicio
         });
-       document.getElementById("extButton").addEventListener("click", function() {
-    window.open("https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb", "_blank");
+        document.getElementById("reportButton").addEventListener("click", function() {
+    window.location.href = 'fallos.html'; 
 });
+    
     </script>
   <script>
     // Mostrar/ocultar el menú de compartir
