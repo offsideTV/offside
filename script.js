@@ -96,8 +96,8 @@ document.getElementById('donateButton').addEventListener('click', function() {
 document.getElementById('camButton').addEventListener('click', function() {
     window.location.href = 'multicam.html'; 
 });
-document.getElementById("extButton").addEventListener("click", function() {
-    window.open("https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb", "_blank");
+document.getElementById("reportButton").addEventListener("click", function() {
+    window.location.href = 'fallos.html'; 
 });
 function closeBanner() {
     document.getElementById("donationBanner").style.display = "none";
@@ -239,7 +239,7 @@ function isMobile() {
 
 if (isMobile()) {
     document.getElementById('camButton').innerHTML = 'Multicamaras <span>(⚠️ Sólo para PC)</span>';
-    document.getElementById('extButton').innerHTML = 'Multicamaras <span>En la webstore darle a "Agregar a Chrome"</span>';
+    
 }
 
 // Función para detectar si es un dispositivo móvil
@@ -250,6 +250,5 @@ function isMobile() {
 // Ocultar el botón si es un dispositivo móvil
 if (isMobile()) {
     document.getElementById('camButton').style.display = 'none';
-    document.getElementById('extButton').style.display = 'none';
+ 
 }
-
