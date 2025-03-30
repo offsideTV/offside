@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar fallos - OffsideTV</title>
+    <link rel="stylesheet" href="styless.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Estilos específicos para la página de reportes */
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .report-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .report-header h1 {
+            color: #e74c3c;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 10px;
+        }
+        
+        .report-header p {
+            color: #666;
+        }
+        
+        .report-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .report-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .report-form input,
+        .report-form textarea,
+        .report-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        
+        .report-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        @media (max-width: 768px) {
+            .report-container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">
+            <h1><i class="fas fa-bug"></i> ¿Tuviste algún problema?</h1>
+            <p>Ayúdanos a mejorar OffsideTV reportando cualquier problema que encuentres</p>
+        </div>
+        
+        <!-- Formulario modificado para FormSubmit -->
+        <form id="reportForm" class="report-form" action="https://formsubmit.co/offsideteve@gmail.com" method="POST">
+            <!-- Campos ocultos para configuración -->
+            <input type="hidden" name="_subject" value="Nuevo Reporte OffsideTV">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://offsidetv.netlify.app/gracias.html"> 
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div class="form-group">
+                <label for="problemType">Tipo de problema:</label>
+                <select id="problemType" name="Tipo de problema" required>
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="Problema con transmisión">Problema con transmisión</option>
+                    <option value="Video no funciona">Video no funciona</option>
+                    <option value="Problema de audio">Problema de audio</option>
+                    <option value="Error en la interfaz">Error en la interfaz</option>
+                    <option value="Otro problema">Otro problema</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Descripción detallada:</label>
+                <textarea id="description" name="Descripción" placeholder="Describe el problema con todos los detalles posibles..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="url">URL donde ocurrió el problema (opcional):</label>
+                <input type="url" id="url" name="URL" placeholder="https://...">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Tu email (opcional):</label>
+                <input type="email" id="email" name="Email" placeholder="Para responder tu reporte">
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Enviar Reporte
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenimos el envío inmediato
+            
+            // Mostrar loader
+            const swalInstance = Swal.fire({
+                title: 'Enviando reporte...',
+                html: 'Redireccionando en <span id="countdown">3</span> segundos',
+                timer: 3000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    // Contador regresivo
+                    const timerInterval = setInterval(() => {
+                        const countdown = Swal.getHtmlContainer().querySelector('#countdown');
+                        if (countdown) {
+                            countdown.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+                        }
+                    }, 1000);
+                    
+                    // Enviar el formulario después de 1.5 segundos (para que el usuario vea el mensaje)
+                    setTimeout(() => {
+                        // Crear un iframe oculto para el envío
+                        const iframe = document.createElement('iframe');
+                        iframe.name = 'hidden-iframe';
+                        iframe.style.display = 'none';
+                        document.body.appendChild(iframe);
+                        
+                        // Cambiar el target del formulario
+                        this.target = 'hidden-iframe';
+                        
+                        // Enviar el formulario
+                        this.submit();
+                        
+                        // Redirección manual después del tiempo completo
+                        setTimeout(() => {
+                            window.location.href = "gracias.html";
+                        }, 3000);
+                        
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
