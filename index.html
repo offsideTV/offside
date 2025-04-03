@@ -36,43 +36,79 @@
        
     </header>
     
-<div class="container">
-        <!-- Sección de la agenda -->
-        <section class="agenda">
-            <h2 style="background: linear-gradient(to right, #75AADB, white, #75AADB); padding: 10px; text-align: center; border-radius: 5px; color: #343a40; margin-bottom: 15px;">
-                Agenda del miércoles 2 de Abril - Día del Veterano y de los Caídos en la Guerra de Malvinas
-            </h2>
-            
-            <!-- Imagen y texto más compactos -->
-            <div style="text-align: center; margin: 10px 0;">
-                <img src="islas.webp" alt="Mapa de las Islas Malvinas" style="max-width: 100px; margin: 0 auto 5px;">
-                <p style="color: #343a40; font-style: italic; font-size: 0.9em; margin: 0;">Las Islas Malvinas, Argentinas</p>
+ <div class="container">
+        <!-- Sección de la agenda con estilo destacado -->
+        <section class="agenda" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <div style="position: relative; margin-bottom: 10px;">
+                <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.8em; font-weight: 800; letter-spacing: -0.5px;">
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">JUEVES, 3 DE ABRIL</span>
+                    Agenda</span>
+                </h2>
+                <div style="width: 110%; height: 3px; background: linear-gradient(90deg, #4f0263, #7314b3); margin-top: 8px;"></div>
             </div>
             
-            <!-- Campo de búsqueda -->
-            <input type="text" id="searchInput2" placeholder="Buscar evento (competencia, equipo, etc...)" oninput="filterEvents()" style="width: 100%; padding: 8px; margin-top: 10px; box-sizing: border-box;">
+            <!-- Campo de búsqueda con estilo mejorado -->
+            <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." 
+                   oninput="filterEvents()" 
+                   style="width: 100%; padding: 12px 15px; margin-top: 15px; 
+                          box-sizing: border-box; border: none; 
+                          background: #ffffff; border-radius: 6px; 
+                          font-size: 0.95em; transition: all 0.3s ease;" 
+                   onfocus="this.style.background='#fff'; this.style.boxShadow='0 0 0 2px #FFC168'"
+                   onblur="this.style.background='#f7f7f7'; this.style.boxShadow='none'">
             
             <!-- Mensaje de "No encontrado" -->
-            <div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;">
-                Evento no encontrado.
-            </div>
+            <div id="noResultsMessage" style="display: none; color: #FF5A5F; margin-top: 15px; 
+                 font-size: 0.9em; text-align: center; padding: 10px; 
+                 background: #FFF2F2; border-radius: 6px; font-weight: 500;">
+                ⚠️ Evento no encontrado
+    </div>
     
         <div class="event">
             <button class="accordion">
                 <h3>Premier League</h3>
-                <p>15:45 - Manchester City Vs. Leicester City</p>
+                <p>16:00 - Chelsea Vs. Tottenham</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=6op2" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
+                    <a href="reproductor.html?ch=espn-dp" class="video-link">ESPN opción 2</a>
+                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
                 </div>
             </div>
         </div>
         
         <div class="event">
             <button class="accordion">
-                <h3>Premier League</h3>
-                <p>15:45 - Newcastle Vs. Brentford</p>
+                <h3>Copa Argentina</h3>
+                <p>18:45 - Instituto Vs. Deportivo Madryn</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
+                    <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
+                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
+                </div>
+            </div>
+        </div>
+       
+        <div class="event">
+            <button class="accordion">
+                <h3>Copa Libertadores</h3>
+                <p>19:00 - Bahía Vs. Internacional</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=espn7op1" class="video-link">ESPN 7 opción 1</a>
+                    <a href="reproductor.html?ch=espn7-dp" class="video-link">ESPN 7 opción 2</a>
+                    <a href="reproductor.html?ch=espn7op3" class="video-link">ESPN 7 opción 3</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Copa Libertadores</h3>
+                <p>19:00 - Sporting Cristal Vs. Palmeiras</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
@@ -85,130 +121,14 @@
        
         <div class="event">
             <button class="accordion">
-                <h3>Premier League</h3>
-                <p>15:45 - Southampton Vs. Crystal Palace</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney2op2" class="video-link">Disney + opción 1</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Premier League</h3>
-                <p>15:45 - Brighton Vs. Aston Villa</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney4op2" class="video-link">Disney + opción 1</a>
-                </div>
-            </div>
-        </div>
-       
-        <div class="event">
-            <button class="accordion">
-                <h3>Premier League</h3>
-                <p>15:45 - Bournemouth Vs. Ipswich Town</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney5op2" class="video-link">Disney + opción 1</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa de Alemania</h3>
-                <p>15:45 - Stuttgart Vs. Leipzig</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney7op2" class="video-link">Disney + opción 1</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Coppa Italia</h3>
-                <p>16:00 - Milan Vs. Inter</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=fox1op1" class="video-link">Fox opción 1</a>
-                    <a href="reproductor.html?ch=fox1op2" class="video-link">Fox opción 2</a>
-                    <a href="reproductor.html?ch=fox1op3" class="video-link">Fox opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Premier League</h3>
-                <p>16:00 - Liverpool Vs. Everton</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney8op2" class="video-link">Disney + opción 1</a>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa del Rey</h3>
-                <p>16:30 - Atlético Madrid Vs. Barcelona</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="https://bestleague.one/cvatt.html?get=RXZlbnRvczFIRA&lang=1" class="video-link">Flow opción 1</a>
-                    <a href="https://television-libre.tv/html/fl/?get=RXZlbnRvczFIRA" class="video-link">Flow opción 2</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Sudamericano Sub-17</h3>
-                <p>18:30 - Argentina Vs. Perú</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
-                    <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
-                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
-                    <a href="reproductor.html?ch=tycsportsop4" class="video-link">TyC Sports opción 4</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
                 <h3>Copa Libertadores</h3>
-                <p>19:00 - Vélez Vs. Peñarol</p>
+                <p>19:00 - Central Cordoba Vs. LDU Quito</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=disney12op2" class="video-link">Disney + opción 1</a>
-                    <a href="reproductor.html?ch=fox1op1" class="video-link">Fox opción 2</a>
-                    <a href="reproductor.html?ch=fox1op2" class="video-link">Fox opción 3</a>
-                    <a href="reproductor.html?ch=fox1op3" class="video-link">Fox opción 4</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>19:00 - San Antonio Bulo Bulo Vs. Olimpia</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney11op2" class="video-link">Disney + opción 1</a>
-                    <a href="reproductor.html?ch=fox2op1" class="video-link">Fox 2 opción 2</a>
-                    <a href="reproductor.html?ch=fox2op2" class="video-link">Fox 2 opción 3</a>
-                    <a href="reproductor.html?ch=fox2op3" class="video-link">Fox 2 opción 4</a>
+                    <a href="reproductor.html?ch=disney1op2" class="video-link">Disney + opción 1</a>
+                    <a href="reproductor.html?ch=fox1op1" class="video-link">Fox Sports opción 2</a>
+                    <a href="reproductor.html?ch=fox1op3" class="video-link">Fox Sports opción 3</a>
                 </div>
             </div>
         </div>
@@ -216,150 +136,7 @@
         <div class="event">
             <button class="accordion">
                 <h3>Copa Sudamericana</h3>
-                <p>19:00 - Corinthians Vs. Huracan</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=dsportsop1" class="video-link">Dsports opción 1</a>
-                    <a href="reproductor.html?ch=dsports-dp" class="video-link">Dsports opción 2</a>
-                    <a href="reproductor.html?ch=dsportsop3" class="video-link">Dsports opción 3</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>19:00 - Melgar Vs. Vasco da Gama</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=dsportsplus1" class="video-link">Dsports+ opción 1</a>
-                    <a href="reproductor.html?ch=dsportsplus2" class="video-link">Dsports+ opción 2</a>
-                    <a href="reproductor.html?ch=dsportsplus3" class="video-link">Dsports+ opción 3</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Argentina</h3>
-                <p>19:00 - Atlético Tucuman Vs. All Boys</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
-                    <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
-                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
-                    <a href="reproductor.html?ch=tycsportsop4" class="video-link">TyC Sports opción 4</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>21:30 - U de Chile Vs. Botafogo</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=espn5op1" class="video-link">ESPN 5 opción 1</a>
-                    <a href="reproductor.html?ch=espn5-dp" class="video-link">ESPN 5 opción 2</a>
-                    <a href="reproductor.html?ch=espn5op3" class="video-link">ESPN 5 opción 3</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>21:30 - Universitario Vs. River Plate</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney14op2" class="video-link">Disney + opción 1</a>
-                    <a href="reproductor.html?ch=telefeop1" class="video-link">Telefe opción 2</a>
-                    <a href="reproductor.html?ch=telefeop2" class="video-link">Telefe opción 3</a>
-                    <a href="reproductor.html?ch=telefeop3" class="video-link">Telefe opción 4</a>
-                    <a href="reproductor.html?ch=fox1op1" class="video-link">Fox opción 5</a>
-                    <a href="reproductor.html?ch=fox1op2" class="video-link">Fox opción 6</a>
-                    <a href="reproductor.html?ch=fox1op3" class="video-link">Fox opción 7</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>21:30 - Talleres Vs. São Paulo</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=fox2op1" class="video-link">Fox 2 opción 1</a>
-                    <a href="reproductor.html?ch=fox2op2" class="video-link">Fox 2 opción 2</a>
-                    <a href="reproductor.html?ch=fox2op3" class="video-link">Fox 2 opción 3</a>
-                    <a href="reproductor.html?ch=espn6op1" class="video-link">ESPN 6 opción 4</a>
-                    <a href="reproductor.html?ch=espn6-dp" class="video-link">ESPN 6 opción 5</a>
-                    <a href="reproductor.html?ch=espn6op3" class="video-link">ESPN 6 opción 6</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>21:30 - Vitória Vs. U. Católica</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=dsportsplus1" class="video-link">Dsports+ opción 1</a>
-                    <a href="reproductor.html?ch=dsportsplus2" class="video-link">Dsports+ opción 2</a>
-                    <a href="reproductor.html?ch=dsportsplus3" class="video-link">Dsports+ opción 3</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>21:30 - Sportivo Luqueño Vs. Gremio</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=espn4op1" class="video-link">ESPN 4 opción 1</a>
-                    <a href="reproductor.html?ch=espn4-dp" class="video-link">ESPN 4 opción 2</a>
-                    <a href="reproductor.html?ch=espn4op3" class="video-link">ESPN 4 opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>21:30 - Racing (Uru) Vs. América de Cali</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=dsportsop1" class="video-link">Dsports opción 1</a>
-                    <a href="reproductor.html?ch=dsports-dp" class="video-link">Dsports opción 2</a>
-                    <a href="reproductor.html?ch=dsportsop3" class="video-link">Dsports opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>23:00 - Atlético Nacional Vs. Nacional</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=disney19op2" class="video-link">Disney + opción 1</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>23:00 - Atlético Grau Vs. Godoy Cruz</p>
+                <p>19:00 - Puerto Cabello Vs. Lanús</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
@@ -372,13 +149,68 @@
 
         <div class="event">
             <button class="accordion">
-                <h3>CONCACAF Champions Cup</h3>
-                <p>00:30 - Los Angeles Vs. Inter Miami</p>
+                <h3>Copa Sudamericana</h3>
+                <p>19:00 - Gualberto Villarroel Vs. Unión Española</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=disney18op2" class="video-link">Disney + opción 1</a>
-                   
+                    <a href="reproductor.html?ch=dsportsplus1" class="video-link">Dsports+ opción 1</a>
+                    <a href="reproductor.html?ch=dsportsplus2" class="video-link">Dsports+ opción 2</a>
+                    <a href="reproductor.html?ch=dsportsplus3" class="video-link">Dsports+ opción 3</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Copa Argentina</h3>
+                <p>21:10 - Newell's Vs. CA Kimberley MdP</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
+                    <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
+                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Copa Libertadores</h3>
+                <p>21:30 - Deportivo Tachira Vs. Flamengo</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
+                    <a href="reproductor.html?ch=espn-dp" class="video-link">ESPN opción 2</a>
+                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="event">
+            <button class="accordion">
+                <h3>Copa Sudamericana</h3>
+                <p>21:30 - Cerro Largo Vs. Defensa y Justicia</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=espn2op1" class="video-link">ESPN 2 opción 1</a>
+                    <a href="reproductor.html?ch=espn2-dp" class="video-link">ESPN 2 opción 2</a>
+                    <a href="reproductor.html?ch=espn2op3" class="video-link">ESPN 2 opción 3</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="event">
+            <button class="accordion">
+                <h3>Copa Sudamericana</h3>
+                <p>23:00 - Mushuc Runa Vs. Palestino</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=espn5op1" class="video-link">ESPN 5 opción 1</a>
+                    <a href="reproductor.html?ch=espn5-dp" class="video-link">ESPN 5 opción 2</a>
+                    <a href="reproductor.html?ch=espn5op3" class="video-link">ESPN 5 opción 3</a>
                 </div>
             </div>
         </div>
