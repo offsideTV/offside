@@ -93,6 +93,9 @@ document.getElementById('dmcaButton').addEventListener('click', function() {
 document.getElementById('donateButton').addEventListener('click', function() {
     window.location.href = 'donaciones.html'; 
 });
+document.getElementById('reportButton').addEventListener('click', function() {
+    window.location.href = 'fallos.html'; 
+});
 document.getElementById('camButton').addEventListener('click', function() {
     window.open('multicam.html', '_blank'); // Abre en una nueva pestaña
 });
