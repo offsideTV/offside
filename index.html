@@ -30,99 +30,101 @@
             <span class="tooltip">Solo recomendable usarlo en PC</span>
         </button>
          <button id="reportButton" class="report-button">
-            Reportar fallos
+            Reportar - Pedir
         </button>
-        <button id="donateButton" class="donate-button">Dejar una donación</button>
-       
+        <button id="donateButton" class="donate-button">Dejar una donación</button> 
+
+        <div class="reloj-container">
+            <div id="titulo">Hora actual</div>
+            <div id="reloj"></div>
+        </div>
     </header>
     
- <div class="container">
+    <div class="container">
         <!-- Sección de la agenda con estilo destacado -->
         <section class="agenda" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <div style="position: relative; margin-bottom: 10px;">
                 <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.8em; font-weight: 800; letter-spacing: -0.5px;">
-                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">JUEVES, 3 DE ABRIL</span>
-                    Agenda</span>
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">VIERNES, 4 DE ABRIL</span>
+                    Agenda deportiva</span>
                 </h2>
-                <div style="width: 110%; height: 3px; background: linear-gradient(90deg, #4f0263, #7314b3); margin-top: 8px;"></div>
+                
             </div>
             
-            <!-- Campo de búsqueda con estilo mejorado -->
-            <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." 
-                   oninput="filterEvents()" 
-                   style="width: 100%; padding: 12px 15px; margin-top: 15px; 
-                          box-sizing: border-box; border: none; 
-                          background: #ffffff; border-radius: 6px; 
-                          font-size: 0.95em; transition: all 0.3s ease;" 
-                   onfocus="this.style.background='#fff'; this.style.boxShadow='0 0 0 2px #FFC168'"
-                   onblur="this.style.background='#f7f7f7'; this.style.boxShadow='none'">
+          <!-- Campo de búsqueda -->
+          <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." oninput="filterEvents()" style="width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box;">
             
-            <!-- Mensaje de "No encontrado" -->
-            <div id="noResultsMessage" style="display: none; color: #FF5A5F; margin-top: 15px; 
-                 font-size: 0.9em; text-align: center; padding: 10px; 
-                 background: #FFF2F2; border-radius: 6px; font-weight: 500;">
-                ⚠️ Evento no encontrado
-    </div>
-    
+         <!-- Mensaje de "No encontrado" -->
+<div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;">
+    ⚠️ Evento no encontrado. Solicitalo dando click <a href="fallos.html" style="color: blue; text-decoration: underline;">aquí</a>.
+  </div>
+  
+  <script>
+    function mostrarMensajeNoEncontrado() {
+      document.getElementById("noResultsMessage").style.display = "block";
+    }
+  
+    // Llamar a esta función cuando no se encuentre el evento
+    // mostrarMensajeNoEncontrado();
+  </script>
+  
         <div class="event">
             <button class="accordion">
-                <h3>Premier League</h3>
-                <p>16:00 - Chelsea Vs. Tottenham</p>
+                <h3>Saudi Pro League</h3>
+                <p>15:00 - Al Hilal Vs. Al Nassr</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
-                    <a href="reproductor.html?ch=espn-dp" class="video-link">ESPN opción 2</a>
-                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
+                    <a href="reproductor.html?ch=tntsportsop1" class="video-link">TNT Sports opción 1</a>
+                    <a href="reproductor.html?ch=tntsports-dp" class="video-link">TNT Sports opción 2</a>
+                    <a href="reproductor.html?ch=tntsportsop3" class="video-link">TNT Sports opción 3</a>
                 </div>
             </div>
         </div>
         
         <div class="event">
             <button class="accordion">
-                <h3>Copa Argentina</h3>
-                <p>18:45 - Instituto Vs. Deportivo Madryn</p>
+                <h3>Bundesliga</h3>
+                <p>15:30 - Augsburg Vs. Bayen Munchen</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
-                    <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
-                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
+                    <a href="reproductor.html?ch=disney" class="video-link">Disney + opción 1</a>
                 </div>
             </div>
         </div>
        
         <div class="event">
             <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>19:00 - Bahía Vs. Internacional</p>
+                <h3>Serie A</h3>
+                <p>15:45 - Genoa Vs. Udinese</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=espn7op1" class="video-link">ESPN 7 opción 1</a>
-                    <a href="reproductor.html?ch=espn7-dp" class="video-link">ESPN 7 opción 2</a>
-                    <a href="reproductor.html?ch=espn7op3" class="video-link">ESPN 7 opción 3</a>
+                    <a href="reproductor.html?ch=espn3op1" class="video-link">ESPN 3 opción 1</a>
+                    <a href="reproductor.html?ch=espn3-dp" class="video-link">ESPN 3 opción 2</a>
+                    <a href="reproductor.html?ch=espn3op3" class="video-link">ESPN 3 opción 3</a>
                 </div>
             </div>
         </div>
         <div class="event">
             <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>19:00 - Sporting Cristal Vs. Palmeiras</p>
+                <h3>Ligue 1</h3>
+                <p>15:45 - Nice Vs. Nantes</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
-                    <a href="reproductor.html?ch=espn-dp" class="video-link">ESPN opción 2</a>
-                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
+                    <a href="reproductor.html?ch=espn4op1" class="video-link">ESPN 4 opción 1</a>
+                    <a href="reproductor.html?ch=espn4-dp" class="video-link">ESPN 4 opción 2</a>
+                    <a href="reproductor.html?ch=espn4op3" class="video-link">ESPN 4 opción 3</a>
                 </div>
             </div>
         </div>
        
         <div class="event">
             <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>19:00 - Central Cordoba Vs. LDU Quito</p>
+                <h3>Championship</h3>
+                <p>16:00 - Blackburn Rovers Vs. Middlesbrough</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
@@ -135,62 +137,8 @@
 
         <div class="event">
             <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>19:00 - Puerto Cabello Vs. Lanús</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=espn3op1" class="video-link">ESPN 3 opción 1</a>
-                    <a href="reproductor.html?ch=espn3-dp" class="video-link">ESPN 3 opción 2</a>
-                    <a href="reproductor.html?ch=espn3op3" class="video-link">ESPN 3 opción 3</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>19:00 - Gualberto Villarroel Vs. Unión Española</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=dsportsplus1" class="video-link">Dsports+ opción 1</a>
-                    <a href="reproductor.html?ch=dsportsplus2" class="video-link">Dsports+ opción 2</a>
-                    <a href="reproductor.html?ch=dsportsplus3" class="video-link">Dsports+ opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Argentina</h3>
-                <p>21:10 - Newell's Vs. CA Kimberley MdP</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
-                    <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
-                    <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Libertadores</h3>
-                <p>21:30 - Deportivo Tachira Vs. Flamengo</p>
-            </button>
-            <div class="panel">
-                <div class="sub-events">
-                    <a href="reproductor.html?ch=espnop1" class="video-link">ESPN opción 1</a>
-                    <a href="reproductor.html?ch=espn-dp" class="video-link">ESPN opción 2</a>
-                    <a href="reproductor.html?ch=espnop3" class="video-link">ESPN opción 3</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="event">
-            <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>21:30 - Cerro Largo Vs. Defensa y Justicia</p>
+                <h3>La Liga EA Sports</h3>
+                <p>16:00 - Rayo Vallecano Vs. Espanyol</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
@@ -203,14 +151,27 @@
 
         <div class="event">
             <button class="accordion">
-                <h3>Copa Sudamericana</h3>
-                <p>23:00 - Mushuc Runa Vs. Palestino</p>
+                <h3>Torneo Betano</h3>
+                <p>19:00 - Estudiantes LP Vs. Belgrano</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=espn5op1" class="video-link">ESPN 5 opción 1</a>
-                    <a href="reproductor.html?ch=espn5-dp" class="video-link">ESPN 5 opción 2</a>
-                    <a href="reproductor.html?ch=espn5op3" class="video-link">ESPN 5 opción 3</a>
+                    <a href="reproductor.html?ch=tntsportsop1" class="video-link">TNT Sports opción 1</a>
+                    <a href="reproductor.html?ch=tntsports-dp" class="video-link">TNT Sports opción 2</a>
+                    <a href="reproductor.html?ch=tntsportsop3" class="video-link">TNT Sports opción 3</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>Torneo Betano</h3>
+                <p>22:00 - San Martin SJ Vs. San Lorenzo</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=espnpremiumop1" class="video-link">ESPN Premium opción 1</a>
+                    <a href="reproductor.html?ch=espnpremium-dp" class="video-link">ESPN Premium opción 2</a>
+                    <a href="reproductor.html?ch=espnpremiumop3" class="video-link">ESPN Premium opción 3</a>
                 </div>
             </div>
         </div>
