@@ -1218,3 +1218,24 @@ h1 {
         visibility: visible;
         opacity: 1;
     }
+.reloj-container {
+        text-align: center;
+        padding: 5px;
+        border-radius: 15px;
+        
+    }
+
+    #reloj {
+        font-size: 1rem;
+        font-weight: bold;
+       
+        
+    }
+
+   
+    #titulo {
+        font-size: 1rem;
+        margin-bottom: 0px;
+        color: rgb(0, 0, 0);
+        
+    }
