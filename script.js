@@ -250,5 +250,18 @@ function isMobile() {
 // Ocultar el botón si es un dispositivo móvil
 if (isMobile()) {
     document.getElementById('camButton').style.display = 'none';
+
+
+
+function actualizarReloj() {
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, "0");
+    const minutos = ahora.getMinutes().toString().padStart(2, "0");
+    const segundos = ahora.getSeconds().toString().padStart(2, "0");
+    document.getElementById("reloj").textContent = `${horas}:${minutos}:${segundos}`;
+}
+
+setInterval(actualizarReloj, 1000); // Actualizar cada segundo
+actualizarReloj(); // Llamada inicial para evitar retraso
  
 }
