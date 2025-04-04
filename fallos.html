@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar fallos - OffsideTV</title>
+    <title>Reportar fallos o solicitar contenido - OffsideTV</title>
     <link rel="stylesheet" href="styless.css">
     <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -84,10 +84,51 @@
             background-color: #c0392b;
         }
         
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
         @media (max-width: 768px) {
             .report-container {
                 margin: 20px;
                 padding: 20px;
+            }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-radius: 0;
+                margin-right: 0;
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -95,12 +136,17 @@
 <body>
     <div class="report-container">
         <div class="report-header">
-            <h1><i class="fas fa-bug"></i> ¿Tuviste algún problema?</h1>
-            <p>Ayúdanos a mejorar OffsideTV reportando cualquier problema que encuentres</p>
+            <h1><i class="fas fa-bug"></i> ¿Tuviste algún problema? <i class="fas fa-plus-circle"></i> ¿Queres solicitar algún contenido?</h1>
+            <p>Ayúdanos a mejorar OffsideTV reportando problemas o pidiendo contenido que no encuentres</p>
         </div>
         
-        <!-- Formulario modificado para FormSubmit -->
-        <form id="reportForm" class="report-form" action="https://formsubmit.co/offsideteve@gmail.com" method="POST">
+        <div class="tab-container">
+            <div class="tab active" data-tab="report">Reportar problema</div>
+            <div class="tab" data-tab="request">Solicitar contenido</div>
+        </div>
+        
+        <!-- Formulario para reportar problemas -->
+        <form id="reportForm" class="report-form tab-content active" action="https://formsubmit.co/offsideteve@gmail.com" method="POST">
             <!-- Campos ocultos para configuración -->
             <input type="hidden" name="_subject" value="Nuevo Reporte OffsideTV">
             <input type="hidden" name="_template" value="table">
@@ -138,52 +184,115 @@
                 <i class="fas fa-paper-plane"></i> Enviar Reporte
             </button>
         </form>
+        
+        <!-- Formulario para solicitar contenido -->
+        <form id="requestForm" class="report-form tab-content" action="https://formsubmit.co/offsideteve@gmail.com" method="POST">
+            <!-- Campos ocultos para configuración -->
+            <input type="hidden" name="_subject" value="Solicitud de Contenido OffsideTV">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://offsidetv.netlify.app/gracias.html"> 
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div class="form-group">
+                <label for="contentType">Tipo de contenido:</label>
+                <select id="contentType" name="Tipo de contenido" required>
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="Partido de fútbol">Partido de fútbol</option>
+                    <option value="Evento deportivo">Evento deportivo</option>
+                    <option value="Programa deportivo">Programa deportivo</option>
+                    <option value="Documental deportivo">Documental deportivo</option>
+                    <option value="Otro contenido">Otro contenido</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="contentDetails">Detalles del contenido solicitado:</label>
+                <textarea id="contentDetails" name="Detalles del contenido" placeholder="Describe el contenido que te gustaría ver (equipos, competición, fecha, etc.)..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="contentDate">Fecha del evento (si aplica):</label>
+                <input type="date" id="contentDate" name="Fecha del evento">
+            </div>
+            
+            <div class="form-group">
+                <label for="requestEmail">Tu email (opcional):</label>
+                <input type="email" id="requestEmail" name="Email" placeholder="Para informarte cuando esté disponible">
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-plus-circle"></i> Solicitar Contenido
+            </button>
+        </form>
     </div>
 
     <script>
-        document.getElementById('reportForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenimos el envío inmediato
-            
-            // Mostrar loader
-            const swalInstance = Swal.fire({
-                title: 'Enviando reporte...',
-                html: 'Redireccionando en <span id="countdown">3</span> segundos',
-                timer: 3000,
-                timerProgressBar: true,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                    // Contador regresivo
-                    const timerInterval = setInterval(() => {
-                        const countdown = Swal.getHtmlContainer().querySelector('#countdown');
-                        if (countdown) {
-                            countdown.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
-                        }
-                    }, 1000);
-                    
-                    // Enviar el formulario después de 1.5 segundos (para que el usuario vea el mensaje)
-                    setTimeout(() => {
-                        // Crear un iframe oculto para el envío
-                        const iframe = document.createElement('iframe');
-                        iframe.name = 'hidden-iframe';
-                        iframe.style.display = 'none';
-                        document.body.appendChild(iframe);
-                        
-                        // Cambiar el target del formulario
-                        this.target = 'hidden-iframe';
-                        
-                        // Enviar el formulario
-                        this.submit();
-                        
-                        // Redirección manual después del tiempo completo
-                        setTimeout(() => {
-                            window.location.href = "gracias.html";
-                        }, 3000);
-                        
-                    }, 1500);
-                }
+        // Manejo de pestañas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remover clase active de todas las pestañas y contenidos
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Agregar clase active a la pestaña clickeada
+                tab.classList.add('active');
+                
+                // Mostrar el contenido correspondiente
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}Form`).classList.add('active');
             });
         });
+        
+        // Manejo del envío de formularios
+        function handleFormSubmit(formId) {
+            document.getElementById(formId).addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevenimos el envío inmediato
+                
+                // Mostrar loader
+                const swalInstance = Swal.fire({
+                    title: formId === 'reportForm' ? 'Enviando reporte...' : 'Enviando solicitud...',
+                    html: 'Redireccionando en <span id="countdown">3</span> segundos',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        // Contador regresivo
+                        const timerInterval = setInterval(() => {
+                            const countdown = Swal.getHtmlContainer().querySelector('#countdown');
+                            if (countdown) {
+                                countdown.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+                            }
+                        }, 1000);
+                        
+                        // Enviar el formulario después de 1.5 segundos (para que el usuario vea el mensaje)
+                        setTimeout(() => {
+                            // Crear un iframe oculto para el envío
+                            const iframe = document.createElement('iframe');
+                            iframe.name = 'hidden-iframe';
+                            iframe.style.display = 'none';
+                            document.body.appendChild(iframe);
+                            
+                            // Cambiar el target del formulario
+                            this.target = 'hidden-iframe';
+                            
+                            // Enviar el formulario
+                            this.submit();
+                            
+                            // Redirección manual después del tiempo completo
+                            setTimeout(() => {
+                                window.location.href = "gracias.html";
+                            }, 3000);
+                            
+                        }, 1500);
+                    }
+                });
+            });
+        }
+        
+        // Configurar ambos formularios
+        handleFormSubmit('reportForm');
+        handleFormSubmit('requestForm');
     </script>
 </body>
 </html>
