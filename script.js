@@ -94,10 +94,7 @@ document.getElementById('donateButton').addEventListener('click', function() {
     window.location.href = 'donaciones.html'; 
 });
 document.getElementById('camButton').addEventListener('click', function() {
-    window.location.href = 'multicam.html'; 
-});
-document.getElementById("reportButton").addEventListener("click", function() {
-    window.location.href = 'fallos.html'; 
+    window.open('multicam.html', '_blank'); // Abre en una nueva pestaña
 });
 function closeBanner() {
     document.getElementById("donationBanner").style.display = "none";
@@ -231,25 +228,3 @@ if (isMobile()) {
         lastScrollTop = scrollTop;
     });
 }
-
-// Función para detectar si es un dispositivo móvil
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-if (isMobile()) {
-    document.getElementById('camButton').innerHTML = 'Multicamaras <span>(⚠️ Sólo para PC)</span>';
-    
-}
-
-// Función para detectar si es un dispositivo móvil
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// Ocultar el botón si es un dispositivo móvil
-if (isMobile()) {
-    document.getElementById('camButton').style.display = 'none';
-
-
-
