@@ -34,10 +34,7 @@
         </button>
         <button id="donateButton" class="donate-button">Dejar una donación</button> 
 
-        <div class="reloj-container">
-            <div id="titulo">Hora actual</div>
-            <div id="reloj"></div>
-        </div>
+     
     </header>
     
     <div class="container">
@@ -520,18 +517,7 @@
         </a>
     </div>
 </div>
-      <script>
-        function actualizarReloj() {
-            const ahora = new Date();
-            const horas = ahora.getHours().toString().padStart(2, "0");
-            const minutos = ahora.getMinutes().toString().padStart(2, "0");
-            const segundos = ahora.getSeconds().toString().padStart(2, "0");
-            document.getElementById("reloj").textContent = `${horas}:${minutos}:${segundos}`;
-        }
-
-        setInterval(actualizarReloj, 1000);
-        actualizarReloj();
-    </script>
+      
     <script src="script.js"></script>
 </body>
 </html>
