@@ -393,15 +393,15 @@
                 </div>
             </div>
         </div>
-        <div class="event">
+       <div class="event">
             <button class="accordion">
                 <h3>Torneo Betano</h3>
                 <p>18:00 - Huracan Vs. Aldosivi</p>
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=tntsportsop1" class="video-link">TNT Sports opción 1</a>
-                    <a href="reproductor.html?ch=tntsports-dp" class="video-link">TNT Sports opción 2</a>
+                    <a href="reproductor.html?ch=tntsports-v" class="video-link">TNT Sports opción 1</a>
+                    <a href="reproductor.html?ch=tntsportsop1" class="video-link">TNT Sports opción 2</a>
                     <a href="reproductor.html?ch=tntsportsop3" class="video-link">TNT Sports opción 3</a>
                 </div>
             </div>
@@ -413,8 +413,8 @@
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=espnpremiumop1" class="video-link">ESPN Premium opción 1</a>
-                    <a href="reproductor.html?ch=espnpremium-dp" class="video-link">ESPN Premium opción 2</a>
+                    <a href="reproductor.html?ch=espnpremium-v" class="video-link">ESPN Premium opción 1</a>
+                    <a href="reproductor.html?ch=espnpremiumop1" class="video-link">ESPN Premium opción 2</a>
                     <a href="reproductor.html?ch=espnpremiumop3" class="video-link">ESPN Premium opción 3</a>
                 </div>
             </div>
@@ -426,8 +426,8 @@
             </button>
             <div class="panel">
                 <div class="sub-events">
-                    <a href="reproductor.html?ch=espnpremiumop1" class="video-link">ESPN Premium opción 1</a>
-                    <a href="reproductor.html?ch=espnpremium-dp" class="video-link">ESPN Premium opción 2</a>
+                    <a href="reproductor.html?ch=espnpremium-v" class="video-link">ESPN Premium opción 1</a>
+                    <a href="reproductor.html?ch=espnpremiumop1" class="video-link">ESPN Premium opción 2</a>
                     <a href="reproductor.html?ch=espnpremiumop3" class="video-link">ESPN Premium opción 3</a>
                 </div>
             </div>
@@ -442,6 +442,22 @@
                     <a href="reproductor.html?ch=tycsportsop1" class="video-link">TyC Sports opción 1</a>
                     <a href="reproductor.html?ch=tyc-dp" class="video-link">TyC Sports opción 2</a>
                     <a href="reproductor.html?ch=tycsportsop3" class="video-link">TyC Sports opción 3</a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <button class="accordion">
+                <h3>F1 - Carrera</h3>
+                <p>02:00 - GP de Japón</p>
+            </button>
+            <div class="panel">
+                <div class="sub-events">
+                    <a href="reproductor.html?ch=fox1-v" class="video-link">Fox Sports opción 1</a>
+                    <a href="reproductor.html?ch=fox1op1" class="video-link">Fox Sports opción 2</a>
+                    <a href="reproductor.html?ch=fox1op3" class="video-link">Fox Sports opción 3</a>
+                    <a href="reproductor.html?ch=disney15op2" class="video-link">Disney + opción 4</a>
+                    <a href="reproductor.html?ch=disney16op2" class="video-link">Cámara On Board opción 5</a>
+                    <a href="reproductor.html?ch=espndeportes-v" class="video-link">ESPN Deportes opción 6</a>
                 </div>
             </div>
         </div>
@@ -790,7 +806,25 @@
         </a>
     </div>
 </div>
-      
+       <!-- Modal Aviso -->
+  <div id="modalAviso" class="modal-aviso">
+    <h2>¡AVISO!</h2>
+    <p>Algunos canales presentan errores momentáneos, pronto se solucionará. Recomendamos probar todas las opciones posibles.</p>
+    <button class="btn-cerrar-aviso" onclick="cerrarModalAviso()">Cerrar</button>
+  </div>
+  <script>
+    const modalAviso = document.getElementById('modalAviso');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        modalAviso.classList.add('active');
+      }, 300);
+    });
+
+    function cerrarModalAviso() {
+      modalAviso.classList.remove('active');
+    }
+  </script>
     <script src="script.js"></script>
 </body>
 </html>
