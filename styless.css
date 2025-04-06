@@ -983,12 +983,12 @@ h1 {
     }
 }
 #searchInput2 {
-    width: 80%;
-    max-width: 300px;
+    width: 90%;
+    max-width: 250px;
     padding: 10px;
     font-size: 15px;
     border: 2px solid #ae00f3;
-    border-radius: 8px;
+    border-radius: 15px;
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
