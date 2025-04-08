@@ -555,7 +555,7 @@ h1 {
     }
 
     .accordion {
-        font-size: 16px;
+        font-size: 12px;
     }
 }
 @media (max-width: 768px) {
@@ -1008,7 +1008,7 @@ h1 {
 /* Media queries para pantallas pequeñas */
 @media (max-width: 768px) {
     #searchInput2 {
-        width: 90%; /* Ocupa más espacio en pantallas medianas */
+        width: 80%; /* Ocupa más espacio en pantallas medianas */
         font-size: 14px; /* Reduce el tamaño de la fuente */
         padding: 8px; /* Reduce el padding */
     }
@@ -1218,27 +1218,7 @@ h1 {
         visibility: visible;
         opacity: 1;
     }
-.reloj-container {
-        text-align: center;
-        padding: 5px;
-        border-radius: 15px;
-        
-    }
 
-    #reloj {
-        font-size: 1rem;
-        font-weight: bold;
-       
-        
-    }
-
-   
-    #titulo {
-        font-size: 1rem;
-        margin-bottom: 0px;
-        color: rgb(0, 0, 0);
-        
-    }
   /* Modal Aviso Estilo Azul - Versión Responsive Modificada */
 .modal-aviso {
     position: fixed;
