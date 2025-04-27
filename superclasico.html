@@ -56,6 +56,35 @@
       window.open(url, 'ventana', opciones);
     }
   </script>
-   <script src="script.js"></script>
+   <script>
+    var acc = document.getElementsByClassName("accordion");
+
+if (acc.length > 0) {
+    for (var i = 0; i < acc.length; i++) {
+        // Agregamos el evento de click
+        acc[i].addEventListener("click", function() {
+            let activeAccordion = document.querySelector(".accordion.active");
+            if (activeAccordion && activeAccordion !== this) {
+                activeAccordion.classList.remove("active");
+                activeAccordion.nextElementSibling.style.display = "none";
+            }
+
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+
+        // --- Hace que el acordeón esté activo al cargar ---
+        acc[i].classList.add("active"); // Le da la clase active
+        var panel = acc[i].nextElementSibling;
+        panel.style.display = "block"; // Muestra el contenido
+    }
+}
+
+   </script>
 </body>
 </html>
