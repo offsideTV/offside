@@ -1314,3 +1314,12 @@ h1 {
         display: none !important;
     }
 }
+.sub-events p {
+    text-align: center;
+    font-family: 'Poppins', 'Roboto', sans-serif; /* Tipografías lindas y modernas */
+    font-size: 20px;
+    font-weight: 600; /* Negrita moderada */
+    margin: 20px 0 10px 0; /* Espaciado arriba y abajo */
+    color: #333; /* Color gris oscuro agradable */
+  }
+  
