@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superclásico</title>
+  <link rel="stylesheet" href="styless.css"> 
+  <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Incluye SweetAlert en tu HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PS1PQ89GCR');
+</script>
+</head>
+<body>
+  <div class="event">
+    <button class="accordion">
+      <h3>Torneo Betano</h3>
+      <p>15:30 - River Plate Vs. Boca Juniors</p>
+    </button>
+    <div class="panel">
+      <div class="sub-events">
+        <p>Opciones ESPN Premium</p>
+        <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 1</a>
+        <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 2</a>
+        <a href="reproductor.html?ch=espnpre-arg" class="video-link">ESPN Premium opción 3</a>
+        <a href="reproductor.html?ch=espnpre-ar" class="video-link">ESPN Premium opción 4</a>
+
+        <a href="#" onclick="abrirVentana(event, 'https://nebunexa.co/cvatt2.php?get=Rm94X1Nwb3J0c19QcmVtaXVuX0hE&start=true')">ESPN Premium (Extensión)</a>
+        <p>Opciones TNT Sports</p>
+        <a href="reproductor.html?ch=tntsports-b" class="video-link">TNT Sports opción 1</a>
+        <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 2</a>
+        <a href="reproductor.html?ch=tntpre-arg" class="video-link">TNT Sports opción 3</a>
+        <a href="reproductor.html?ch=tntpre-ar" class="video-link">TNT Sports opción 4</a>
+        <a href="#" onclick="abrirVentana(event, 'https://nebunexa.co/cvatt.php?get=VE5UX1Nwb3J0c19IRA')">TNT Sports (Extensión)</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function abrirVentana(e, url) {
+      e.preventDefault();
+      const width = 800;
+      const height = 600;
+      const left = (window.screen.width / 2) - (width / 2);
+      const top = (window.screen.height / 2) - (height / 2);
+      const opciones = `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,toolbar=no,menubar=no,status=no,location=no`.replace(/\s+/g, '');
+      window.open(url, 'ventana', opciones);
+    }
+  </script>
+   <script src="script.js"></script>
+</body>
+</html>
