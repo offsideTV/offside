@@ -135,7 +135,39 @@
         </div>
     </div>
 </div>
-
+<div class="event">
+    <button class="accordion">
+        <h3>Champions League - Semifinal</h3>
+        <p>21:00 - Inter Miami Vs. Vancouver Whitecaps</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 1</a>
+            <a href="reproductor.html?ch=espn-c" class="video-link">ESPN opción 2</a>
+            <a href="reproductor.html?ch=espnargentina" class="video-link">ESPN opción 3</a>   
+            <a href="#" onclick="abrirVentana(event, 'https://nebunexa.co/temp.html?get=RVNQTjJIRA')">ESPN opción PC</a>   
+            <script>
+                function abrirVentana(e, url) {
+                  e.preventDefault(); // Evita la acción por defecto del enlace
+                
+                  // Tamaño de la ventana
+                  const width = 800;
+                  const height = 600;
+                
+                  // Calcula el centro de la pantalla
+                  const left = (window.screen.width / 2) - (width / 2);
+                  const top = (window.screen.height / 2) - (height / 2);
+                
+                  // Configuración de la ventana
+                  const opciones = `width=${width}, height=${height}, top=${top}, left=${left}, resizable=yes, scrollbars=yes, toolbar=no, menubar=no, status=no, location=no`.replace(/\s+/g, '');
+                
+                  // Abre la ventana emergente con la URL correspondiente
+                  window.open(url, 'ventana', opciones);
+                }
+                </script>        
+        </div>
+    </div>
+</div>
 
         <!-- Más partidos... -->
 </section>
