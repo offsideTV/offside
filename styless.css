@@ -1322,4 +1322,10 @@ h1 {
     margin: 20px 0 10px 0; /* Espaciado arriba y abajo */
     color: #333; /* Color gris oscuro agradable */
   }
-  
+   /* Oculta el botón en pantallas pequeñas (por ejemplo, móviles) */
+@media (max-width: 768px) {
+    #pcButton {
+        display: none;
+    }
+}
+
