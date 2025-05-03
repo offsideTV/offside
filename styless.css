@@ -352,18 +352,19 @@ h1 {
 }
 
 .agenda::-webkit-scrollbar-track {
-    background: rgba(241, 241, 241, 0.5); /* Fondo de la pista */
+    background: rgba(243, 243, 243, 0.5);
     border-radius: 4px; /* Bordes redondeados */
 }
 
 .agenda::-webkit-scrollbar-thumb {
-    background: rgba(136, 136, 136, 0.7); /* Color del thumb */
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     border-radius: 4px; /* Bordes redondeados */
     transition: background 0.3s ease; /* Transición suave */
 }
 
 .agenda::-webkit-scrollbar-thumb:hover {
-    background: rgba(85, 85, 85, 0.9); /* Color del thumb al hacer hover */
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+
 }
 
 /* Ajustes para pantallas pequeñas */
@@ -555,7 +556,7 @@ h1 {
     }
 
     .accordion {
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 @media (max-width: 768px) {
@@ -617,6 +618,21 @@ h1 {
 }
 
 .donate-button:hover {
+    background-color: #5a32c7;
+}
+
+.pc-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.pc-button:hover {
     background-color: #5a32c7;
 }
 
@@ -801,10 +817,10 @@ h1 {
         flex-direction: column;
         text-align: center;
         font-size: 14px;
-        padding: 8px 12px;
+        padding: 10px 10px;
     }
     .donation-banner button {
-        width: 100%;
+        width: 80%;
         margin-top: 5px;
     }
 }
@@ -1008,7 +1024,7 @@ h1 {
 /* Media queries para pantallas pequeñas */
 @media (max-width: 768px) {
     #searchInput2 {
-        width: 80%; /* Ocupa más espacio en pantallas medianas */
+        width: 50%; /* Ocupa más espacio en pantallas medianas */
         font-size: 14px; /* Reduce el tamaño de la fuente */
         padding: 8px; /* Reduce el padding */
     }
@@ -1016,7 +1032,7 @@ h1 {
 
 @media (max-width: 480px) {
     #searchInput2 {
-        width: 95%; /* Ocupa todo el ancho en pantallas muy pequeñas */
+        width: 80%; /* Ocupa todo el ancho en pantallas muy pequeñas */
         font-size: 14px; /* Reduce aún más el tamaño de la fuente */
         padding: 10px; /* Reduce el padding */
         border-radius: 7px; /* Reduce el radio del borde */
@@ -1219,7 +1235,29 @@ h1 {
         opacity: 1;
     }
 
-  /* Modal Aviso Estilo Azul - Versión Responsive Modificada */
+    .reloj-container {
+        text-align: center;
+        padding: 5px;
+        border-radius: 15px;
+        
+    }
+
+    #reloj {
+        font-size: 1rem;
+        font-weight: bold;
+       
+        
+    }
+
+   
+    #titulo {
+        font-size: 1rem;
+        margin-bottom: 0px;
+        color: rgb(0, 0, 0);
+        
+    }
+
+ /* Modal Aviso Estilo Azul - Versión Responsive Modificada */
 .modal-aviso {
     position: fixed;
     top: 50%;
@@ -1308,12 +1346,14 @@ h1 {
 .btn-cerrar-aviso:hover {
     background-color: #bae6fd;
 }
+
 /* Ocultar el banner en móviles (ancho menor a 768px) */
 @media only screen and (max-width: 767px) {
     .donation-banner {
         display: none !important;
     }
 }
+
 .sub-events p {
     text-align: center;
     font-family: 'Poppins', 'Roboto', sans-serif; /* Tipografías lindas y modernas */
@@ -1322,24 +1362,34 @@ h1 {
     margin: 20px 0 10px 0; /* Espaciado arriba y abajo */
     color: #333; /* Color gris oscuro agradable */
   }
-   /* Oculta el botón en pantallas pequeñas (por ejemplo, móviles) */
+  
+ /* Oculta el botón en pantallas pequeñas (por ejemplo, móviles) */
 @media (max-width: 768px) {
     #pcButton {
         display: none;
     }
 }
-.pc-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-left: 20px;
+
+/* Ocultar el botón en todos los dispositivos móviles */
+@media only screen and (max-width: 1024px) {
+    #pcButton {
+        display: none;
+    }
+}
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-.pc-button:hover {
-    background-color: #5a32c7;
+::-webkit-scrollbar-track {
+    background: #7facf0;
 }
 
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#6a11cb, #2575fc);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#2575fc, #6a11cb);
+}
