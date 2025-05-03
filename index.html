@@ -1,62 +1,786 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OffsideTV</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0b0c10, #1f2833);
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .container {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 2rem;
-      border-radius: 15px;
-      max-width: 500px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    .emoji {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    @media (max-width: 500px) {
-      .container {
-        margin: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OffsideTV</title>
+    <link rel="stylesheet" href="styless.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Incluye SweetAlert en tu HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PS1PQ89GCR');
+</script>
 </head>
 <body>
-  <div class="container">
-    <div class="emoji">⚽🛠️</div>
-    <h1>Estamos en mantenimiento</h1>
+    <header>
+        <a href="index.html">
+            <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
+        </a>
+        <button id="camButton" class="cam-button">
+            Multicamaras
+            <span class="tooltip">Solo recomendable usarlo en PC</span>
+        </button>
+         <button id="reportButton" class="report-button">
+            Reportar - Pedir
+        </button>
+        <a href="reproductor.html?ch=video-explicativo">
+            <button id="pcButton" class="pc-button">¿Cómo ver la opción PC?</button>
+        </a>
+        
+        <button id="donateButton" class="donate-button">Dejar una donación</button> 
+
+       
+    </header>
+    
+    <div class="container">
+        <!-- Sección de la agenda con estilo destacado -->
+        <section class="agenda">
+            <div style="position: center; margin-bottom: 10px;">
+                <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;">
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">SABADO, 03 DE MAYO</span>
+                    Agenda deportiva del dia</span>
+                </h2>
+                
+            </div>
+            
+          <!-- Campo de búsqueda -->
+          <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." oninput="filterEvents()">
+            
+         <!-- Mensaje de "No encontrado" -->
+        <div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;">
+                    ⚠️ Evento no encontrado. Solicitalo dando click <a href="fallos.html" style="color: blue; text-decoration: underline;">aquí</a>.
+        </div>
+  
+  <script>
+    function mostrarMensajeNoEncontrado() {
+      document.getElementById("noResultsMessage").style.display = "block";
+    }
+  
+    // Llamar a esta función cuando no se encuentre el evento
+    // mostrarMensajeNoEncontrado();
+  </script>
+<div class="event">
+    <button class="accordion">
+        <h3>Premier League</h3>
+        <p>08:30 - Aston Villa Vs. Fulham</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>    
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>La Liga</h3>
+        <p>09:00 - Alavés Vs. Atlético Madrid</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn-a" class="video-link">ESPN opción 1</a>
+            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 2</a>
+            <a href="reproductor.html?ch=espn-c" class="video-link">ESPN opción 3</a>  
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Serie A</h3>
+        <p>10:00 - Cagliari Vs. Udinese</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>    
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Serie A</h3>
+        <p>10:00 - Parma Vs. Como 1907</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn3-a" class="video-link">ESPN 3 opción 1</a>
+            <a href="reproductor.html?ch=espn3-b" class="video-link">ESPN 3 opción 2</a>
+            <a href="reproductor.html?ch=espn3-c" class="video-link">ESPN 3 opción 3</a>  
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Bundesliga</h3>
+        <p>10:30 - Borussia Mönchengladbach Vs. Hoffenheim</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Bundesliga</h3>
+        <p>10:30 - Union Berlin Vs. Werder Bremen</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Bundesliga</h3>
+        <p>10:30 - St. Pauli Vs. Stuttgart</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Bundesliga</h3>
+        <p>10:30 - Leipzig Vs. Bayern Munich</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn2-a" class="video-link">ESPN 2 opción 1</a>
+            <a href="reproductor.html?ch=espn2-b" class="video-link">ESPN 2 opción 2</a>
+            <a href="reproductor.html?ch=espn2-c" class="video-link">ESPN 2 opción 3</a>  
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Premier League</h3>
+        <p>11:00 - Everton Vs. Ipswich Town</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn-a" class="video-link">ESPN opción 1</a>
+            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 2</a>
+            <a href="reproductor.html?ch=espn-c" class="video-link">ESPN opción 3</a>  
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Premier League</h3>
+        <p>11:00 - Leicester City Vs. Southampton</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>La Liga</h3>
+        <p>11:15 - Villarreal Vs. Osasuna</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=dsports-b" class="video-link">Dsports opción 1</a>
+            <a href="reproductor.html?ch=dsports-c" class="video-link">Dsports opción 2</a>
+            
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Ligue 1</h3>
+        <p>12:00 - Strasbourg Vs. PSG</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn3-a" class="video-link">ESPN 3 opción 1</a>
+            <a href="reproductor.html?ch=espn3-b" class="video-link">ESPN 3 opción 2</a>
+            <a href="reproductor.html?ch=espn3-c" class="video-link">ESPN 3 opción 3</a>   
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Serie A</h3>
+        <p>13:00 - Lecce Vs. Napoli</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn-a" class="video-link">ESPN opción 1</a>
+            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 2</a>
+            <a href="reproductor.html?ch=espn-c" class="video-link">ESPN opción 3</a>   
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>La Liga</h3>
+        <p>13:30 - Las Palmas Vs. Valencia</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=dsports-b" class="video-link">Dsports opción 1</a>
+            <a href="reproductor.html?ch=dsports-c" class="video-link">Dsports opción 2</a>
+            
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Premier League</h3>
+        <p>13:30 - Arsenal Vs. Bournemouth</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Bundesliga</h3>
+        <p>13:30 - Borussia Dortmund Vs. Wolfsburg</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Ligue 1</h3>
+        <p>14:00 - Toulouse Vs. Rennes</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn3-a" class="video-link">ESPN 3 opción 1</a>
+            <a href="reproductor.html?ch=espn3-b" class="video-link">ESPN 3 opción 2</a>
+            <a href="reproductor.html?ch=espn3-c" class="video-link">ESPN 3 opción 3</a>   
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Serie A</h3>
+        <p>15:45 - Inter Vs. Hellas Verona</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn-a" class="video-link">ESPN opción 1</a>
+            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 2</a>
+            <a href="reproductor.html?ch=espn-c" class="video-link">ESPN opción 3</a>   
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>La Liga</h3>
+        <p>16:00 - Real Valladolid Vs. Barcelona</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=dsports-b" class="video-link">Dsports opción 1</a>
+            <a href="reproductor.html?ch=dsports-c" class="video-link">Dsports opción 2</a>
+            
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Torneo Betano</h3>
+        <p>16:00 - Sarmiento Vs. San Lorenzo</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espnpremium-a" class="video-link">ESPN Premium opción 1</a>
+            <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 2</a>
+            <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 3</a>   
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Torneo Betano</h3>
+        <p>16:00 - Talleres Vs. Instituto</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=tntsports-a" class="video-link">TNT Sports opción 1</a>
+            <a href="reproductor.html?ch=tntsports-b" class="video-link">TNT Sports opción 2</a>
+            <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 3</a>   
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Torneo Betano</h3>
+        <p>16:00 - Deportivo Riestra Vs. Godoy Cruz</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=tnt-hd-a" class="video-link">TNT opción 1</a>
+            <a href="reproductor.html?ch=tnt-hd-b" class="video-link">TNT opción 2</a>
+            
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Ligue 1</h3>
+        <p>16:05 - Saint Etienne Vs. Monaco</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 1</a>
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Torneo Betano</h3>
+        <p>18:30 - Rosario Central Vs. Independiente</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espnpremium-a" class="video-link">ESPN Premium opción 1</a>
+            <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 2</a>
+            <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 3</a>   
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>MLS</h3>
+        <p>20:30 - Inter Miami Vs. New York</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=mls" class="video-link">MLS Pass opción 1</a>
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <h3>Torneo Betano</h3>
+        <p>21:00 - Atlético Tucuman Vs. Lanús</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espnpremium-a" class="video-link">ESPN Premium opción 1</a>
+            <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 2</a>
+            <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 3</a>   
+        </div>
+    </div>
+</div>
+<div class="event">
+    <button class="accordion">
+        <h3>Torneo Betano</h3>
+        <p>21:00 - Huracan Vs. Barracas Central</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=tntsports-a" class="video-link">TNT Sports opción 1</a>
+            <a href="reproductor.html?ch=tntsports-b" class="video-link">TNT Sports opción 2</a>
+            <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 3</a>   
+        </div>
+    </div>
+</div>
+        <!-- Más partidos... -->
+</section>
+
+        <!-- Sección de los canales -->
+        <section class="canales">
+            <h2>Canales disponibles</h2>
+            <!-- Campo de búsqueda -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar canal..." class="search-input">
+        </div>
+            <div class="channels-grid">
+                <!-- Div de Multicámaras -->
+        <div class="cam">
+        <a href="multicam.html">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/camaras.png" alt="Multicam Logo" class="cam-logo">
+        
+     </a>
+     <h1 class="warning-text">Multicam solo para PC.</h1>
+    </div>
+   
+   
+                <div class="channel">
+                    <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN1-logo.webp" alt="ESPN Logo" class="channel-logo">
+                    <button class="accordion">ESPN</button>
+                    <div class="panel">
+                        <a href="reproductor.html?ch=espn-a" class="video-link">Opción 1</a>
+                        <a href="reproductor.html?ch=espn-b" class="video-link">Opción 2</a>
+                        <a href="reproductor.html?ch=espn-c" class="video-link">Opción 3</a>                        
+                    </div>
+                </div>
+                <div class="channel">
+                    <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN2-logo.webp" alt="ESPN2 Logo" class="channel-logo">
+                    <button class="accordion">ESPN 2</button>
+                    <div class="panel">
+                        <a href="reproductor.html?ch=espn2-a" class="video-link">Opción 1</a>
+                        <a href="reproductor.html?ch=espn2-b" class="video-link">Opción 2</a>
+                        <a href="reproductor.html?ch=espn2-c" class="video-link">Opción 3</a>
+                    </div>
+                </div>
+
+                <div class="channel">
+                    <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN3-logo.webp" alt="ESPN3 Logo" class="channel-logo">
+                    <button class="accordion">ESPN 3</button>
+                    <div class="panel">
+                        <a href="reproductor.html?ch=espn3-a" class="video-link">Opción 1</a>
+                        <a href="reproductor.html?ch=espn3-b" class="video-link">Opción 2</a>
+                        <a href="reproductor.html?ch=espn3-c" class="video-link">Opción 3</a>
+                </div>
+            </div>
+
+            <div class="channel">
+                <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN4-logo.webp" alt="ESPN4 Logo" class="channel-logo">
+                <button class="accordion">ESPN 4</button>
+                <div class="panel">
+                    <a href="reproductor.html?ch=espn4-a" class="video-link">Opción 1</a>
+                    <a href="reproductor.html?ch=espn4-b" class="video-link">Opción 2</a>
+                    <a href="reproductor.html?ch=espn4-c" class="video-link">Opción 3</a>
+            </div>
+        </div>
+        <div class="channel">
+            <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN5-logo.webp" alt="ESPN5 Logo" class="channel-logo">
+            <button class="accordion">ESPN 5</button>
+            <div class="panel">
+                <a href="reproductor.html?ch=espn5-a" class="video-link">Opción 1</a>
+                <a href="reproductor.html?ch=espn5-b" class="video-link">Opción 2</a>
+                <a href="reproductor.html?ch=espn5-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+        <div class="channel">
+            <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN6-logo.webp" alt="ESPN6 Logo" class="channel-logo">
+            <button class="accordion">ESPN 6</button>
+            <div class="panel">
+                <a href="reproductor.html?ch=espn6-a" class="video-link">Opción 1</a>
+                <a href="reproductor.html?ch=espn6-b" class="video-link">Opción 2</a>
+                <a href="reproductor.html?ch=espn6-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+        <div class="channel">
+            <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPN7-logo.webp" alt="ESPN7 Logo" class="channel-logo">
+            <button class="accordion">ESPN 7</button>
+            <div class="panel">
+                <a href="reproductor.html?ch=espn7-a" class="video-link">Opción 1</a>
+                <a href="reproductor.html?ch=espn7-b" class="video-link">Opción 2</a>
+                <a href="reproductor.html?ch=espn7-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+            <div class="channel">
+                <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/ESPNPremium-logo.webp" alt="ESPN Premium Logo" class="channel-logo">
+                <button class="accordion">ESPN Premium</button>
+                <div class="panel">
+                    <a href="reproductor.html?ch=espnpremium-a" class="video-link">Opción 1</a>
+                    <a href="reproductor.html?ch=espnpremium-b" class="video-link">Opción 2</a>
+                    <a href="reproductor.html?ch=espnpremium-c" class="video-link">Opción 3</a>
+            </div>
+        </div>
+        <div class="channel">
+            <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/TNTSports-logo.webp" alt="TNT Sports Logo" class="channel-logo">
+            <button class="accordion">TNT Sports Premium</button>
+            <div class="panel">
+                <a href="reproductor.html?ch=tntsports-a" class="video-link">Opción 1</a>
+                <a href="reproductor.html?ch=tntsports-b" class="video-link">Opción 2</a>
+                <a href="reproductor.html?ch=tntsports-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Fox-logo.webp" alt="Fox Logo" class="channel-logo">
+        <button class="accordion">Fox Sports</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=fox1ar-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=fox1ar-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=fox1ar-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Fox2-logo.webp" alt="Fox2 Logo" class="channel-logo">
+        <button class="accordion">Fox Sports 2</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=fox2ar-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=fox2ar-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=fox2ar-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Fox3-logo.webp" alt="Fox3 Logo" class="channel-logo">
+        <button class="accordion">Fox Sports 3</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=fox3ar-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=fox3ar-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=fox3ar-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/TyCSports-logo.webp" alt="TyC Logo" class="channel-logo">
+        <button class="accordion">TyC Sports</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=tyc-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=tyc-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=tyc-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/TyCSportsinternacional-logo.webp" alt="TyCInt Logo" class="channel-logo">
+        <button class="accordion">TyC Sports Internacional </button>
+        <div class="panel">
+            <a href="reproductor.html?ch=tycint-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/tvpublica.webp" alt="TyC Logo" class="channel-logo">
+        <button class="accordion">TV Pública</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=tvpublica-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=tvpublica-b" class="video-link">Opción 2</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Dsports-logo1.webp" alt="DSports Logo" class="channel-logo">
+        <button class="accordion">Dsports</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=dsports-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=dsports-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=dsports-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Dsports2-logo.webp" alt="DSports2 Logo" class="channel-logo">
+        <button class="accordion">Dsports 2</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=dsports2-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=dsports2-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=dsports2-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Dsports+-logo.webp" alt="DSports+ Logo" class="channel-logo">
+        <button class="accordion">Dsports+</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=dsportsplus-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=dsportsplus-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=dsportsplus-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/Telefe-logo.webp" alt="Telefe Logo" class="channel-logo">
+        <button class="accordion">Telefe</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=telefe-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=telefe-b" class="video-link">Opción 2</a>
+            <a href="reproductor.html?ch=telefe-c" class="video-link">Opción 3</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere logo" class="channel-logo">
+        <button class="accordion">Premiere</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere1-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=premiere1-b" class="video-link">Opción 2</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 2</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere2-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=premiere2-b" class="video-link">Opción 2</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 3</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere3-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=premiere3-b" class="video-link">Opción 2</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 4</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere4-a" class="video-link">Opción 1</a>
+            <a href="reproductor.html?ch=premiere4-b" class="video-link">Opción 2</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 5</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere5-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 6</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere6-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 7</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere7-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/premierelogo.webp" alt="Premiere Logo" class="channel-logo">
+        <button class="accordion">Premiere 8</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=premiere8-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="Sportv Logo" class="channel-logo">
+        <button class="accordion">Sportv</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=sportv-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="sportv Logo" class="channel-logo">
+        <button class="accordion">Sportv 2</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=sportv2-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="sportv Logo" class="channel-logo">
+        <button class="accordion">Sportv 3</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=sportv3-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="sportv Logo" class="channel-logo">
+        <button class="accordion">Sportv 4</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=sportv4-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+    <div class="channel">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/sportvlogo.webp" alt="sportv Logo" class="channel-logo">
+        <button class="accordion">Sportv 5</button>
+        <div class="panel">
+            <a href="reproductor.html?ch=sportv5-a" class="video-link">Opción 1</a>
+        </div>
+    </div>
+        </section>
+    </div>
+    <div class="dmca-button-container">
+        <button id="dmcaButton">DMCA</button>
+        <div id="dmcaText" class="dmca-text">
+            <h2>Cumplimiento del DMCA</h2>
+            <p><strong>Este sitio web cumple con el Digital Millennium Copyright Act (DMCA).</strong> No transmitimos ni alojamos de manera ilegal ningún juego, canal, evento u otro contenido protegido por derechos de autor.</p>
+            
+            <h2>Descargo de Responsabilidad</h2>
+            <p><strong>Este sitio web opera de acuerdo con el Digital Millennium Copyright Act (DMCA).</strong> En virtud de esta ley, nos comprometemos a responder rápidamente a las reclamaciones de violación de derechos de autor y a tomar las medidas necesarias para eliminar el material infractor.</p>
+            <p><strong>Los enlaces proporcionados en este sitio web apuntan a contenido alojado en servidores externos</strong> y no alojamos ni transmitimos de manera directa ningún material protegido por derechos de autor. No tenemos control sobre el contenido de estos servidores externos y no nos hacemos responsables por el uso indebido que se pueda hacer de dicho contenido.</p>
+            
+            <h2>Compromiso con los Derechos de Autor</h2>
+            <p><strong>Entendemos la importancia de proteger los derechos de autor</strong> y estamos comprometidos a cumplir con todas las leyes aplicables. Si eres propietario de los derechos de autor de algún contenido y crees que se ha utilizado de manera inapropiada, te instamos a que nos contactes de inmediato para que podamos abordar el problema de manera efectiva.</p>
+            <p><strong>Además del DMCA, este sitio web también se adhiere a otras leyes y regulaciones relacionadas con la propiedad intelectual y la protección de derechos de autor.</strong> Nos reservamos el derecho de modificar o eliminar cualquier enlace o contenido que infrinja estas leyes.</p>
+            
+            <h2>Contacto</h2>
+            <p><strong>Correo electrónico:</strong> <a href="mailto:offsideteve@gmail.com">offsideteve@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="donation-banner" id="donationBanner">
+        <span class="donation-icon">🎁</span>
+        <span>Si disfrutás de OffsideTV, considerá apoyarnos con una donación. <strong>Tu ayuda nos permite seguir creciendo.</strong></span>
+        <button onclick="window.open('https://link.mercadopago.com.ar/offsidetv', '_blank')">Donar ahora</button>
+        <button class="close-btn" onclick="closeBanner()">✖</button>
+    </div>
+<!-- Botón de compartir con imagen redonda + extensión -->
+<div class="share-button-container">
+    <button id="shareButton" class="share-button">
+        <img src="https://raw.githubusercontent.com/OffsideTV/logosweb/main/compartir.png" alt="Compartir" class="share-icon">
+    </button>
+    <div id="shareMenu" class="share-menu">
+        <a href="https://www.instagram.com/offsidetv_" class="share-link" target="_blank">
+            <i class="fab fa-instagram"></i> ¡Seguinos en IG!
+        </a>
+        <a href="https://x.com/offsideteve" class="share-link" target="_blank">
+            <i class="fab fa-x-twitter"></i> ¡Seguinos en X!
+        </a>
+        <a href="#" class="share-link" id="copyLink">
+            <i class="fas fa-link"></i> Compartir web
+        </a>
+        <a href="#" class="share-link" id="shareQR">
+            <i class="fas fa-qrcode"></i> Generar QR
+        </a>
+        <!-- Nueva opción para la extensión -->
+        <a href="https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb" 
+           class="share-link" 
+           id="extensionLink" 
+           target="_blank">
+            <i class="fas fa-puzzle-piece"></i> Extensión M3U8
+        </a>
+    </div>
+</div>
+ <!-- Modal Aviso -->
+<div id="modalAviso" class="modal-aviso">
+    <h2>Recomendamos el uso de un bloqueador de anuncios</h2>
+    <p>En <strong>OffsideTV</strong>, priorizamos su experiencia.</p>
+    <p>Algunas transmisiones pueden incluir anuncios externos que no controlamos, por lo que sugerimos utilizar un navegador con bloqueador de publicidad.</p>
+    <p><strong>OffsideTV no se financia mediante estos anuncios.</strong></p>
     <p>
-      En <strong>OffsideTV</strong> estamos ajustando las transmisiones para que todo funcione mejor.<br><br>
-      ⏳ Volvé a intentarlo mas tarde.<br><br>
-      ¡Gracias por tu paciencia! 
+      <strong>Extensión recomendada:</strong> <span style="color: #b91c1c;">UBlock Origin</span><br>
+      <strong>Navegador recomendado:</strong> <span style="color: #0f766e;">Brave Browser</span>
     </p>
+    <button class="btn-cerrar-aviso" onclick="cerrarModalAviso()">Cerrar</button>
   </div>
+  
+  <script>
+    const modalAviso = document.getElementById('modalAviso');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        modalAviso.classList.add('active');
+      }, 300);
+    });
+
+    function cerrarModalAviso() {
+      modalAviso.classList.remove('active');
+    }
+  </script>
+
+
+
+    <script src="script.js"></script>
 </body>
 </html>
