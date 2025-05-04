@@ -41,12 +41,12 @@
        
     </header>
     
-    <div class="container">
+  <div class="container">
         <!-- Sección de la agenda con estilo destacado -->
         <section class="agenda">
             <div style="position: center; margin-bottom: 10px;">
                 <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;">
-                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">DOMINGO,04 DE MAYO</span>
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">DOMINGO, 04 DE MAYO</span>
                     Agenda deportiva del dia</span>
                 </h2>
                 
@@ -70,8 +70,15 @@
   </script>
 <div class="event">
     <button class="accordion">
-        <h3>Serie A</h3>
-        <p>07:30 - Empoli Vs. Lazio</p>
+        <div class="match-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Empoli_FC.png" alt="Empoli" class="team-logo-small">
+            <div class="match-title">
+                <h3>Serie A</h3>
+                <p>07:30 - Empoli Vs. Lazio</p>
+            </div>
+            <img src="https://1000marcas.net/wp-content/uploads/2021/05/Lazio-Logo.png" alt="Lazio" class="team-logo-small">
+        </div>
+    </button>
     </button>
     <div class="panel">
         <div class="sub-events">
@@ -345,7 +352,18 @@
         </div>
     </div>
 </div>
-
+<div class="event">
+    <button class="accordion">
+        <h3>Brasileirao</h3>
+        <p>16:00 - Gremio Vs. Santos</p>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=premiere1-a" class="video-link">Premiere opción 1</a>
+            <a href="reproductor.html?ch=sportv1-a" class="video-link">SporTV opción 2</a>
+        </div>
+    </div>
+</div>
 
 <div class="event">
     <button class="accordion">
@@ -374,7 +392,6 @@
         </div>
     </div>
 </div>
-
         <!-- Más partidos... -->
 </section>
 
