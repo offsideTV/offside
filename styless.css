@@ -332,18 +332,19 @@ h1 {
 }
 
 
-/* Estilos para la sección de la agenda */
+/* Estilos optimizados para agenda en móviles */
 .agenda {
-    margin-bottom: 40px; /* Espacio entre la agenda y los canales */
-    max-height: 400px; /* Ajusta la altura según necesites */
-    overflow-y: auto; /* Agrega scroll vertical cuando sea necesario */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* Borde sutil */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 15px; /* Espaciado interno */
-    background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    position: relative;
-    overflow-x: hidden; /* Evita el scroll horizontal */
+    margin-bottom: 20px;
+    max-height: 60vh; /* Altura máxima del 60% del viewport */
+    overflow-y: auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Estilo para la scrollbar en navegadores WebKit (Chrome, Edge, Safari) */
@@ -384,21 +385,17 @@ h1 {
     }
 }
 
-/* Estilos para el título de la agenda */
 .agenda h2 {
-    font-size: 1.5em;
-    
+    font-size: 1.3em;
     color: #1b1b1b;
-    text-align: center; /* Centrar el título */
-    position: relative;
+    text-align: center;
+    padding: 8px;
+    margin: 0 0 10px 0;
+    background: rgba(255, 255, 255, 0.9);
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    margin: 0;
-    background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
-    padding: 10px;
-    z-index: 10;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Línea divisoria */
+    z-index: 5;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 
@@ -1392,4 +1389,41 @@ h1 {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(#2575fc, #6a11cb);
+}
+
+/* Media queries para ajustes específicos */
+@media (max-width: 480px) {
+    .agenda {
+        max-height: 40vh;
+        padding: 8px;
+    }
+    
+    .event-btn {
+        font-size: 5px;
+        padding: 8px;
+    }
+    
+    .sub-events a {
+        font-size: 12px;
+        padding: 6px 5px;
+    }
+    
+    .agenda h2 {
+        font-size: 1em;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 360px) {
+    .agenda {
+        max-height: 50vh;
+    }
+    
+    .event-btn {
+        font-size: 12px;
+    }
+    
+    .sub-events a {
+        font-size: 11px;
+    }
 }
