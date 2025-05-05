@@ -1427,3 +1427,139 @@ h1 {
         font-size: 11px;
     }
 }
+
+/* Estilo para el contenedor principal */
+.match-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+}
+
+/* Título de la competencia (arriba) */
+.match-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+/* Equipos (centro) */
+.match-teams {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 4px 0;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+}
+
+.team-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-bottom: 3px;
+}
+
+.team span {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.vs {
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
+    background: #07058a;
+    padding: 2px 10px;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px rgba(7, 5, 138, 0.2);
+    transform: rotate(-2deg);
+    display: inline-block;
+}
+/* Hora (abajo - tamaño considerable) */
+.match-time {
+    font-size: 18px;
+    font-weight: 700;
+    color: #090b80; /* Color azul oscuro */
+    margin-top: 5px;
+    background: #fdedec;
+    padding: 3px 8px; /* Reduje el padding horizontal de 12px a 8px */
+    border-radius: 15px;
+    display: inline-block; /* Para que el fondo se ajuste al contenido */
+    white-space: nowrap; /* Evita saltos de línea */
+}
+
+/* Versión móvil compacta */
+@media (max-width: 768px) {
+    .match-container {
+        padding: 6px;
+    }
+    
+    .match-title {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+    
+    .match-teams {
+        gap: 4px;
+    }
+    
+    .team {
+        width: 60px;
+    }
+    
+    .team-logo {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .team span {
+        font-size: 11px;
+    }
+    
+    .vs {
+        font-size: 16px;
+        padding: 1px 8px;
+    }
+    
+    .match-time {
+        font-size: 16px;
+        padding: 2px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team {
+        width: 50px;
+    }
+    
+    .team-logo {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .team span {
+        font-size: 10px;
+    }
+    
+    .vs {
+        font-size: 16px;
+        padding: 1px 8px;
+    }
+    
+    .match-time {
+        font-size: 15px;
+        padding: 2px 5px;
+    }
+}
+
