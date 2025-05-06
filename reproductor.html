@@ -56,6 +56,10 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
             const streams = {
+                "espn-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=RVNQTjJIRA",
+                    "sandbox": true
+                },
                 "espn-a": {
                     "repro1": "https://nebunexa.co/temp.html?get=RVNQTjJIRA",
                     "sandbox": true
@@ -166,14 +170,17 @@
 
 
                 "tntsports-a": {
-                    "repro1": "https://nebunexa.co/cvatt.php?get=VE5UX1Nwb3J0c19IRA",
+                    "repro1": "https://nebunexa.co/cvatt.php?get=VE5UX1Nwb3J0c19IRA&start=true",
                     "sandbox": true
                 },
-                "tntsportsext": {
+                "tntsportsext-a": {
                     "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=VE5UX1Nwb3J0c19IRA",
                     "sandbox": true
                 },
-
+                "tntsportsext-b": {
+                    "repro1": "https://nebunexa.co/ext.html?get=VE5UX1Nwb3J0c19IRA&start=true",
+                    "sandbox": true
+                },
                 "tntsports-c": {
                     "repro1": "https://streamtp4.com/global1.php?stream=tntsports"
                 },
@@ -185,7 +192,10 @@
                     "sandbox": true
                 },
 
-
+                "fox1ar-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=Rm94U3BvcnRz&lang=1",
+                    "sandbox": true
+                },
                 "fox1ar-a": {
                     "repro1": "https://nebunexa.co/temp.html?get=Rm94U3BvcnRz&lang=1",
                     "sandbox": true
@@ -199,6 +209,10 @@
                 },
                 
 
+                "fox2ar-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=Rm94U3BvcnRzMkhE&lang=1",
+                    "sandbox": true
+                },
 
                 "fox2ar-a": {
                     "repro1": "https://nebunexa.co/temp.html?get=Rm94U3BvcnRzMkhE&lang=1",
@@ -213,7 +227,10 @@
                 },
                 
 
-
+                "fox3ar-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=Rm94U3BvcnRzM0hE&lang=1",
+                    "sandbox": true
+                },
                 "fox3ar-a": {
                     "repro1": "https://nebunexa.co/temp.html?get=Rm94U3BvcnRzM0hE&lang=1",
                     "sandbox": true
@@ -521,11 +538,14 @@
                 },
 
                 "prueba-canales": {
-                    "repro1": "https://canalesonline.netlify.app/servidores/cvatt.html?get=QXJ0ZWFySEQ",
+                    "repro1": "chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/pages/player.html#https://chromecast.cvattv.com.ar/live/c7eds/Fox_Sports_Premiun_HD/SA_Live_dash_enc/Fox_Sports_Premiun_HD.mpd?ck=IjRjMjMwZGJjN2Y2YTRiZmE2YWQwYWE3M2ZmNzkyMzc0IjoiNDE4NmE3YzJhMTVmNTkwYTkzOTk4ODZmZWFlYzQyNTci&headers=eyJvcmlnaW4iOiJodHRwczovL3dlYi5hcHAuZmxvdy5jb20uYXIvIiwicmVmZXJlciI6Imh0dHBzOi93ZWIuYXBwLmZsb3cuY29tLmFyLyJ9Q",
+                    "sandbox": true
                 },
+
 
               
             };
+
 
             // Obtener parámetros de la URL
             const urlParams = new URLSearchParams(window.location.search);
