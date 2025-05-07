@@ -52,7 +52,7 @@
         </div>
     </div>
     
-    <script>
+   <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
             const streams = {
@@ -83,7 +83,10 @@
                 "espn2-c": {
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=espn2"
                 },
-              
+              "espn2-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=RVNQTjJfQXJn&lang=1",
+                    "sandbox": true
+                },
 
 
                "espn3-a": {
@@ -97,6 +100,10 @@
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=espn3"
                 },
                 
+               "espn3-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=RVNQTjM&lang=1",
+                    "sandbox": true
+                },
 
 
                 "espn4-a": {
@@ -110,7 +117,10 @@
                 "espn4-c": {
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=espn4"
                 },
-               
+                "espn4-ext": {
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=RVNQTkhE&lang=1",
+                    "sandbox": true
+                },
 
                 "espn5-a": {
                     "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=RVNQTjQ=",
@@ -257,17 +267,19 @@
                 },
 
                 "dsports2-a": {
-                    "repro1": "https://streamsvv1.su/global/player.php?channel=dsports2"
-                },
-                "dsports2-b": {
                     "repro1": "https://streamtp4.com/global1.php?stream=dsports2"
                 },
-                "dsports2-c": {
+               
+                "dsports2-b": {
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=dsports2"
                 },
 
+                "dsports2-c": {
+                    "repro1": "https://vodkapr3mium.com/deportivo.php?player=desktop&live=dsports2",
+                    "sandbox": true
+                },
                 "dsportsplus-a": {
-                    "repro1": "https://streamsvv1.su/global/player.php?channel=dsportsplus"
+                    "repro1": "https://embed.sdfgnksbounce.com/embed2/directvsportsplus.html"
                 },
                 "dsportsplus-b": {
                     "repro1": "https://streamtp4.com/global1.php?stream=dsportsplus"
@@ -546,7 +558,6 @@
               
             };
 
-
             // Obtener parámetros de la URL
             const urlParams = new URLSearchParams(window.location.search);
             const channel = urlParams.get("ch");
@@ -612,6 +623,7 @@
            
         });
     </script>
+
 
     <div class="dmca-button-container">
         <button id="dmcaButton">DMCA</button>
