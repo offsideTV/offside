@@ -39,8 +39,10 @@
     
         <!-- Contenedor para el iframe -->
         <div id="video-container">
+              <div id="video-placeholder" style="display: none;"></div>
             <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    
+          
+
             <!-- Elementos de error, ocultos por defecto -->
             <div id="error-message" style="display: none;">
                 <p>Este archivo de video no se puede reproducir (Error 102630).</p>
@@ -611,11 +613,12 @@
                     "repro1": "https://play.tycsports.com/player.html?site=tycsportsplay&contentId=1489234&poster=https://pbs.twimg.com/ext_tw_video_thumb/1807143526582415360/pu/img/AodcMaMHZdZKNmpo.jpg:large",
                     "sandbox": true
                 },
-             "prueba-disney": {
-                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTL4?id=disneyplus2",
+             "dazn-m": {
+                    "repro1": "https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/mundial.webp",
               
                 },
                
+
             };
 
             // Obtener parámetros de la URL
@@ -829,5 +832,28 @@
             });
         });
     </script>
+  
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+const canal = params.get("ch");
+
+const videoContainer = document.getElementById("video-container");
+const iframe = document.getElementById("video-iframe");
+const placeholder = document.getElementById("video-placeholder");
+
+if (canal === "dazn-m") {
+  iframe.style.display = "none"; // Oculta el iframe
+  placeholder.style.display = "block"; // Muestra el contenedor de imagen
+
+  placeholder.innerHTML = `
+    <img src="https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/mundial.webp" alt="Evento DAZN" />
+  `;
+} else {
+  // lógica para insertar el stream normalmente si no es dazn-m
+}
+
+</script>
+
 </body>
 </html>
