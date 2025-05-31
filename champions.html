@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Superclásico</title>
+  <title>Champions League - FINAL</title>
   <link rel="stylesheet" href="styless.css"> 
   <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
@@ -21,29 +21,45 @@
 </script>
 </head>
 <body>
-  <div class="event">
+ <div class="event featured">
     <button class="accordion">
-      <h3>Torneo Betano</h3>
-      <p>15:30 - River Plate Vs. Boca Juniors</p>
-    </button>
-    <div class="panel">
-      <div class="sub-events">
-        <p>Opciones ESPN Premium</p>
-        <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 1</a>
-        <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 2</a>
-        <a href="reproductor.html?ch=espnpre-arg" class="video-link">ESPN Premium opción 3</a>
-        <a href="reproductor.html?ch=espnpre-ar" class="video-link">ESPN Premium opción 4</a>
+        <span class="featured-badge">Evento Destacado</span>
+        <div class="match-header">
+            <div class="competition-name" style="display: flex; justify-content: center; align-items: center; gap: 10px; text-align: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/UEFA_Champions_League_logo_2.svg/120px-UEFA_Champions_League_logo_2.svg.png" 
+                     alt="Champions League logo" style="width: 26px; height: auto;">
+                <h3 style="margin: 0;">Champions League - FINAL</h3>
+            </div>
 
-        <a href="#" onclick="abrirVentana(event, 'https://nebunexa.co/cvatt2.php?get=Rm94X1Nwb3J0c19QcmVtaXVuX0hE&start=true')">ESPN Premium (Extensión)</a>
-        <p>Opciones TNT Sports</p>
-        <a href="reproductor.html?ch=tntsports-b" class="video-link">TNT Sports opción 1</a>
-        <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 2</a>
-        <a href="reproductor.html?ch=tntpre-arg" class="video-link">TNT Sports opción 3</a>
-        <a href="reproductor.html?ch=tntpre-ar" class="video-link">TNT Sports opción 4</a>
-        <a href="#" onclick="abrirVentana(event, 'https://nebunexa.co/cvatt.php?get=VE5UX1Nwb3J0c19IRA')">TNT Sports (Extensión)</a>
-      </div>
+            <div class="match-teams">
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20131224050227-psg.webp" alt="PSG logo" class="team-logo">
+                    <span>PSG</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20210330172154-inter-milan.webp" alt="Inter Milan logo" class="team-logo">
+                    <span>Inter</span>
+                </div>
+            </div>
+
+            <div class="match-time">16:00</div>
+        </div>
+    </button>
+
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=espn-ext" class="video-link">ESPN opción 1 (Extensión)</a>
+            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 2</a>
+            <a href="reproductor.html?ch=espn-C" class="video-link">ESPN opción 3</a>
+            <a href="reproductor.html?ch=fox1ar-ext" class="video-link">Fox Sports opción 4 (Extensión)</a>
+            <a href="reproductor.html?ch=fox1ar-b" class="video-link">Fox Sports opción 5</a>
+            <a href="reproductor.html?ch=fox1ar-c" class="video-link">Fox Sports opción 6</a>
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 7</a>
+            <a href="reproductor.html?ch=disney" class="video-link">Disney+ opción 8</a>
+        </div>
     </div>
-  </div>
+</div>
 
   <script>
     function abrirVentana(e, url) {
@@ -100,11 +116,11 @@ if (acc.length > 0) {
         </a>
       </li>
       <li class="step">Ingresar a:
-        <a href="https://offsidetv.netlify.app/superclasico" 
+        <a href="https://offsidetv.netlify.app/champions" 
            target="_blank" 
            rel="noopener"
            class="guide-link">
-          offsidetv.netlify.app/superclasico
+          offsidetv.netlify.app/champions
         </a>
       </li>
       <li class="step">Activar <strong>Modo de escritorio</strong> en Lemur</li>
@@ -162,6 +178,5 @@ if (acc.length > 0) {
   }
   </style>
   
-      
 </body>
 </html>
