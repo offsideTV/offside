@@ -42,125 +42,94 @@
        
     </header>
     
- <div class="container">
-        <!-- Sección de la agenda con estilo destacado -->
-        <section class="agenda">
-            <div style="position: center; margin-bottom: 10px;">
-                <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;">
-                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">SABADO, 31 DE MAYO</span>
-                    Agenda deportiva del dia</span>
-                </h2>
-                
-            </div>
-            
-          <!-- Campo de búsqueda -->
-          <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." oninput="filterEvents()">
-            
-         <!-- Mensaje de "No encontrado" -->
-        <div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;">
-                    ⚠️ Evento no encontrado. Solicitalo dando click <a href="fallos.html" style="color: blue; text-decoration: underline;">aquí</a>.
-        </div>
-  
-  <script>
-    function mostrarMensajeNoEncontrado() {
-      document.getElementById("noResultsMessage").style.display = "block";
-    }
-  
-    // Llamar a esta función cuando no se encuentre el evento
-    // mostrarMensajeNoEncontrado();
-  </script>
-<div class="event featured">
-    <button class="accordion">
-        <span class="featured-badge">Evento Destacado</span>
-        <div class="match-header">
-            <div class="competition-name" style="display: flex; justify-content: center; align-items: center; gap: 10px; text-align: center;">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/UEFA_Champions_League_logo_2.svg/120px-UEFA_Champions_League_logo_2.svg.png" 
-                     alt="Champions League logo" style="width: 26px; height: auto;">
-                <h3 style="margin: 0;">Champions League - FINAL</h3>
-            </div>
+  <div class="container"> 
+        <!-- Sección de la agenda con estilo destacado --> 
+        <section class="agenda"> 
+            <div style="position: center; margin-bottom: 10px;"> 
+                <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;"> 
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">DOMINGO, 01 DE JUNIO</span> 
+                    Agenda deportiva del dia</span> 
+                </h2> 
 
-            <div class="match-teams">
-                <div class="team">
-                    <img src="https://static.futbolenlatv.com/img/32/20131224050227-psg.webp" alt="PSG logo" class="team-logo">
-                    <span>PSG</span>
-                </div>
-                <div class="vs">VS</div>
-                <div class="team">
-                    <img src="https://static.futbolenlatv.com/img/32/20210330172154-inter-milan.webp" alt="Inter Milan logo" class="team-logo">
-                    <span>Inter</span>
-                </div>
-            </div>
+            </div> 
 
-            <div class="match-time">16:00</div>
-        </div>
-    </button>
+          <!-- Campo de búsqueda --> 
+          <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." oninput="filterEvents()"> 
 
-    <div class="panel">
-        <div class="sub-events">
-            <a href="reproductor.html?ch=espn-ext" class="video-link">ESPN opción 1 (Extensión)</a>
-            <a href="reproductor.html?ch=espn-b" class="video-link">ESPN opción 2</a>
-            <a href="reproductor.html?ch=espn-c" class="video-link">ESPN opción 3</a>
-            <a href="reproductor.html?ch=fox1ar-ext" class="video-link">Fox Sports opción 4 (Extensión)</a>
-            <a href="reproductor.html?ch=fox1ar-b" class="video-link">Fox Sports opción 5</a>
-            <a href="reproductor.html?ch=fox1ar-c" class="video-link">Fox Sports opción 6</a>
-        </div>
-    </div>
-</div>
+         <!-- Mensaje de "No encontrado" --> 
+        <div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;"> 
+                    ⚠️ Evento no encontrado. Solicitalo dando click <a href="fallos.html" style="color: blue; text-decoration: underline;">aquí</a>. 
+        </div> 
 
+  <script> 
+    function mostrarMensajeNoEncontrado() { 
+      document.getElementById("noResultsMessage").style.display = "block"; 
+    } 
 
-<div class="event">
-    <button class="accordion">
-        <div class="match-header">
-            <h3 class="competition-name">MLS</h3>
-            <div class="match-teams">
-                <div class="team">
-                    <img src="https://static.futbolenlatv.com/img/32/20191208031649-inter-miami-cf.webp" alt="" class="team-logo">
-                    <span>Inter Miami</span>
-                </div>
-                <div class="vs">VS</div>
-                <div class="team">
-                    <img src="https://static.futbolenlatv.com/img/32/20211013184144-columbus-crew.webp" alt="" class="team-logo">
-                    <span>Columbus Crew</span>
-                </div>
-            </div>
-            <div class="match-time">20:30</div>
-        </div>
-    </button>
-    <div class="panel">
-        <div class="sub-events">
-           <a href="reproductor.html?ch=mls1" class="video-link">MLS Season Pass opción 1 </a>
-            <a href="reproductor.html?ch=mls-inter" class="video-link">MLS Season Pass opción 2 (Inglés) </a>
-        </div>
-    </div>
-</div>
-        <div class="event">
-    <button class="accordion">
-        <div class="match-header">
-            <h3 class="competition-name">Mundial de Clubes - PLAY-IN</h3>
-            <div class="match-teams">
-                <div class="team">
-                    <img src="https://api.promiedos.com.ar/images/team/fbbhi/1" alt="" class="team-logo">
-                    <span>Los Angeles </span>
-                </div>
-                <div class="vs">VS</div>
-                <div class="team">
-                    <img src="https://api.promiedos.com.ar/images/team/bcff/1" alt="" class="team-logo">
-                    <span>Club América</span>
-                </div>
-            </div>
-            <div class="match-time">23:30</div>
-        </div>
-    </button>
-    <div class="panel">
-        <div class="sub-events">
-           <a href="reproductor.html?ch=dsports-a" class="video-link">Dsports opción 1 </a>
-  <a href="reproductor.html?ch=dsports-b" class="video-link">Dsports opción 2 </a>
-  <a href="reproductor.html?ch=dsports-c" class="video-link">Dsports opción 3 </a>
+    // Llamar a esta función cuando no se encuentre el evento 
+    // mostrarMensajeNoEncontrado(); 
+  </script> 
+<div class="event"> 
+    <button class="accordion"> 
+        <div class="match-header"> 
+            <h3 class="competition-name">Copa Argentina</h3> 
+            <div class="match-teams"> 
+                <div class="team"> 
+                    <img src="https://static.futbolenlatv.com/img/32/20140830122106-estudiantes-lp.webp" alt="" class="team-logo"> 
+                    <span>Estudiantes LP</span> 
+                </div> 
+                <div class="vs">VS</div> 
+                <div class="team"> 
+                    <img src="https://static.futbolenlatv.com/img/32/20140826095110-aldosivi.webp" alt="" class="team-logo"> 
+                    <span>Aldosivi</span> 
+                </div> 
+            </div> 
+            <div class="match-time">13:30</div> 
+        </div> 
+    </button> 
+    <div class="panel"> 
+        <div class="sub-events"> 
+          <a href="reproductor.html?ch=tyc-a" class="video-link">TyC Sports opción 1 </a> 
+          <a href="reproductor.html?ch=tyc-ext" class="video-link">TyC Sports opción 2 (Extensión) </a> 
+          <a href="reproductor.html?ch=tyc-b" class="video-link">TyC Sports opción 3 </a> 
+          <a href="reproductor.html?ch=tyc-c" class="video-link">TyC Sports opción 4 </a> 
+        </div> 
+    </div> 
+</div> 
 
-        </div>
-    </div>
-</div>    
-
+<div class="event"> 
+    <button class="accordion"> 
+        <div class="match-header"> 
+            <h3 class="competition-name">Torneo Betano - FINAL</h3> 
+            <div class="match-teams"> 
+                <div class="team"> 
+                    <img src="https://static.futbolenlatv.com/img/32/20140821093122-ca-huracan.webp" alt="" class="team-logo"> 
+                    <span>Huracán</span> 
+                </div> 
+                <div class="vs">VS</div> 
+                <div class="team"> 
+                    <img src="https://static.futbolenlatv.com/img/32/20140812073636-platense.webp" alt="" class="team-logo"> 
+                    <span>Platense</span> 
+                </div> 
+            </div> 
+            <div class="match-time">17:00</div> 
+        </div> 
+    </button> 
+    <div class="panel"> 
+        <div class="sub-events"> 
+        <a href="reproductor.html?ch=espnpremium-a" class="video-link">ESPN Premium opción 1</a>    
+        <a href="reproductor.html?ch=espnpremiumext-a" class="video-link">ESPN Premium opción 2 (Extensión)</a> 
+        <a href="reproductor.html?ch=espnpremiumext-b" class="video-link">ESPN Premium opción 3 (Extensión)</a> 
+        <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 4</a> 
+        <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 5</a> 
+        <a href="reproductor.html?ch=tntsports-a" class="video-link">TNT Sports opción 6</a>  
+        <a href="reproductor.html?ch=tntsportsext-a" class="video-link">TNT Sports opción 7 (Extensión)</a> 
+        <a href="reproductor.html?ch=tntsportsext-b" class="video-link">TNT Sports opción 8 (Extensión)</a> 
+        <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 9</a> 
+        <a href="reproductor.html?ch=tntsports-d" class="video-link">TNT Sports opción 10</a> 
+        </div> 
+    </div> 
+</div> 
  <!-- Más partidos... -->
 </section>
         <!-- Sección de los canales -->
