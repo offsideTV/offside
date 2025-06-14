@@ -17,16 +17,6 @@
       gtag('js', new Date());
       gtag('config', 'G-PS1PQ89GCR');
     </script>
-    <style>
-        .audio-player {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .audio-player audio {
-            width: 100%;
-            max-width: 400px;
-        }
-    </style>
 </head>
 
 <body>
@@ -44,12 +34,22 @@
     
         <div id="video-container">
             <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display: none;"></iframe>
-            <div id="audio-player" class="audio-player" style="display: none;">
-                <audio id="audio-element" controls>
-                    <source id="audio-source" src="" type="audio/aac">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
-            </div>
+ <div id="audio-player" class="audio-player">
+        <img src="https://dsportsradio-assets.tadevel-cdn.com/62990b945104019949cc22c2/720.webp" 
+             alt="DSPORTS RADIO" 
+             class="logoradio">
+        <div class="player-container">
+            <audio id="audio-element" controls>
+                <source id="audio-source" src="https://stream.dsportsradio.com.ar/stream" type="audio/aac">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+        <div class="station-info">
+            DSPORTS RADIO - Argentina Vs. Colombia
+        </div>
+    </div>
+
+
             <div id="error-message" style="display: none;">
                 <p>Este contenido no se puede reproducir (Error 102630).</p>
             </div>
@@ -339,7 +339,7 @@
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=tycsports"
                 },
                    "tyc-ext": {
-                    "repro1": "https://bestleague.one/ext.html?get=VHlDU3BvcnQ",
+                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=VHlDU3BvcnQ",
                     "sandbox": true
                 },
 
@@ -374,7 +374,7 @@
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=telefe"
                 },
                 "telefe-ext": {
-                    "repro1": "https://cablevisionflow2.dev.ar/extencion.html?get=VGVsZWZlSEQ=",
+                    "repro1": "https://bestleague.one/ext.html?get=VGVsZWZlSEQ=",
                     "sandbox": true
                 },
 
@@ -599,8 +599,8 @@
                     "sandbox": true
                 },
 
-                "auftv": {
-                    "repro1": "https://bestleague.one/ext.html?get=RXZlbnRvc19IRF9VeQ%3D%3D&start=true",
+                "tnt-hd-a": {
+                    "repro1": "https://nebunexa.co/cvatt.php?get=VE5UX0hEX0FyZw==&lang=1",
                     "sandbox": true
                 },
                 "tnt-hd-b": {
@@ -636,11 +636,14 @@
                  "golperu": {
                     "repro1": "https://stream196tp.com/global1.php?stream=golperu",
                 },
-"dsradio": {
+                "dsradio": {
                     "repro1": "https://playerservices.streamtheworld.com/api/livestream-redirect/DSPORTSRADIOAAC.aac",
                     "type": "audio"
                 },
- "eventos2": {
+
+
+                //  EVENTOS / EXTENSION: 1
+    "eventos2": {
         "repro1": "https://stream196tp.com/global1.php?stream=eventos2",
        
     },
@@ -648,16 +651,6 @@
     "eventos1": {
         "repro1": "https://stream196tp.com/global1.php?stream=eventos1",
        
-    },
-                //  EVENTOS / EXTENSION: 1
-    "evento2": {
-        "repro1": "https://tvlibreonline.me/pc.html?get=EVENTO2",
-        "sandbox": true
-    },
-    //  EVENTOS / EXTENSION: 2
-    "evento3": {
-        "repro1": "https://tvlibreonline.me/pc.html?get=EVENTO3",
-        "sandbox": true
     },
     //  EVENTOS / EXTENSION: 3 
     "evento4": {
