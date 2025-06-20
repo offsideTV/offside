@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="styless.css">
     <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -25,41 +28,30 @@
             <img src="https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
         </a>
         <button id="chanels" class="donate-button">Canales y agenda</button>
-        <button id="reportButton" class="report-button">Reportar fallos</button>
+        <button id="reportButton" class="report-button">
+            Reportar fallos
+        </button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
     </header>
     
     <div class="container">
         <h2>Reproduciendo contenido</h2>
     
+        <!-- Contenedor para el iframe -->
         <div id="video-container">
-            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display: none;"></iframe>
- <div id="audio-player" class="audio-player">
-        <img src="" 
-             alt="DSPORTS RADIO" 
-             class="logoradio">
-        <div class="player-container">
-            <audio id="audio-element" controls>
-                <source id="audio-source" src="https://stream.dsportsradio.com.ar/stream" type="audio/aac">
-                Tu navegador no soporta el elemento de audio.
-            </audio>
-        </div>
-        <div class="station-info">
-          
-        </div>
-    </div>
-
-
+            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    
+            <!-- Elementos de error, ocultos por defecto -->
             <div id="error-message" style="display: none;">
-                <p>Este contenido no se puede reproducir (Error 102630).</p>
+                <p>Este archivo de video no se puede reproducir (Error 102630).</p>
             </div>
             <div id="fallback-link" style="display: none;">
                 <p>Intenta verlo directamente aquí:</p>
-                <a id="fallback-url" href="#" target="_blank">Ver contenido</a>
+                <a id="fallback-url" href="#" target="_blank">Ver video</a>
             </div>
         </div>
     </div>
-
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
@@ -717,46 +709,30 @@
             };
 
 
+            // Obtener parámetros de la URL
             const urlParams = new URLSearchParams(window.location.search);
             const channel = urlParams.get("ch");
             const getParam = urlParams.get("get");
             const iframe = document.getElementById("video-iframe");
-            const audioPlayer = document.getElementById("audio-player");
-            const audioElement = document.getElementById("audio-element");
-            const audioSource = document.getElementById("audio-source");
             const errorMessage = document.getElementById("error-message");
             const fallbackLink = document.getElementById("fallback-link");
             const fallbackUrl = document.getElementById("fallback-url");
 
-            if (!iframe || !audioPlayer || !audioElement || !audioSource || !errorMessage || !fallbackLink || !fallbackUrl) {
+            // Verificación de elementos
+            if (!iframe || !errorMessage || !fallbackLink || !fallbackUrl) {
                 console.error("Uno o más elementos del DOM no se encontraron.");
                 return;
             }
 
+            // Manejar el canal o el parámetro get
             let streamUrl = "";
             if (channel && streams[channel]) {
                 streamUrl = streams[channel]["repro1"];
-                if (streams[channel].type === "audio") {
-                    audioSource.src = streamUrl;
-                    audioPlayer.style.display = "block";
-                    iframe.style.display = "none";
-                    audioElement.load();
-                    audioElement.play().catch(error => {
-                        console.error("Error al reproducir el audio:", error);
-                        errorMessage.style.display = "block";
-                        fallbackUrl.href = streamUrl;
-                        fallbackUrl.textContent = "Escuchar audio";
-                        fallbackLink.style.display = "block";
-                    });
+                iframe.setAttribute("src", streamUrl);
+                if (streams[channel].sandbox) {
+                    iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
                 } else {
-                    iframe.setAttribute("src", streamUrl);
-                    iframe.style.display = "block";
-                    audioPlayer.style.display = "none";
-                    if (streams[channel].sandbox) {
-                        iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
-                    } else {
-                        iframe.removeAttribute("sandbox");
-                    }
+                    iframe.removeAttribute("sandbox");
                 }
             } else if (getParam) {
                 let externalUrl = `https://nebunexa.co/cvatt.php?get=${getParam}`;
@@ -767,9 +743,7 @@
                 }
                 streamUrl = externalUrl;
                 iframe.setAttribute("src", streamUrl);
-                iframe.style.display = "block";
-                audioPlayer.style.display = "none";
-                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin"); // Aplicar sandbox para getParam
                 fallbackUrl.href = externalUrl;
                 fallbackUrl.textContent = externalUrl;
             } else {
@@ -777,24 +751,27 @@
                 return;
             }
 
+            // Mostrar mensaje de error y enlace de fallback si el iframe no carga
             iframe.onerror = function () {
-                errorMessage.style.display = "block";
-                fallbackLink.style.display = "block";
-            };
-
-            iframe.onload = function () {
-                if (iframe.contentDocument && iframe.contentDocument.body.textContent.includes("no se puede reproducir")) {
+                if (errorMessage && fallbackLink && fallbackUrl) {
                     errorMessage.style.display = "block";
                     fallbackLink.style.display = "block";
+                } else {
+                    console.error("Elementos de error o fallback no disponibles.");
                 }
             };
 
-            audioElement.onerror = function () {
-                errorMessage.style.display = "block";
-                fallbackUrl.href = streamUrl;
-                fallbackUrl.textContent = "Escuchar audio";
-                fallbackLink.style.display = "block";
+            // Verificación adicional tras cargar el iframe
+            iframe.onload = function () {
+                if (iframe.contentDocument && iframe.contentDocument.body.textContent.includes("no se puede reproducir")) {
+                    if (errorMessage && fallbackLink && fallbackUrl) {
+                        errorMessage.style.display = "block";
+                        fallbackLink.style.display = "block";
+                    }
+                }
             };
+
+           
         });
     </script>
 
@@ -803,63 +780,79 @@
         <div id="dmcaText" class="dmca-text">
             <h2>Cumplimiento del DMCA</h2>
             <p><strong>Este sitio web cumple con el Digital Millennium Copyright Act (DMCA).</strong> No transmitimos ni alojamos de manera ilegal ningún juego, canal, evento u otro contenido protegido por derechos de autor.</p>
+            
             <h2>Descargo de Responsabilidad</h2>
             <p><strong>Este sitio web opera de acuerdo con el Digital Millennium Copyright Act (DMCA).</strong> En virtud de esta ley, nos comprometemos a responder rápidamente a las reclamaciones de violación de derechos de autor y a tomar las medidas necesarias para eliminar el material infractor.</p>
             <p><strong>Los enlaces proporcionados en este sitio web apuntan a contenido alojado en servidores externos</strong> y no alojamos ni transmitimos de manera directa ningún material protegido por derechos de autor. No tenemos control sobre el contenido de estos servidores externos y no nos hacemos responsables por el uso indebido que se pueda hacer de dicho contenido.</p>
+            
             <h2>Compromiso con los Derechos de Autor</h2>
             <p><strong>Entendemos la importancia de proteger los derechos de autor</strong> y estamos comprometidos a cumplir con todas las leyes aplicables. Si eres propietario de los derechos de autor de algún contenido y crees que se ha utilizado de manera inapropiada, te instamos a que nos contactes de inmediato para que podamos abordar el problema de manera efectiva.</p>
             <p><strong>Además del DMCA, este sitio web también se adhiere a otras leyes y regulaciones relacionadas con la propiedad intelectual y la protección de derechos de autor.</strong> Nos reservamos el derecho de modificar o eliminar cualquier enlace o contenido que infrinja estas leyes.</p>
+            
             <h2>Contacto</h2>
             <p><strong>Correo electrónico:</strong> <a href="mailto:offsidetve@gmail.com">offsideteve@gmail.com</a></p>
         </div>
     </div>
 
+    <!-- Botón de compartir con imagen redonda -->
     <div class="share-button-container">
         <button id="shareButton" class="share-button">
             <img src="https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/compartir.png" alt="Compartir" class="share-icon">
         </button>
         <div id="shareMenu" class="share-menu">
+            <!-- Opción para compartir enlace -->
             <a href="#" class="share-link" id="copyLink">
                 <i class="fas fa-link"></i> Compartir canal
             </a>
+            <!-- Opción para generar QR -->
             <a href="#" class="share-link" id="shareQR">
                 <i class="fas fa-qrcode"></i> Generar QR
             </a>
+            <!-- Nueva opción para la extensión -->
             <a href="https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb" 
-               class="share-link" id="extensionLink" target="_blank">
+               class="share-link" 
+               id="extensionLink" 
+               target="_blank">
                 <i class="fas fa-puzzle-piece"></i> Extensión M3U8
             </a>
         </div>
     </div>
 
     <script>
+        // Agrega un evento al botón DMCA para mostrar/ocultar el texto y desplazar la página
         document.getElementById('dmcaButton').addEventListener('click', function() {
             const dmcaText = document.getElementById('dmcaText');
+            
+            // Alternar la visibilidad del texto
             if (dmcaText.style.display === "none" || dmcaText.style.display === "") {
-                dmcaText.style.display = "block";
-                dmcaText.scrollIntoView({ behavior: 'smooth' });
+                dmcaText.style.display = "block"; // Cambia a visible
+                dmcaText.scrollIntoView({ behavior: 'smooth' }); // Desplaza hacia el div
             } else {
-                dmcaText.style.display = "none";
+                dmcaText.style.display = "none"; // Oculta el texto
             }
         });
 
         document.getElementById('donateButton').addEventListener('click', function() {
-            window.location.href = 'donaciones.html';
+            window.location.href = 'donaciones.html'; 
         });
-
+       
         document.getElementById('chanels').addEventListener('click', function() {
-            window.location.href = 'index.html';
+            window.location.href = 'index.html'; // Redirige a la página de inicio
         });
 
         document.getElementById("reportButton").addEventListener("click", function() {
-            window.location.href = 'fallos.html';
+            window.location.href = 'fallos.html'; 
         });
+    </script>
 
+    <script>
+        // Mostrar/ocultar el menú de compartir
         document.getElementById('shareButton').addEventListener('click', function() {
             var shareMenu = document.getElementById('shareMenu');
             shareMenu.classList.toggle('show');
         });
 
+        // Cerrar el menú si se hace clic fuera de él
         window.addEventListener('click', function(event) {
             var shareMenu = document.getElementById('shareMenu');
             var shareButton = document.getElementById('shareButton');
@@ -868,19 +861,28 @@
             }
         });
 
+        // Copiar el enlace al portapapeles (compatible con móviles)
         document.getElementById('copyLink').addEventListener('click', function(event) {
             event.preventDefault();
-            var url = window.location.href;
+            var url = window.location.href; // Obtiene la URL actual
+
+            // Crea un elemento de texto temporal
             var tempInput = document.createElement('input');
             tempInput.value = url;
             document.body.appendChild(tempInput);
+
+            // Selecciona y copia el texto
             tempInput.select();
             document.execCommand('copy');
+
+            // Elimina el elemento temporal
             document.body.removeChild(tempInput);
+
+            // Muestra un mensaje de confirmación con SweetAlert
             Swal.fire({
                 icon: 'success',
                 title: '¡Enlace copiado!',
-                text: 'El enlace se copió correctamente. ¡Compártelo!',
+                text: 'El enlace se copio correctamente. ¡Compartilo!',
                 confirmButtonText: 'OK'
             });
         });
@@ -888,26 +890,32 @@
         document.getElementById('shareQR').addEventListener('click', function(event) {
             event.preventDefault();
             var url = window.location.href;
+
+            // Crear un contenedor para el QR
             var qrContainer = document.createElement('div');
             qrContainer.id = 'qr-code';
-            qrContainer.style.textAlign = 'center';
+            qrContainer.style.textAlign = 'center'; // Centrar el contenido
+
+            // Generar el QR
             new QRCode(qrContainer, {
                 text: url,
-                width: 200,
+                width: 200, // Tamaño del QR
                 height: 200,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
+                colorDark: "#000000", // Color del QR (negro)
+                colorLight: "#ffffff", // Color de fondo (blanco)
+                correctLevel: QRCode.CorrectLevel.H // Nivel de corrección de errores (alto)
             });
+
+            // Mostrar el QR en un modal con SweetAlert
             Swal.fire({
                 title: '¡Escanea el QR y compartí el canal!',
                 html: qrContainer,
                 showCloseButton: true,
                 showConfirmButton: false,
                 customClass: {
-                    popup: 'qr-modal',
-                    title: 'qr-title',
-                    htmlContainer: 'qr-html-container'
+                    popup: 'qr-modal', // Clase CSS personalizada para el modal
+                    title: 'qr-title', // Clase CSS para el título
+                    htmlContainer: 'qr-html-container' // Clase CSS para el contenido del modal
                 }
             });
         });
