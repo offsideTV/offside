@@ -42,7 +42,34 @@
        
     </header>
     
-  <div class="event">
+ <div class="container">
+        <!-- Sección de la agenda con estilo destacado -->
+        <section class="agenda">
+            <div style="position: center; margin-bottom: 10px;">
+                <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;">
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">Lunes, 23 de Junio</span>
+                    Agenda deportiva del dia</span>
+                </h2>
+                
+            </div>
+            
+          <!-- Campo de búsqueda -->
+          <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." oninput="filterEvents()">
+            
+         <!-- Mensaje de "No encontrado" -->
+        <div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;">
+                    ⚠️ Evento no encontrado. Solicitalo dando click <a href="fallos.html" style="color: blue; text-decoration: underline;">aquí</a>.
+        </div>
+  
+  <script>
+    function mostrarMensajeNoEncontrado() {
+      document.getElementById("noResultsMessage").style.display = "block";
+    }
+  
+    // Llamar a esta función cuando no se encuentre el evento
+    // mostrarMensajeNoEncontrado();
+  </script>
+<div class="event">
     <button class="accordion">
         <div class="match-header">
             <h3 class="competition-name">Mundial de Clubes</h3>
