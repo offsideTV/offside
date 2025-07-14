@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Canal en Vivo</title>
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+  <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+  <script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      height: 100%;
+    }
+    #player {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const get = params.get('get');
+    const start = params.get('start') === 'true';
+
+    if (!get) {
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;padding-top:40px;'>Falta el parámetro ?get</h2>";
+      throw new Error("Falta parámetro ?get");
+    }
+
+    const decoded = atob(get);
+    const number = 7; // Podés hacer lógica como en el original si querés
+
+    const mpd = `https://cdn.cvattv.com.ar/live/c${number}eds/${decoded}/SA_Live_dash_enc/${decoded}.mpd`;
+
+    const claves = {
+      "Rm94X1Nwb3J0c19QcmVtaXVuX0hE": { // Fox Premium
+        keyId: "4c230dbc7f6a4bfa6ad0aa73ff792374",
+        key: "4186a7c2a15f590a9399886feaec4257"
+      },
+      "VE5UX1Nwb3J0c19IRA": { // TNT Sports
+        keyId: "bc80fa3da696e503f940fde5f681a1c5",
+        key: "ea46e4e9f1132e8dd71fb77f7d55058a"
+      },
+      "RVNQTjJIRA": { // ESPN 1
+        keyId: "e884b711ab111beb8a7ba1e7bcbdc9bf",
+        key: "cb89ee3961599e3e648a5aad60895f34"
+      }
+    };
+
+    const drm = claves[get];
+
+    if (!drm) {
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;padding-top:40px;'>Canal no soportado</h2>";
+      throw new Error("Canal no soportado");
+    }
+
+    jwplayer("player").setup({
+      file: mpd,
+      type: "dash",
+      drm: {
+        clearkey: {
+          keyId: drm.keyId,
+          key: drm.key
+        }
+      },
+      width: "100%",
+      height: "100%",
+      aspectratio: "16:9",
+      autostart: start
+    });
+  </script>
+</body>
+</html>
