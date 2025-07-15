@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificación de Extensión e Inclusión de Reproductor - Canales de Deportes</title>
+    <link rel="stylesheet" href="https://boxicons.com/css/boxicons.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #player {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Aspect ratio 16:9 */
+            background: #000;
+        }
+
+        #player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .alert-card {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+        }
+
+        .alert-card h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .alert-card .boxicon {
+            font-size: 48px;
+            color: #ff0;
+        }
+
+        .alert-card p {
+            margin: 10px 0;
+            color: #ebebeb;
+        }
+
+        @media (max-width: 480px) {
+            .alert-card {
+                max-width: 90%;
+                padding: 5px;
+                margin-right: 50px;
+            }
+
+            .alert-card h2 {
+                font-size: 20px;
+            }
+
+            .alert-card .boxicon {
+                font-size: 36px;
+            }
+
+            .alert-card p {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .alert-card {
+                max-width: 80%;
+                padding: 25px;
+            }
+
+            .alert-card h2 {
+                font-size: 22px;
+            }
+
+            .alert-card .boxicon {
+                font-size: 42px;
+            }
+
+            .alert-card p {
+                font-size: 16px; 
+            }
+        }
+
+        a {
+            color: #0f0;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="player" class="hidden"></div>
+        <div id="alerta-extension" class="hidden alert">
+            <i class="bx bx-error-circle boxicon"></i>
+            <center>
+                <div id="jb" class="jumbotron">
+                    <div class="image"><img src="https://lh3.googleusercontent.com/CpjFFK0vJQElr4Xo1TAzovP8tCzedGN0h5uzSthqCaRQXlDvU6kIrIc4QTm1sPrxlD29NWLqfT_srE6MK5j7Iy9wkg=s60" width="10%"></div>
+                    <h1>Reproductor MPD/M3U8/M3U/EPG</h1>
+                </div>        
+                <p><i style="color:red">NOTA</i>: Para reproducir este canal necesitas instalar la extensión: <strong>Reproductor MPD/M3U8/M3U/EPG</strong></p>
+                <h2>Instalación</h2>
+                <p>Para instalar la extensión debes ingresar a <a target="_blank" href="https://chromewebstore.google.com/detail/reproductor-mpdm3u8m3uepg/opmeopcambhfimffbomjgemehjkbbmji">Reproductor MPD/M3U8/M3U/EPG</a> o buscarla en <b>Chrome Web Store o Brave</b></p>
+                <img src="https://star.nebunexa.com/disney/brave.png" width="40%">
+                <p>Una vez instalada la extensión, recarga la página y disfruta del canal.</p>
+            </center>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        var getURL = getParameterByName('get');
+        var getIMG = getParameterByName('img');
+        var getKEY = getParameterByName('key');
+        var getKEY2 = getParameterByName('key2');
+        if (getURL == "") {alert('Vuelve a la página anterior');}
+
+        var number;
+
+        // Solo canales de deportes
+        if (getURL == "Rm94U3BvcnRzX1ByZW1pdW1fSEQ" || getURL == "VHlDU3BvcnQ" || getURL == "RVNQTjJfQXJn" || getURL == "Rm94U3BvcnRzMl9VWQ==" || getURL == "RVNQTjQ=" || getURL == "Rm94U3BvcnRzM19VWQ==" || getURL == "RXZlbnRvc19IRF9VeQ==" || getURL == "VE5UX1Nwb3J0c19IRA==" || getURL == "RVNQTkhE" || getURL == "RXZlbnRvczFIRA==" || getURL == "RXZlbnRvc18yX0hE" || getURL == "TkJBX1RW")
+            number = 7;
+        else
+            number = 3;
+
+        // Función para verificar si es Windows o Linux
+        function isWindowsPC() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return (/windows|linux/.test(userAgent)) && !(/mobile|tablet|iphone|ipod|android/.test(userAgent));
+        }
+
+        // Función para mostrar el mensaje de dispositivo no compatible
+        function showUnsupportedDeviceMessage() {
+            const unsupportedMessage = document.createElement('div');
+            unsupportedMessage.classList.add('alert-card');
+            unsupportedMessage.innerHTML = `
+                <i class='bx bx-error-circle boxicon'></i>
+                <h2>Dispositivo no compatible</h2>
+                <p>Este contenido es compatible solo con PC. Por favor, usa un PC para visualizarlo.</p>
+            `;
+            document.body.appendChild(unsupportedMessage);
+        }
+
+        // Verificar si es un dispositivo compatible antes de ejecutar el código principal
+        if (!isWindowsPC()) {
+            showUnsupportedDeviceMessage();
+        } else {
+            // Array de URLs disponibles
+            var mt = ["chromecast", "cdn"];
+
+            // Obtener un índice aleatorio de la lista de URLs
+            var randomIndex = Math.floor(Math.random() * mt.length);
+            console.log("Selected mt:", mt[randomIndex]);
+
+            // Definir las claves
+            var keyId, key, mpdBase;
+
+            if (getURL == "RVNQTjJfQXJn") {  //ESPN 2
+                keyId = "65a5bfa3c7a72dde60be9b0c7406c8fc";
+                key = "0b40ae9f78a7bac3b57ecbf72d3c081e";
+                mpdBase = `https://edge-mix01-cte.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzMzODk4Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2M2ZWRzL0VTUE4yX0FyZy9TQV9MaXZlX2Rhc2hfZW5jLyIsInNlc3Npb25fY2RuX2lkIjoiYTA4ZWRjMjI0MTI2MDVmMCIsInNlc3Npb25faWQiOiIiLCJjbGllbnRfaWQiOiIiLCJkZXZpY2VfaWQiOiIiLCJtYXhfc2Vzc2lvbnMiOjAsInNlc3Npb25fZHVyYXRpb24iOjAsInVybCI6Imh0dHBzOi8vMjAxLjIzNS42Ni4xMTUiLCJhdWQiOiIyMDEiLCJzb3VyY2VzIjpbNzcsODUsMTQ0LDg2LDg4XX0=.kZdYPhMgakFtvnO8kZVPYADzLs9E_5_y9USpoodr3Mh-tCpT5yJbknfedJ1BfbLW4GbZ2_oSBbtoSkrZtq8tPg==/live/c6eds/ESPN2_Arg/SA_Live_dash_enc/ESPN2_Arg.mpd`;
+            
+        
+        } else if (getURL == "Rm94U3BvcnRzX1ByZW1pdW1fSEQ") { //ESPN PREMIUM
+                keyId = "4c230dbc7f6a4bfa6ad0aa73ff792374";
+                key = "4186a7c2a15f590a9399886feaec4257";
+                mpdBase = `https://edge-live32-sl.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNTE2MTkwIiwic2lwIjoiNDUuMjI4LjY3LjMwIiwicGF0aCI6Ii9saXZlL2M3ZWRzL0ZveF9TcG9ydHNfUHJlbWl1bl9IRC9TQV9MaXZlX2Rhc2hfZW5jLyIsInNlc3Npb25fY2RuX2lkIjoiYTcyMDE2MzE5NzUzZjVjMyIsInNlc3Npb25faWQiOiIiLCJjbGllbnRfaWQiOiIiLCJkZXZpY2VfaWQiOiIiLCJtYXhfc2Vzc2lvbnMiOjAsInNlc3Npb25fZHVyYXRpb24iOjAsInVybCI6Imh0dHBzOi8vMjAxLjIzNS42Ni4xMTQiLCJhdWQiOiIxMDAiLCJzb3VyY2VzIjpbODUsMTQ0LDg2LDg4XX0=.rbxIhzBELH7epsVqCQT4G_9zUjMBBLjQfa-TqdALzURkEknZfBjywNEn8Z4RC5qmr8GALqorPyAbRxAB3G7_Ew==/live/c7eds/Fox_Sports_Premiun_HD/SA_Live_dash_enc/Fox_Sports_Premiun_HD.mpd`;
+           
+        
+        } else if (getURL == "VHlDU3BvcnQ") { //TyC Sports
+                keyId = "2b21c8fa9a329cce311a4c4a4aa996a1";
+                key = "cc23ea1fb32629f9e1f48c8deeae3e5b";
+                mpdBase = `https://edge-live18-sl.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNTE2MTI0Iiwic2lwIjoiNDUuMjI4LjY3LjMwIiwicGF0aCI6Ii9saXZlL2M3ZWRzL1R5Q1Nwb3J0L1NBX0xpdmVfZGFzaF9lbmMvIiwic2Vzc2lvbl9jZG5faWQiOiJlOGNjOGU5YjhkMmY3YTgzIiwic2Vzc2lvbl9pZCI6IiIsImNsaWVudF9pZCI6IiIsImRldmljZV9pZCI6IiIsIm1heF9zZXNzaW9ucyI6MCwic2Vzc2lvbl9kdXJhdGlvbiI6MCwidXJsIjoiaHR0cHM6Ly8xODEuMTIuMzYuMTUwIiwiYXVkIjoiMjMxIiwic291cmNlcyI6Wzg1LDE0NCw4Niw4OF19.vMMfnRHCRDSArmnjd3a5_pQdH1xDM-amFaB3EZSlU2M1FoMU1HwW7eOD89rHh4b55m70Nqp4BqK79ttDexWhZw==/live/c7eds/TyCSport/SA_Live_dash_enc/TyCSport.mpd`;
+           
+        
+        } else if (getURL == "Rm94U3BvcnRzMl9VWQ==") { //ESPN 7
+                keyId = "5fc7b662e69c0fbf8d39691166b1c919";
+                key = "89157cdd25df25d56f1ecccee3850888";
+                mpdBase = `https://edge-live01-cte.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzM0MTg2Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2M3ZWRzL0ZveFNwb3J0czJfVVkvU0FfTGl2ZV9kYXNoX2VuYy8iLCJzZXNzaW9uX2Nkbl9pZCI6IjM4YzllNmI4NDE1MjZiOGIiLCJzZXNzaW9uX2lkIjoiIiwiY2xpZW50X2lkIjoiIiwiZGV2aWNlX2lkIjoiIiwibWF4X3Nlc3Npb25zIjowLCJzZXNzaW9uX2R1cmF0aW9uIjowLCJ1cmwiOiJodHRwczovLzIwMS4yMzUuNjYuMTIyIiwiYXVkIjoiMjU4Iiwic291cmNlcyI6Wzc3LDg1LDE0NCw4Niw4OF19.RPslnEDBW_jXuLZ1omW-Hnm4g3SbIOwo1x7TgKG-T5idpKoTof1f1N5RtqwIXjiC8d_rlFJuj87BClEfY6tdPg==/live/c7eds/FoxSports2_UY/SA_Live_dash_enc/FoxSports2_UY.mpd`;
+        
+        } else if (getURL == "RVNQTjQ=") { //ESPN 5
+                keyId = "24f2b3e741f0d9e9a8d516faff38bddc";
+                key = "bbd3fd02fb104e1463ac528a13f67e4a";
+                mpdBase = `https://edge-mix02-res.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzM0Mzc2Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2M3ZWRzL0VTUE40L1NBX0xpdmVfZGFzaF9lbmMvIiwic2Vzc2lvbl9jZG5faWQiOiI2MTdhOGJlNjU4NTA4MzU3Iiwic2Vzc2lvbl9pZCI6IiIsImNsaWVudF9pZCI6IiIsImRldmljZV9pZCI6IiIsIm1heF9zZXNzaW9ucyI6MCwic2Vzc2lvbl9kdXJhdGlvbiI6MCwidXJsIjoiaHR0cHM6Ly8yMDEuMjM1LjY2LjExNCIsImF1ZCI6IjEwNyIsInNvdXJjZXMiOls3Nyw4NSwxNDQsODYsODhdfQ==.e78VnCvratIJQtZqYMMiZM6-I2cxIfpN_pMfJ_ZEsImi9s8uXhsJ_Q6S7vK5nHuvkFpelLtOqE_ypr99_Qdn2g==/live/c7eds/ESPN4/SA_Live_dash_enc/ESPN4.mpd`;
+           
+        
+        } else if (getURL == "Rm94U3BvcnRzM19VWQ==") { //ESPN 6
+                keyId = "5fc7b662e69c0fbf8d39691166b1c919";
+                key = "89157cdd25df25d56f1ecccee3850888";
+                mpdBase = `https://edge-mix02-res.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzM0NTI4Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2M3ZWRzL0ZveFNwb3J0czNfVVkvU0FfTGl2ZV9kYXNoX2VuYy8iLCJzZXNzaW9uX2Nkbl9pZCI6IjcwODU3NDlhZTdiMmU2M2QiLCJzZXNzaW9uX2lkIjoiIiwiY2xpZW50X2lkIjoiIiwiZGV2aWNlX2lkIjoiIiwibWF4X3Nlc3Npb25zIjowLCJzZXNzaW9uX2R1cmF0aW9uIjowLCJ1cmwiOiJodHRwczovLzIwMS4yMzUuNjYuMTIyIiwiYXVkIjoiMTA3Iiwic291cmNlcyI6Wzc3LDg1LDE0NCw4Niw4OF19.krloke0dcFxcnDsTRj8f2wKu3XRrmVca1PDvT3BJfesMmLWxUYJv6nDTisbAo89mUnr0arEVxHDXA8SJ9YPfaw==/live/c7eds/FoxSports3_UY/SA_Live_dash_enc/FoxSports3_UY.mpd`;
+            
+        
+        } else if (getURL == "RXZlbnRvc19IRF9VeQ==") { //Eventos UY
+                keyId = "48d0e34c8797c5c2a742d2630a8fb975";
+                key = "fb5d12b9d8febe836e5670abd003ddca";
+                mpdBase = `https://edge-live12-hr.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNTg4NzEzIiwic2lwIjoiNDUuMjI4LjY3LjMwIiwicGF0aCI6Ii9saXZlL2M3ZWRzL0V2ZW50b3NfSERfVXkvU0FfTGl2ZV9kYXNoX2VuYy8iLCJzZXNzaW9uX2Nkbl9pZCI6ImI3M2JhZjdjOGMxYzlkM2YiLCJzZXNzaW9uX2lkIjoiIiwiY2xpZW50X2lkIjoiIiwiZGV2aWNlX2lkIjoiIiwibWF4X3Nlc3Npb25zIjowLCJzZXNzaW9uX2R1cmF0aW9uIjowLCJ1cmwiOiJodHRwczovLzIwMS4yMzUuNjYuMTIzIiwiYXVkIjoiNjUiLCJzb3VyY2VzIjpbODUsMTQ0LDg2LDg4XX0=.QlUiIb9ASKsLmm82QpeheKmP-d6KS6WNy8riTjqz3qEeVb23zaZgfWOJBtxfaDuVW1KsWBgeuKXHKIN-cCgvWw==/live/c7eds/Eventos_HD_Uy/SA_Live_dash_enc/Eventos_HD_Uy.mpd`;
+            
+        
+        } else if (getURL == "VE5UX1Nwb3J0c19IRA==") { //TNT Sports
+                keyId = "bc80fa3da696e503f940fde5f681a1c5";
+                key = "ea46e4e9f1132e8dd71fb77f7d55058a";
+                mpdBase = `https://edge-mix01-res.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzI5NjI1Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2M2ZWRzL1ROVF9TcG9ydHNfSEQvU0FfTGl2ZV9kYXNoX2VuY19DLyIsInNlc3Npb25fY2RuX2lkIjoiMzU3OWUzNWEwZDczNDU1NyIsInNlc3Npb25faWQiOiI3NzQ1NjQyNi0xNzUyNTU2ODI1LTMxNyIsImNsaWVudF9pZCI6IjY5NzMwMjkiLCJkZXZpY2VfaWQiOiI3NzQ1NjQyNiIsIm1heF9zZXNzaW9ucyI6MCwic2Vzc2lvbl9kdXJhdGlvbiI6MCwidXJsIjoiaHR0cHM6Ly8yMDEuMjM1LjY2LjExNSIsImF1ZCI6IjI1OSIsInNvdXJjZXMiOls3Nyw4NSwxNDQsODYsODhdfQ==.5Gbg3oPcTM-PwF1GaPRA-D4Qh0rmAtoR1YYfC-OIpHpRU8qqHCgCWzk-qgRhhTeygS3V8ZSlDQLDoz3klW867Q==/live/c6eds/TNT_Sports_HD/SA_Live_dash_enc_C/TNT_Sports_HD.mpd`;
+            
+        
+        } else if (getURL == "RVNQTkhE") { //ESPN 4
+                keyId = "cc8d44406ed6bf1898ad9f7a2d64f29e";
+                key = "fb85d059687ab0fc67805806204edbdf";
+                mpdBase = `https://edge-mix02-res.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzM0NjM1Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2MzZWRzL0VTUE5IRC9TQV9MaXZlX2Rhc2hfZW5jLyIsInNlc3Npb25fY2RuX2lkIjoiOGQ3ZDk1YjI4Y2JhYzI3YyIsInNlc3Npb25faWQiOiIiLCJjbGllbnRfaWQiOiIiLCJkZXZpY2VfaWQiOiIiLCJtYXhfc2Vzc2lvbnMiOjAsInNlc3Npb25fZHVyYXRpb24iOjAsInVybCI6Imh0dHBzOi8vMjAxLjIzNS42Ni4xMTQiLCJhdWQiOiIxMDciLCJzb3VyY2VzIjpbNzcsODUsMTQ0LDg2LDg4XX0=.CBiFO2xxikbzkpzZljgQFcBu_BhlkJgvdUDysrnV3NmBGQL0Rs18MHslp70zQh91u1QQMxUhgx3vp1Rq_n5K0w==/live/c3eds/ESPNHD/SA_Live_dash_enc/ESPNHD.mpd`;
+           
+        
+        } else if (getURL == "RXZlbnRvczFIRA") { //FLOW SPORTS 1 AR
+                keyId = "5c86e237317c2231ac1bc130e995fad6";
+                key = "dcacf7b239ee03df3c69ca11dbcde4eb";
+                mpdBase = `https://edge-mix02-res.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzM1MDc3Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2MzZWRzL0V2ZW50b3MxSEQvU0FfTGl2ZV9kYXNoX2VuY19DLyIsInNlc3Npb25fY2RuX2lkIjoiNGFmNzA3MTVkNDU2MTM1YiIsInNlc3Npb25faWQiOiI3NzQ1NjQyNi0xNzUyNTYyMjc2LTc0MSIsImNsaWVudF9pZCI6IjY5NzMwMjkiLCJkZXZpY2VfaWQiOiI3NzQ1NjQyNiIsIm1heF9zZXNzaW9ucyI6MCwic2Vzc2lvbl9kdXJhdGlvbiI6MCwidXJsIjoiaHR0cHM6Ly8yMDEuMjM1LjY2LjExNCIsImF1ZCI6IjEwNyIsInNvdXJjZXMiOls3Nyw4NSwxNDQsODYsODhdfQ==.9iuxS_JZUz4IK9c_KmbkbEWuw0gEf2Qxs088BtMngBjcfa5M5z8y4wkBouglFRVl46FqvaQvfBLRyMaCcW4hIg==/live/c3eds/Eventos1HD/SA_Live_dash_enc_C/Eventos1HD.mpd`;
+        
+        } else if (getURL == "RXZlbnRvc18yX0hE") { //FLOW SPORTS 2 AR
+                keyId = "e54e9ea87a634658fbba0e380aa701a7";
+                key = "4e486d25d7d0e7d131743b285963c643";
+                mpdBase = `https://edge-mix01-cte.cvattv.com.ar/tok_eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIxNzUyNzM1MjQ5Iiwic2lwIjoiMTkwLjEzNy4yMzUuMTU0IiwicGF0aCI6Ii9saXZlL2M2ZWRzL0V2ZW50b3NfMl9IRC9TQV9MaXZlX2Rhc2hfZW5jX0MvIiwic2Vzc2lvbl9jZG5faWQiOiI5NDVhMTgzY2EzOTJhYTlkIiwic2Vzc2lvbl9pZCI6Ijc3NDU2NDI2LTE3NTI1NjI0NDktMTQ0IiwiY2xpZW50X2lkIjoiNjk3MzAyOSIsImRldmljZV9pZCI6Ijc3NDU2NDI2IiwibWF4X3Nlc3Npb25zIjowLCJzZXNzaW9uX2R1cmF0aW9uIjowLCJ1cmwiOiJodHRwczovLzIwMS4yMzUuNjYuMTIzIiwiYXVkIjoiMjAxIiwic291cmNlcyI6Wzc3LDg1LDE0NCw4Niw4OF19.zHhYPQKRiSDtswDcF5w8Io4RScmKLOZ5Gj7s3hA836ZjixDiy7Dj_joXHC8bkj0MPcQZ5wKstkomtNZ7yWJRZA==/live/c6eds/Eventos_2_HD/SA_Live_dash_enc_C/Eventos_2_HD.mpd`;
+        
+        } else if (getURL == "TkJBX1RW") { //NBA TV
+                keyId = "d0c38de3c9844e4e9f975dffb3eff8ad";
+                key = "141ca0fdf6ebadfa7107576b8e09e117";
+                mpdBase = ``;
+            }
+
+            // Convertir keyId y key a una cadena JSON
+            if (keyId && key) {
+                var keyString = `"${keyId}":"${key}"`;
+                // Codificar en base64
+                var base64Key = btoa(keyString);
+
+                var extensionUrl = `chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/pages/player.html#${mpdBase}?ck=${encodeURIComponent(base64Key)}&headers=eyJvcmlnaW4iOiJodHRwczovL3BvcnRhbC5hcHAuZmxvdy5jb20uYXIvIiwicmVmZXJlciI6Imh0dHBzOi9wb3J0YWwuYXBwLmZsb3cuY29tLmFyLyJ9`;
+
+                // Mostrar el reproductor o el mensaje de extensión según corresponda
+                const playerDiv = document.getElementById("player");
+                const alertaDiv = document.getElementById("alerta-extension");
+
+                isExtensionInstalled(
+                    () => {
+                        playerDiv.classList.remove("hidden");
+                        playerDiv.innerHTML = `<iframe id="iframe" allow="encrypted-media" allowfullscreen src="${extensionUrl}"></iframe>`;
+                    },
+                    () => {
+                        alertaDiv.classList.remove("hidden");
+                    }
+                );
+            } else {
+                alert('KeyId o Key no definidos.');
+            }
+        }
+
+        // Función para verificar si la extensión está instalada
+        function isExtensionInstalled(installedCallback, notInstalledCallback) {
+            const img = document.createElement('img');
+            img.onload = installedCallback;
+            img.onerror = notInstalledCallback;
+            img.src = 'chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/play-on.png';
+        }
+    </script>
+</body>
+</html>
