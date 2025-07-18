@@ -1000,7 +1000,7 @@ playerInstance.setup({
 	
 if (getURL != "") {
     playerInstance.on("error", function() {
-        var redirectUrl = 'cvatt_ext.html?get=' + encodeURIComponent(getURL) + '&start=true';
+        var redirectUrl = 'futcvatt.html?get=' + encodeURIComponent(getURL) + '&start=true';
         window.location = redirectUrl;
     });
 }
