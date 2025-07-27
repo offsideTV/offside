@@ -47,6 +47,155 @@
         <section class="agenda">
             <div style="position: center; margin-bottom: 10px;">
                 <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;">
+                    <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">Domingo, 27 de Junio</span>
+                    Agenda deportiva del dia</span>
+                </h2>
+                
+            </div>
+            
+          <!-- Campo de búsqueda -->
+          <input type="text" id="searchInput2" placeholder="🔍 Buscar evento..." oninput="filterEvents()">
+            
+         <!-- Mensaje de "No encontrado" -->
+        <div id="noResultsMessage" style="display: none; color: red; margin-top: 10px; font-size: 0.9em; text-align: center;">
+                    ⚠️ Evento no encontrado. Solicitalo dando click <a href="fallos.html" style="color: blue; text-decoration: underline;">aquí</a>.
+        </div>
+  
+  <script>
+    function mostrarMensajeNoEncontrado() {
+      document.getElementById("noResultsMessage").style.display = "block";
+    }
+  
+    // Llamar a esta función cuando no se encuentre el evento
+    // mostrarMensajeNoEncontrado();
+  </script>
+
+
+<div class="event">
+    <button class="accordion">
+        <div class="match-header">
+            <h3 class="competition-name">Torneo Clausura</h3>
+            <div class="match-teams">
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20130729045030-gimnasia-lp.webp" alt="" class="team-logo">
+                    <span>Gimnasia LP</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20121219051437_independiente.webp" alt="" class="team-logo">
+                    <span>Independiente</span>
+                </div>
+            </div>
+            <div class="match-time">16:00</div>
+        </div>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+          <a href="reproductor.html?ch=espnpremium-a" class="video-link">ESPN Premium opción 1</a>
+            <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 2</a>
+            <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 3</a>
+            <a href="reproductor.html?ch=espnpremium-d" class="video-link">ESPN Premium opción 4</a>
+            <a href="reproductor.html?ch=espnpremiumext-a" class="video-link">ESPN Premium opción 5 (PC)</a>
+            <a href="reproductor.html?ch=espnpremiumext-b" class="video-link">ESPN Premium opción 6 (PC)</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="event">
+    <button class="accordion">
+        <div class="match-header">
+            <h3 class="competition-name">Torneo Clausura</h3>
+            <div class="match-teams">
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20160714102309-talleres-cordoba.webp" alt="" class="team-logo">
+                    <span>Talleres</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20121219051410_godoy-cruz.webp" alt="" class="team-logo">
+                    <span>Godoy Cruz</span>
+                </div>
+            </div>
+            <div class="match-time">16:00</div>
+        </div>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=tntsports-a" class="video-link">TNT Sports opción 1</a>
+            <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 2</a>
+            <a href="reproductor.html?ch=tntsports-d" class="video-link">TNT Sports opción 3</a>
+            <a href="reproductor.html?ch=tntsportsext-a" class="video-link">TNT Sports opción 4 (PC)</a>
+            <a href="reproductor.html?ch=tntsportsext-b" class="video-link">TNT Sports opción 5 (PC)</a>
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <div class="match-header">
+            <h3 class="competition-name">Torneo Clausura</h3>
+            <div class="match-teams">
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20140821093122-ca-huracan.webp" alt="" class="team-logo">
+                    <span>Huracán</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20121219051310_boca-juniors.webp" alt="" class="team-logo">
+                    <span>Boca Juniors</span>
+                </div>
+            </div>
+            <div class="match-time">18:30</div>
+        </div>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+            <a href="reproductor.html?ch=tntsports-a" class="video-link">TNT Sports opción 1</a>
+            <a href="reproductor.html?ch=tntsports-c" class="video-link">TNT Sports opción 2</a>
+            <a href="reproductor.html?ch=tntsports-d" class="video-link">TNT Sports opción 3</a>
+            <a href="reproductor.html?ch=tntsportsext-a" class="video-link">TNT Sports opción 4 (PC)</a>
+             <a href="reproductor.html?ch=tntsportsext-b" class="video-link">TNT Sports opción 5 (PC)</a>
+        </div>
+    </div>
+</div>
+
+<div class="event">
+    <button class="accordion">
+        <div class="match-header">
+            <h3 class="competition-name">Torneo Clausura</h3>
+            <div class="match-teams">
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20121219051705_river-plate.webp" alt="" class="team-logo">
+                    <span>River Plate</span>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team">
+                    <img src="https://static.futbolenlatv.com/img/32/20121219051730_san-lorenzo-de-almagro.webp" alt="" class="team-logo">
+                    <span>San Lorenzo</span>
+                </div>
+            </div>
+            <div class="match-time">20:30</div>
+        </div>
+    </button>
+    <div class="panel">
+        <div class="sub-events">
+           <a href="reproductor.html?ch=espnpremium-a" class="video-link">ESPN Premium opción 1</a>
+            <a href="reproductor.html?ch=espnpremium-b" class="video-link">ESPN Premium opción 2</a>
+            <a href="reproductor.html?ch=espnpremium-c" class="video-link">ESPN Premium opción 3</a>
+            <a href="reproductor.html?ch=espnpremium-d" class="video-link">ESPN Premium opción 4</a>
+            <a href="reproductor.html?ch=espnpremiumext-a" class="video-link">ESPN Premium opción 5 (PC)</a>
+            <a href="reproductor.html?ch=espnpremiumext-b" class="video-link">ESPN Premium opción 6 (PC)</a>
+        </div>
+    </div>
+</div>
+
+        <!-- Más partidos... -->
+</section><div class="container">
+        <!-- Sección de la agenda con estilo destacado -->
+        <section class="agenda">
+            <div style="position: center; margin-bottom: 10px;">
+                <h2 style="margin: 0; font-family: 'Arial', sans-serif; color: #444; font-size: 1.7em; font-weight: 800; letter-spacing: -0.5px;">
                     <span style="display: block; font-size: 0.7em; font-weight: 400; color: #ca0a0a; margin-bottom: 3px;">Sábado, 26 de Junio</span>
                     Agenda deportiva del dia</span>
                 </h2>
