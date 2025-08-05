@@ -33,14 +33,18 @@
         </button>
         <button id="donateButton" class="donate-button">Dejar una donación</button>
     </header>
-    
     <div class="container">
         <h2>Reproduciendo contenido</h2>
     
         <!-- Contenedor para el iframe -->
         <div id="video-container">
             <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    
+            
+            <!-- Botón de pantalla completa -->
+            <button id="fullscreen-btn" class="fullscreen-button" title="Pantalla completa">
+                <i class="fas fa-expand"></i>
+            </button>
+            
             <!-- Elementos de error, ocultos por defecto -->
             <div id="error-message" style="display: none;">
                 <p>Este archivo de video no se puede reproducir (Error 102630).</p>
@@ -781,7 +785,6 @@
                     "repro1": "https://thedaddy.click/embed/stream-643.php",
                    
                 },
-
                     "eltrece": {
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=QXJ0ZWFySEQ&lang=1",
                     "sandbox": true
@@ -999,7 +1002,160 @@
                 }
             });
         });
+
+        // Funcionalidad de pantalla completa
+        document.addEventListener("DOMContentLoaded", function() {
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const videoContainer = document.getElementById('video-container');
+            const iframe = document.getElementById('video-iframe');
+
+            if (fullscreenBtn && videoContainer) {
+                fullscreenBtn.addEventListener('click', function() {
+                    if (!document.fullscreenElement) {
+                        // Entrar en pantalla completa
+                        if (videoContainer.requestFullscreen) {
+                            videoContainer.requestFullscreen();
+                        } else if (videoContainer.webkitRequestFullscreen) {
+                            videoContainer.webkitRequestFullscreen();
+                        } else if (videoContainer.msRequestFullscreen) {
+                            videoContainer.msRequestFullscreen();
+                        }
+                    } else {
+                        // Salir de pantalla completa
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                    }
+                });
+
+                // Cambiar el ícono cuando cambie el estado de pantalla completa
+                document.addEventListener('fullscreenchange', updateFullscreenIcon);
+                document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+                document.addEventListener('msfullscreenchange', updateFullscreenIcon);
+
+                function updateFullscreenIcon() {
+                    const icon = fullscreenBtn.querySelector('i');
+                    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                        icon.className = 'fas fa-compress';
+                        fullscreenBtn.title = 'Salir de pantalla completa';
+                        // Agregar clase al body para ocultar elementos
+                        document.body.classList.add('fullscreen-active');
+                    } else {
+                        icon.className = 'fas fa-expand';
+                        fullscreenBtn.title = 'Pantalla completa';
+                        // Remover clase del body
+                        document.body.classList.remove('fullscreen-active');
+                    }
+                }
+
+                // Mostrar el botón solo cuando hay contenido reproduciéndose
+                function checkIfVideoIsPlaying() {
+                    const iframeSrc = iframe.src;
+                    if (iframeSrc && iframeSrc.trim() !== '') {
+                        fullscreenBtn.style.display = 'block';
+                    } else {
+                        fullscreenBtn.style.display = 'none';
+                    }
+                }
+
+                // Variables para controlar la visibilidad del botón en pantalla completa
+                let fullscreenButtonTimeout;
+                let isFullscreen = false;
+
+                // Función para mostrar temporalmente el botón en pantalla completa
+                function showFullscreenButtonTemporarily() {
+                    if (isFullscreen) {
+                        fullscreenBtn.classList.add('show-temporarily');
+                        
+                        // Ocultar después de 3 segundos
+                        clearTimeout(fullscreenButtonTimeout);
+                        fullscreenButtonTimeout = setTimeout(() => {
+                            if (isFullscreen) {
+                                fullscreenBtn.classList.remove('show-temporarily');
+                            }
+                        }, 3000);
+                    }
+                }
+
+                // Detectar movimiento del mouse en pantalla completa
+                document.addEventListener('mousemove', function() {
+                    if (isFullscreen) {
+                        showFullscreenButtonTemporarily();
+                    }
+                });
+
+                // Detectar eventos del iframe (pausa, play, etc.)
+                iframe.addEventListener('load', function() {
+                    try {
+                        // Intentar acceder al contenido del iframe para detectar eventos
+                        const iframeContent = iframe.contentWindow;
+                        if (iframeContent) {
+                            // Escuchar eventos de teclado que podrían indicar pausa/play
+                            iframeContent.addEventListener('keydown', function(e) {
+                                if (isFullscreen && (e.code === 'Space' || e.code === 'KeyP')) {
+                                    showFullscreenButtonTemporarily();
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        // Error de CORS - no podemos acceder al contenido del iframe
+                        console.log('No se puede acceder al contenido del iframe debido a CORS');
+                    }
+                });
+
+                // Detectar clics en el iframe (podrían indicar pausa/play)
+                iframe.addEventListener('click', function() {
+                    if (isFullscreen) {
+                        showFullscreenButtonTemporarily();
+                    }
+                });
+
+                // Detectar teclas de pausa/play en el documento
+                document.addEventListener('keydown', function(e) {
+                    if (isFullscreen && (e.code === 'Space' || e.code === 'KeyP')) {
+                        showFullscreenButtonTemporarily();
+                    }
+                });
+
+                // Actualizar la función updateFullscreenIcon para manejar el estado
+                const originalUpdateFullscreenIcon = updateFullscreenIcon;
+                function updateFullscreenIcon() {
+                    const icon = fullscreenBtn.querySelector('i');
+                    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                        icon.className = 'fas fa-compress';
+                        fullscreenBtn.title = 'Salir de pantalla completa';
+                        // Agregar clase al body para ocultar elementos
+                        document.body.classList.add('fullscreen-active');
+                        isFullscreen = true;
+                        // Ocultar el botón después de un breve delay
+                        setTimeout(() => {
+                            if (isFullscreen) {
+                                fullscreenBtn.classList.remove('show-temporarily');
+                            }
+                        }, 1000);
+                    } else {
+                        icon.className = 'fas fa-expand';
+                        fullscreenBtn.title = 'Pantalla completa';
+                        // Remover clase del body
+                        document.body.classList.remove('fullscreen-active');
+                        isFullscreen = false;
+                        // Mostrar el botón normalmente
+                        fullscreenBtn.classList.remove('show-temporarily');
+                        clearTimeout(fullscreenButtonTimeout);
+                    }
+                }
+
+                // Verificar cada 2 segundos si hay contenido
+                setInterval(checkIfVideoIsPlaying, 2000);
+                
+                // Verificación inicial
+                checkIfVideoIsPlaying();
+            }
+        });
     </script>
 </body>
 </html>
-
