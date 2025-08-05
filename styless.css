@@ -331,6 +331,205 @@ h1 {
     border-radius: 12px;
 }
 
+/* Estilos para el botón de pantalla completa */
+.fullscreen-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: none; /* Oculto por defecto */
+    z-index: 1000;
+    transition: all 0.3s ease, opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+}
+
+.fullscreen-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.fullscreen-button i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.fullscreen-button:hover i {
+    transform: scale(1.1);
+}
+
+/* Estilos para pantalla completa */
+#video-container:fullscreen {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background-color: black !important;
+}
+
+#video-container:fullscreen #video-iframe {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+}
+
+#video-container:fullscreen .fullscreen-button {
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+#video-container:fullscreen .fullscreen-button i {
+    font-size: 20px;
+}
+
+/* Soporte para navegadores webkit */
+#video-container:-webkit-full-screen {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background-color: black !important;
+}
+
+#video-container:-webkit-full-screen #video-iframe {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+}
+
+#video-container:-webkit-full-screen .fullscreen-button {
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+/* Soporte para navegadores Mozilla */
+#video-container:-moz-full-screen {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background-color: black !important;
+}
+
+#video-container:-moz-full-screen #video-iframe {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+}
+
+/* Ocultar elementos del body cuando esté en pantalla completa */
+body.fullscreen-active header {
+    display: none !important;
+}
+
+body.fullscreen-active .container h2 {
+    display: none !important;
+}
+
+/* Asegurar que el body no tenga scroll cuando esté en pantalla completa */
+body.fullscreen-active {
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: black !important;
+}
+
+body.fullscreen-active .container {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+body.fullscreen-active .container h2 {
+    display: none !important;
+}
+
+/* Ocultar el botón de pantalla completa cuando esté en pantalla completa */
+body.fullscreen-active #fullscreen-btn {
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+/* Mostrar el botón cuando se detecte movimiento del mouse en pantalla completa */
+body.fullscreen-active #fullscreen-btn.show-temporarily {
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .fullscreen-button {
+        width: 40px;
+        height: 40px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .fullscreen-button i {
+        font-size: 16px;
+    }
+    
+    #video-container:fullscreen .fullscreen-button,
+    #video-container:-webkit-full-screen .fullscreen-button {
+        width: 45px;
+        height: 45px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    #video-container:fullscreen .fullscreen-button i,
+    #video-container:-webkit-full-screen .fullscreen-button i {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fullscreen-button {
+        width: 35px;
+        height: 35px;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .fullscreen-button i {
+        font-size: 14px;
+    }
+}
+
 
 /* Estilos optimizados para agenda en móviles */
 .agenda {
@@ -1562,20 +1761,52 @@ h1 {
         padding: 2px 5px;
     }
 }
-#video-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+.audio-player {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centra verticalmente */
+    align-items: center;     /* centra horizontalmente */
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-#video-placeholder img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* hace que encastre */
-  display: block;
-  border-radius: 12px;
+.logoradio {
+    max-width: 100px;
+    width: 70%;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+}
+
+.logoradio:hover {
+    transform: scale(1.05);
+}
+
+.player-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#audio-element {
+    width: 50%;
+    max-width: 50%;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.station-info {
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
