@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor - OffsideTV</title>
+    <link rel="stylesheet" href="styless.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/OffsideTV/logosweb/main/logopestaña2-.webp" type="image/webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS1PQ89GCR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PS1PQ89GCR');
+    </script>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img src="https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
+        </a>
+        <button id="chanels" class="donate-button">Canales y agenda</button>
+        <button id="reportButton" class="report-button">
+            Reportar fallos
+        </button>
+        <button id="donateButton" class="donate-button">Dejar una donación</button>
+    </header>
+    <div class="container">
+        <h2>Reproduciendo contenido</h2>
+    
+        <!-- Contenedor para el iframe -->
+        <div id="video-container">
+            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="no-referrer" allowfullscreen></iframe>
+            
+            <!-- Botón de pantalla completa -->
+            <button id="fullscreen-btn" class="fullscreen-button" title="Pantalla completa">
+                <i class="fas fa-expand"></i>
+            </button>
+            
+            <!-- Elementos de error, ocultos por defecto -->
+            <div id="error-message" style="display: none;">
+                <p>Este archivo de video no se puede reproducir (Error 102630).</p>
+            </div>
+            <div id="fallback-link" style="display: none;">
+                <p>Intenta verlo directamente aquí:</p>
+                <a id="fallback-url" href="#" target="_blank">Ver video</a>
+            </div>
+        </div>
+        <!-- Selector de opciones de canal -->
+        <div id="source-selector" class="source-selector" style="display:none;">
+            <span class="source-label">Opciones:</span>
+            <div id="source-options" class="source-options"></div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mapa de streams
+            const streams = {
+              "espn-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTjJIRA",
+                    "sandbox": true
+                },
+
+                "espn-ext1": {
+                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=RVNQTjJIRA",
+                    "sandbox": true
+                },
+                "espn-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTjJIRA",
+                    "sandbox": true
+                },
+                "espn-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn"
+                },
+                "espn-c": {
+                    "repro1": "https://la14hd.com/vivo/canales.php?stream=espn"
+                },
+
+
+                "espnext": {
+                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=RVNQTjJIRA",
+                     "sandbox": true
+                },
+
+                "espn2-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTjJfQXJn&lang=1",
+                    "sandbox": true
+                },
+                "espn2-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn2"
+                },
+                "espn2-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=espn2"
+                },
+              "espn2-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTjJfQXJn&lang=1",
+                    "sandbox": true
+                },
+
+
+               "espn3-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTjM&lang=1",
+                    "sandbox": true
+                },
+                "espn3-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn3"
+                },
+                "espn3-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=espn3"
+                },
+                
+               "espn3-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTjM&lang=1",
+                    "sandbox": true
+                },
+
+
+                "espn4-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTkhE&lang=1",
+                    "sandbox": true
+                },
+
+                "espn4-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn4"
+                },
+                "espn4-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=espn4"
+                },
+                "espn4-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTkhE&lang=1",
+                    "sandbox": true
+                },
+
+                "espn5-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTjQ=",
+                    "sandbox": true
+                },
+                "espn5-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn5"
+                },
+                "espn5-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=espn5"
+                },
+                
+                "espn5-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTjQ=",
+                    "sandbox": true
+                },
+
+                "espn6-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94U3BvcnRzM19VWQ%3D%3D&start=true",
+                    "sandbox": true
+                },
+                "espn6-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn6"
+                },
+                "espn6-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=espn6"
+                },
+                  "espn6-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94U3BvcnRzM19VWQ%3D%3D&start=true",
+                    "sandbox": true
+                },
+
+
+               "espn7-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94U3BvcnRzMl9VWQ==",
+                    "sandbox": true
+                },
+                "espn7-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espn7"
+                },
+                "espn7-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=espn7"
+                },
+                "espn7-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94U3BvcnRzMl9VWQ==",
+                    "sandbox": true
+                },
+
+
+               "espnpremium-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94X1Nwb3J0c19QcmVtaXVuX0hE",
+                    "sandbox": true
+                },
+               
+                "espnpremiumext-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94X1Nwb3J0c19QcmVtaXVuX0hE",
+                    "sandbox": true
+                },
+
+                "espnpremiumext-b": {
+                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=Rm94U3BvcnRzX1ByZW1pdW1fSEQ", //funciona
+                    "sandbox": true
+                },
+
+                "espnpremium-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espnpremium"
+                },
+                "espnpremium-c": {
+                    "repro1": "https://la14hd.com/vivo/canal.php?stream=espnpremium"
+                },
+
+                 "espnpremium-d": {
+                    "repro1": "https://thedaddy.click/embed/stream-387.php",
+                    "sandbox": true
+                },
+
+
+
+
+
+                "tntsports-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VE5UX1Nwb3J0c19IRA",
+                    "sandbox": true
+                },
+
+                "tntsportsext-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=VE5UX1Nwb3J0c19IRA",
+                    "sandbox": true
+                },
+
+                "tntsportsext-b": {
+                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=VE5UX1Nwb3J0c19IRA==", 
+                    "sandbox": true
+                },
+
+                "tntsports-c": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=tntsports"
+                },
+                "tntsports-d": {
+                    "repro1": "https://la14hd.com/vivo/canal.php?stream=tntsports"
+                },
+              
+                 "tntpp-ext": {
+                    "repro1": "https://elcanaldeportivo.com/tntsports.php",
+                    "sandbox": true
+                },
+
+
+             
+                "fox1ar-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94U3BvcnRz&lang=1",
+                    "sandbox": true
+                },
+                "fox1ar-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94U3BvcnRz&lang=1",
+                    "sandbox": true
+                },
+
+                "fox1ar-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=fox1ar"
+                },
+                "fox1ar-c": {
+                    "repro1": "https://la14hd.com/vivo/canales.php?stream=foxsports"
+                },
+                
+                "fox-mx": {
+                    "repro1": "https://streamtpglobal.com/global1.php?stream=foxsportsmx",
+                
+                },
+
+                 "fox-deportes": {
+                    "repro1": "https://streamtpglobal.com/global1.php?stream=fox_deportes_usa",
+                
+                },
+
+               "fox2ar-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94U3BvcnRzMkhE&lang=1",
+                    "sandbox": true
+                },
+
+                "fox2ar-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94U3BvcnRzMkhE&lang=1",
+                    "sandbox": true
+                },
+
+                "fox2ar-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=fox2ar"
+                },
+                "fox2ar-c": {
+                    "repro1": "https://la14hd.com/vivo/canales.php?stream=foxsports2"
+                },
+
+                "fox3ar-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94U3BvcnRzM0hE&lang=1",
+                    "sandbox": true
+                },
+                "fox3ar-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94U3BvcnRzM0hE&lang=1",
+                    "sandbox": true
+                },
+                "fox3ar-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=fox3ar"
+                },
+                "fox3-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=foxsports3"
+                },
+                
+
+
+                "dsports-a": {
+                    "repro1": "https://elcanaldeportivo.com/directvsports.php"
+                },
+                "dsports-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=dsports"
+                },
+                "dsports-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=dsports"
+                },
+
+                "dsports-d": {
+                    "repro1": "https://embed.ksdjugfsddeports.fun/embed2/directvsports.html",
+                  
+                },
+                  "ds-a": {
+                    "repro1": "https://bestleague.one/cvatt.html?get=RXZlbnRvc19IRF9VeQ==",
+                    "sandbox": true
+                  
+                },
+                  "dsports-ext": {
+                    "repro1": "https://tvlibreonline.org/flow/ev.html?get=RXZlbnRvc19IRF9VeQ==",
+                    "sandbox": true
+                  
+                },
+                  "dsports-ext1": {
+                    "repro1": "https://bestleague.one/tok.html?get=RXZlbnRvc19IRF9VeQ==",
+                    "sandbox": true
+                  
+                },
+
+                "dsports2-a": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=dsports2"
+                },
+               
+                "dsports2-b": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=dsports2"
+                },
+
+                "dsports2-c": {
+                    "repro1": "https://elcanaldeportivo.com/dsports2.php",
+                    
+                },
+                "dsports2-d": {
+                    "repro1": "https://hugerelease.net/embed/m4ryw369h1te",
+                    
+                },
+
+                "dsportsplus-a": {
+                    "repro1": "https://elcanaldeportivo.com/directvplushd.php"
+                },
+                "dsportsplus-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=dsportsplus"
+                },
+                "dsportsplus-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=dsportsplus"
+                },
+
+
+               "tyc-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VHlDU3BvcnQ",
+                    "sandbox": true
+                },
+                 "tyc-b": {
+                    "repro1": "https://domainparatodo.online/cn.php?id=TYC1TP",
+                    "sandbox": true
+                },
+              
+                "tyc-c": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=tycsports"
+                },
+                  "tyc-d": {
+                    "repro1": "https://la14hd.com/vivo/canales.php?stream=tycsports"
+                },
+            
+                "tyc-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=VHlDU3BvcnQ",
+                    "sandbox": true
+                },
+
+                  "tyc-ext-b": {
+                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=VHlDU3BvcnQ",
+                    "sandbox": true
+                },
+
+                  "tycext": {
+                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=VHlDU3BvcnQ",
+                    "sandbox": true
+                },
+
+                "tycplay": {
+                    "repro1": "https://dtvlivegratis.com/cn.php?id=TYCPLAY",
+                    "sandbox": true
+              
+                },
+               
+                "tycint-a": {
+                    "repro1": "https://la14hd.com/vivo/canales.php?stream=tycinternacional"
+                },
+
+
+                "telefe-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VGVsZWZlSEQ=",
+                    "sandbox": true
+                },
+                "telefe-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=telefe"
+                },
+                "telefe-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=telefe"
+                },
+                "telefe-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=VGVsZWZlSEQ=",
+                    "sandbox": true
+                },
+
+
+                "tvpublica-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Q2FuYWw3&lang=1",
+                    "sandbox": true
+                },
+                "tvpublica-b": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=tv_publica"
+                },
+                "tvpublica-c": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=tvpublica"
+                },
+                "tvpublica-d": {
+                    "repro1": "https://embed.sdfgnksbounce.com/embed2/tvpublica.html",
+                    "sandbox": true
+                },
+                "tvpublica-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Q2FuYWw3&lang=1",
+                    "sandbox": true
+                },
+
+
+                "disney1": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney1"
+                },
+                "disney2": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney2"
+                },
+
+                "disney3": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney3"
+                },
+                
+                "disney4": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney4"
+                },
+                
+                "disney5": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney5"
+                },
+                
+                "disney6": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney6"
+                },
+                
+                "disney7": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney7"
+                },
+                
+                "disney8": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney8"
+                },
+                
+                "disney9": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney9"
+                },
+                
+                "disney10": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney10"
+                },
+               
+                "disney11": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney11"
+                },
+                
+                "disney12": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney12"
+                },
+               
+                "disney13": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney13"
+                },
+                
+                "disney14": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney14"
+                },
+               
+                "disney15": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney15"
+                },
+               
+                "disney16": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney16"
+                },
+                
+                "disney17": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney17"
+                },
+                
+                "disney18": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney18"
+                },
+                
+                "disney19": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney19"
+                },
+               
+                "disney20": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=disney20"
+                },
+                
+
+
+                "mls1": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=mls1es"
+                },
+                  "mls": {
+                    "repro1": "https://elcanaldeportivo.com/mlspass.php"
+                },
+                "mls2": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls2"
+                },
+                "mls3": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls3"
+                },
+                "mls4": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls4"
+                },
+                "mls5": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls5"
+                },
+                "mls6": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls6"
+                },
+                "mls7": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls7"
+                },
+                "mls8": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls8"
+                },
+                "mls9": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls9"
+                },
+                "mls10": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=mls10"
+                },
+               
+                "premiere1-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere1"
+                },
+                "premiere1-b": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=premiere"
+                },
+                "premiere2-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere2"
+                },
+                "premiere2-b": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=premiere2"
+                },
+                "premiere3-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere3"
+                },
+                "premiere3-b": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=premiere3"
+                },
+                "premiere4-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere4"
+                },
+                "premiere4-b": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=premiere4"
+                },
+                "premiere5-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere5"
+                },
+                "premiere6-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere6"
+                },
+                "premiere7-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere7"
+                },
+                "premiere8-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=premiere8"
+                },
+                "sportv1-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=sportv"
+                },
+                "sportv2-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=sportv2"
+                },
+                "sportv3-a": {
+                    "repro1": "https://la12hd.com/vivo/canal.php?stream=sportv3"
+                },
+                "sportv4-a": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=sportv4"
+                },
+                "sportv5-a": {
+                    "repro1": "https://streamsvv1.su/global/player.php?channel=sportv5"
+                },
+
+               
+                
+                "espndepor": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espndeportes"
+                },
+                
+                "espnplus": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=espnplus8"
+                },
+                
+                "eventos5": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=eventos5"
+                },
+                "movistar": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=movistar_deportes_peru"
+                },
+            
+
+               "flow1": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RXZlbnRvczFIRA&lang=1",
+                    "sandbox": true
+                },
+                "flow1-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RXZlbnRvczFIRA&lang=1",
+                    "sandbox": true
+                },
+
+                
+                "flow2": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RXZlbnRvczFIRA&lang=1",
+                    "sandbox": true
+                },
+                "flow3": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RXZlbnRvczFIRA&lang=1",
+                    "sandbox": true
+                },
+
+                "tnt-hd-a": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VE5UX0hEX0FyZw==&lang=1",
+                    "sandbox": true
+                },
+                "tnt-hd-b": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VE5UX0hEX0FyZw==&lang=1",
+                    "sandbox": true
+                },
+               
+                "video-explicativo": {
+                    "repro1": "https://streamable.com/e/odpi5t?autoplay=0",
+                },
+
+                "prueba-canales": {
+                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTL4?id=espn4",
+              
+                },
+
+            "telefe-alt": {
+                    "repro1": "https://tvlibreonline.org/en-vivo/telefe/hl.html",
+                    "sandbox": true
+                },
+              
+                "telefe-alt-2": {
+                    "repro1": "https://tvlibreonline.org/html/dash.html?get=aHR0cHM6Ly90ZWxlZmV2aWFjb20xLmFrYW1haXplZC5uZXQvaGxzL2xpdmUvMjAzNzk4Ny92aWFjb21JTlQvVE9LL21hc3Rlci13aWxkMS5tM3U4",
+                    "sandbox": true
+                },
+              
+             "prueba-disney": {
+                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTL4?id=disneyplus2",
+              
+                },
+                "caracoltv": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=caracoltv",
+                },
+
+                 "golperu": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=golperu",
+                },
+                "dsradio": {
+                    "repro1": "https://playerservices.streamtheworld.com/api/livestream-redirect/DSPORTSRADIOAAC.aac",
+                    "type": "audio"
+                },
+
+                "ds-chi": {
+                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTLi?id=directsportchilehd",
+                    "sandbox": true
+                },
+
+          
+                "eventos2-st4": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=eventos2",
+                
+                },
+               
+                "eventos1-st4": {
+                    "repro1": "https://streamtpglobal.com//global1.php?stream=eventos1",
+                
+                },
+               
+                "evento1": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO1",
+                    "sandbox": true
+                },
+                
+                "evento2": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO2",
+                    "sandbox": true
+                },
+            
+                "evento3": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO3",
+                    "sandbox": true
+                },
+            
+                "evento4": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO4",
+                    "sandbox": true
+                },
+      
+                "evento5": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO5",
+                    "sandbox": true
+                },
+              
+                "evento6": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO6",
+                    "sandbox": true
+                },
+              
+                "evento7": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO7",
+                    "sandbox": true
+                },
+                 "evento8": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO8",
+                    "sandbox": true
+                },
+                 "evento9": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO9",
+                    "sandbox": true
+                },
+                 "evento10": {
+                    "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO10",
+                    "sandbox": true
+                },
+
+                  "tigopy": {
+                    "repro1": "https://domainparatodo.online/tigo2.php",
+                    "sandbox": true
+                },
+
+                  "tigopy-a": {
+                    "repro1": "https://bestleague.one/mpdk/?get=aHR0cHM6Ly9kMmpsdXh4Z3g1NTBzdS5jbG91ZGZyb250Lm5ldC9vdXQvdjEvNjJkZTIwNDk1YWY4NGY5MDhmYTg5NjNmNTBjNDRkNDYvaW5kZXgubXBk&key=NDliMmMwZTcwMzcwNDJiMmFmZjlmMDY0ZTBiYjMzMTE=&key2=ODM4NDllMzBhZGY4NTQ0MDU1MDI5MjY5MzE0N2ZiZjc=",
+                    "sandbox": true
+                },
+
+                "directv": {
+                    "repro1": "https://domainparatodo.online/hls/directv2.php",
+              
+                },
+                    "mls2": {
+                    "repro1": "https://embedsports.top/embed/admin/admin-inter-miami-vs-pumas/1",
+                      "sandbox": true   
+        
+                },
+                //Uruguay canal
+               "VTVPlus": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VlRWX1BsdXNfSEQ&lang=1",
+                    "sandbox": true
+                },
+
+                    "VTVPlus-a": {
+                    "repro1": "https://streamtpglobal.com/global1.php?stream=vtvplus",
+                },
+                 "VTVPlus-ext": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=VlRWX1BsdXNfSEQ&lang=1",
+                    "sandbox": true
+                },
+                  "fox-depor-usa": {
+                    "repro1": "https://thedaddy.click/embed/stream-643.php",
+                   
+                },
+                    "eltrece": {
+                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=QXJ0ZWFySEQ&lang=1",
+                    "sandbox": true
+                },
+            };
+
+            // Definición manual de grupos de opciones por canal (sin cambiar claves existentes)
+            const channelGroups = {
+                "espn": ["espn-a", "espn-b", "espn-c", "espn-ext", "espn-ext1", "espnext"],
+                "espn2": ["espn2-a", "espn2-b", "espn2-c", "espn2-ext"],
+                "espn3": ["espn3-a", "espn3-b", "espn3-c", "espn3-ext"],
+                "espn4": ["espn4-a", "espn4-b", "espn4-c", "espn4-ext"],
+                "espn5": ["espn5-a", "espn5-b", "espn5-c", "espn5-ext"],
+                "espn6": ["espn6-a", "espn6-b", "espn6-c", "espn6-ext"],
+                "espn7": ["espn7-a", "espn7-b", "espn7-c", "espn7-ext"],
+                "espnpremium": [
+                    "espnpremium-a", "espnpremium-b", "espnpremium-c",
+                    "espnpremiumext-a", "espnpremiumext-b",
+                    "espnpremium-d"
+                ],
+                "tntsports": [
+                    "tntsports-a", "tntsports-c", "tntsports-d",
+                    "tntsportsext-a", "tntsportsext-b",
+                ],
+                "fox1ar": ["fox1ar-a", "fox1ar-b", "fox1ar-c", "fox1ar-ext"],
+                "fox2ar": ["fox2ar-a", "fox2ar-b", "fox2ar-c", "fox2ar-ext"],
+                "fox3ar": ["fox3ar-a", "fox3ar-b", "fox3-c", "fox3ar-ext"],
+                "tvpublica": ["tvpublica-a", "tvpublica-b", "tvpublica-c", "tvpublica-d", "tvpublica-ext"],
+                "dsports": ["dsports-a", "dsports-b", "dsports-c", "dsports-d", "dsports-ext", "dsports-ext1", "ds-a"],
+                "dsports2": ["dsports2-a", "dsports2-b", "dsports2-c", "dsports2-d"],
+                "dsportsplus": ["dsportsplus-a", "dsportsplus-b", "dsportsplus-c"],
+                "telefe": ["telefe-a", "telefe-b", "telefe-c", "telefe-ext", "telefe-alt", "telefe-alt-2"],
+                "vtvplus": ["VTVPlus", "VTVPlus-a", "VTVPlus-ext"],
+                "tyc": ["tyc-a", "tyc-b", "tyc-c", "tyc-d", "tyc-ext", "tyc-ext-b", "tycext", "tycplay"],
+                "flow": ["flow1", "flow1-ext", "flow2", "flow3"]
+            };
+
+
+            // Obtener parámetros de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const channel = urlParams.get("ch");
+            const group = urlParams.get("multi");
+            const getParam = urlParams.get("get");
+            const iframe = document.getElementById("video-iframe");
+            const errorMessage = document.getElementById("error-message");
+            const fallbackLink = document.getElementById("fallback-link");
+            const fallbackUrl = document.getElementById("fallback-url");
+            const sourceSelector = document.getElementById("source-selector");
+            const sourceOptions = document.getElementById("source-options");
+
+            // Verificación de elementos
+            if (!iframe || !errorMessage || !fallbackLink || !fallbackUrl) {
+                console.error("Uno o más elementos del DOM no se encontraron.");
+                return;
+            }
+
+            // Utilidad: obtener base del canal (prefijo antes de -a, -b, ...)
+            function getBaseFromChannelKey(key) {
+                const match = key && key.match(/^(.+)-([a-z])$/);
+                return match ? match[1] : null;
+            }
+
+            // Construir links de opciones (1, 2, 3, ...) a partir de una lista explícita
+            function buildSelectorFromList(optionKeys, currentChannelKey, groupKey) {
+                const keys = (optionKeys || []).filter(k => streams[k]);
+                if (!keys.length) {
+                    if (sourceSelector) sourceSelector.style.display = "none";
+                    return;
+                }
+                if (sourceOptions) sourceOptions.innerHTML = "";
+                keys.forEach((k, idx) => {
+                    const a = document.createElement("a");
+                    const baseUrl = new URL(window.location.href);
+                    baseUrl.searchParams.set("ch", k);
+                    if (groupKey) baseUrl.searchParams.set("multi", groupKey);
+                    else baseUrl.searchParams.delete("multi");
+                    baseUrl.searchParams.delete("get");
+                    a.href = baseUrl.pathname + "?" + baseUrl.searchParams.toString();
+                    a.className = "source-option" + (k === currentChannelKey ? " active" : "");
+                    a.textContent = String(idx + 1);
+                    a.title = `Opción ${idx + 1}`;
+                    sourceOptions.appendChild(a);
+                });
+                if (sourceSelector) sourceSelector.style.display = "flex";
+            }
+
+            // Fallback: construir selector por sufijos -a, -b, -c si no hay grupo definido
+            function buildSelectorBySuffix(currentChannelKey) {
+                const base = getBaseFromChannelKey(currentChannelKey);
+                if (!base) {
+                    if (sourceSelector) sourceSelector.style.display = "none";
+                    return;
+                }
+                const variantKeys = Object.keys(streams)
+                    .filter(k => k.startsWith(base + "-") && /^[a-z]$/.test(k.split("-").pop()))
+                    .sort((a, b) => a.split("-").pop().localeCompare(b.split("-").pop()));
+                buildSelectorFromList(variantKeys, currentChannelKey, null);
+            }
+
+            function findGroupForChannelKey(key) {
+                for (const [g, list] of Object.entries(channelGroups)) {
+                    if (list.includes(key)) return g;
+                }
+                return null;
+            }
+
+            function isOffsideCvattUrl(urlString) {
+                try {
+                    const u = new URL(urlString);
+                    return (
+                        u.hostname === "offsidetv.netlify.app" &&
+                        (/cvatt/.test(u.pathname))
+                    );
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function loadChannel(chKey) {
+                const url = streams[chKey]["repro1"]; 
+                iframe.setAttribute("src", url);
+                // Respetar configuración original: aplicar sandbox solo si el canal lo requiere
+                if (streams[chKey].sandbox) {
+                    iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+                } else {
+                    iframe.removeAttribute("sandbox");
+                }
+            }
+
+            // Manejar el canal o el parámetro get
+            let streamUrl = "";
+            if (group && channelGroups[group]) {
+                // Abrir por grupo (multi): usar ch si es válido o el primero disponible
+                const groupList = channelGroups[group].filter(k => streams[k]);
+                const initialKey = (channel && groupList.includes(channel)) ? channel : groupList[0];
+                if (!initialKey) {
+                    document.getElementById("video-container").innerHTML = '<p>Grupo sin opciones disponibles.</p>';
+                    if (sourceSelector) sourceSelector.style.display = "none";
+                    return;
+                }
+                loadChannel(initialKey);
+                buildSelectorFromList(groupList, initialKey, group);
+            } else if (channel && streams[channel]) {
+                loadChannel(channel);
+                // Si pertenece a un grupo, mostrar todas las opciones de ese grupo; si no, fallback por sufijos
+                const inferredGroup = findGroupForChannelKey(channel);
+                if (inferredGroup) {
+                    const list = (channelGroups[inferredGroup] || []).filter(k => streams[k]);
+                    buildSelectorFromList(list, channel, inferredGroup);
+                } else {
+                    buildSelectorBySuffix(channel);
+                }
+            } else if (getParam) {
+                let externalUrl = `https://nebunexa.co/cvatt.php?get=${getParam}`;
+                if (getParam === "Rm94X1Nwb3J0c19QcmVtaXVuX0hE") {
+                    externalUrl = `https://nebunexa.co/cvatt2.php?get=${getParam}&start=true`;
+                } else if (["RVNQTjJIRA", "RVNQTjJfQXJn", "RVNQTjM", "RVNQTkhE", "Rm94U3BvcnRzMl9VWQ==", "RXZlbnRvczFIRA"].includes(getParam)) {
+                    externalUrl = `https://nebunexa.co/temp.html?get=${getParam}${urlParams.get("lang") ? "&lang=" + urlParams.get("lang") : ""}`;
+                }
+                streamUrl = externalUrl;
+                iframe.setAttribute("src", streamUrl);
+                // Para get=..., usar sandbox básico como antes
+                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+                // Evitar envío de Referer a terceros
+                iframe.setAttribute("referrerpolicy", "no-referrer");
+                fallbackUrl.href = externalUrl;
+                fallbackUrl.textContent = externalUrl;
+                // Ocultar selector en modo get
+                if (sourceSelector) sourceSelector.style.display = "none";
+            } else {
+                document.getElementById("video-container").innerHTML = '<p>Canal no disponible o desactivado.</p>';
+                return;
+            }
+
+            // Mostrar mensaje de error y enlace de fallback si el iframe no carga
+            iframe.onerror = function () {
+                if (errorMessage && fallbackLink && fallbackUrl) {
+                    errorMessage.style.display = "block";
+                    fallbackLink.style.display = "block";
+                } else {
+                    console.error("Elementos de error o fallback no disponibles.");
+                }
+            };
+
+            // Verificación adicional tras cargar el iframe
+            iframe.onload = function () {
+                if (iframe.contentDocument && iframe.contentDocument.body.textContent.includes("no se puede reproducir")) {
+                    if (errorMessage && fallbackLink && fallbackUrl) {
+                        errorMessage.style.display = "block";
+                        fallbackLink.style.display = "block";
+                    }
+                }
+            };
+
+           
+        });
+    </script>
+
+    <div class="dmca-button-container">
+        <button id="dmcaButton">DMCA</button>
+        <div id="dmcaText" class="dmca-text">
+            <h2>Cumplimiento del DMCA</h2>
+            <p><strong>Este sitio web cumple con el Digital Millennium Copyright Act (DMCA).</strong> No transmitimos ni alojamos de manera ilegal ningún juego, canal, evento u otro contenido protegido por derechos de autor.</p>
+            
+            <h2>Descargo de Responsabilidad</h2>
+            <p><strong>Este sitio web opera de acuerdo con el Digital Millennium Copyright Act (DMCA).</strong> En virtud de esta ley, nos comprometemos a responder rápidamente a las reclamaciones de violación de derechos de autor y a tomar las medidas necesarias para eliminar el material infractor.</p>
+            <p><strong>Los enlaces proporcionados en este sitio web apuntan a contenido alojado en servidores externos</strong> y no alojamos ni transmitimos de manera directa ningún material protegido por derechos de autor. No tenemos control sobre el contenido de estos servidores externos y no nos hacemos responsables por el uso indebido que se pueda hacer de dicho contenido.</p>
+            
+            <h2>Compromiso con los Derechos de Autor</h2>
+            <p><strong>Entendemos la importancia de proteger los derechos de autor</strong> y estamos comprometidos a cumplir con todas las leyes aplicables. Si eres propietario de los derechos de autor de algún contenido y crees que se ha utilizado de manera inapropiada, te instamos a que nos contactes de inmediato para que podamos abordar el problema de manera efectiva.</p>
+            <p><strong>Además del DMCA, este sitio web también se adhiere a otras leyes y regulaciones relacionadas con la propiedad intelectual y la protección de derechos de autor.</strong> Nos reservamos el derecho de modificar o eliminar cualquier enlace o contenido que infrinja estas leyes.</p>
+            
+            <h2>Contacto</h2>
+            <p><strong>Correo electrónico:</strong> <a href="mailto:offsidetve@gmail.com">offsideteve@gmail.com</a></p>
+        </div>
+    </div>
+
+    <!-- Botón de compartir con imagen redonda -->
+    <div class="share-button-container">
+        <button id="shareButton" class="share-button">
+            <img src="https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/compartir.png" alt="Compartir" class="share-icon">
+        </button>
+        <div id="shareMenu" class="share-menu">
+            <!-- Opción para compartir enlace -->
+            <a href="#" class="share-link" id="copyLink">
+                <i class="fas fa-link"></i> Compartir canal
+            </a>
+            <!-- Opción para generar QR -->
+            <a href="#" class="share-link" id="shareQR">
+                <i class="fas fa-qrcode"></i> Generar QR
+            </a>
+            <!-- Nueva opción para la extensión -->
+            <a href="https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb" 
+               class="share-link" 
+               id="extensionLink" 
+               target="_blank">
+                <i class="fas fa-puzzle-piece"></i> Extensión M3U8
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Agrega un evento al botón DMCA para mostrar/ocultar el texto y desplazar la página
+        document.getElementById('dmcaButton').addEventListener('click', function() {
+            const dmcaText = document.getElementById('dmcaText');
+            
+            // Alternar la visibilidad del texto
+            if (dmcaText.style.display === "none" || dmcaText.style.display === "") {
+                dmcaText.style.display = "block"; // Cambia a visible
+                dmcaText.scrollIntoView({ behavior: 'smooth' }); // Desplaza hacia el div
+            } else {
+                dmcaText.style.display = "none"; // Oculta el texto
+            }
+        });
+
+        document.getElementById('donateButton').addEventListener('click', function() {
+            window.location.href = 'donaciones.html'; 
+        });
+       
+        document.getElementById('chanels').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Redirige a la página de inicio
+        });
+
+        document.getElementById("reportButton").addEventListener("click", function() {
+            window.location.href = 'fallos.html'; 
+        });
+    </script>
+
+    <script>
+        // Mostrar/ocultar el menú de compartir
+        document.getElementById('shareButton').addEventListener('click', function() {
+            var shareMenu = document.getElementById('shareMenu');
+            shareMenu.classList.toggle('show');
+        });
+
+        // Cerrar el menú si se hace clic fuera de él
+        window.addEventListener('click', function(event) {
+            var shareMenu = document.getElementById('shareMenu');
+            var shareButton = document.getElementById('shareButton');
+            if (event.target !== shareButton && !shareButton.contains(event.target)) {
+                shareMenu.classList.remove('show');
+            }
+        });
+
+        // Copiar el enlace al portapapeles (compatible con móviles)
+        document.getElementById('copyLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            var url = window.location.href; // Obtiene la URL actual
+
+            // Crea un elemento de texto temporal
+            var tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+
+            // Selecciona y copia el texto
+            tempInput.select();
+            document.execCommand('copy');
+
+            // Elimina el elemento temporal
+            document.body.removeChild(tempInput);
+
+            // Muestra un mensaje de confirmación con SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: '¡Enlace copiado!',
+                text: 'El enlace se copio correctamente. ¡Compartilo!',
+                confirmButtonText: 'OK'
+            });
+        });
+
+        document.getElementById('shareQR').addEventListener('click', function(event) {
+            event.preventDefault();
+            var url = window.location.href;
+
+            // Crear un contenedor para el QR
+            var qrContainer = document.createElement('div');
+            qrContainer.id = 'qr-code';
+            qrContainer.style.textAlign = 'center'; // Centrar el contenido
+
+            // Generar el QR
+            new QRCode(qrContainer, {
+                text: url,
+                width: 200, // Tamaño del QR
+                height: 200,
+                colorDark: "#000000", // Color del QR (negro)
+                colorLight: "#ffffff", // Color de fondo (blanco)
+                correctLevel: QRCode.CorrectLevel.H // Nivel de corrección de errores (alto)
+            });
+
+            // Mostrar el QR en un modal con SweetAlert
+            Swal.fire({
+                title: '¡Escanea el QR y compartí el canal!',
+                html: qrContainer,
+                showCloseButton: true,
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'qr-modal', // Clase CSS personalizada para el modal
+                    title: 'qr-title', // Clase CSS para el título
+                    htmlContainer: 'qr-html-container' // Clase CSS para el contenido del modal
+                }
+            });
+        });
+
+        // Funcionalidad de pantalla completa
+        document.addEventListener("DOMContentLoaded", function() {
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const videoContainer = document.getElementById('video-container');
+            const iframe = document.getElementById('video-iframe');
+
+            if (fullscreenBtn && videoContainer) {
+                fullscreenBtn.addEventListener('click', function() {
+                    if (!document.fullscreenElement) {
+                        // Entrar en pantalla completa
+                        if (videoContainer.requestFullscreen) {
+                            videoContainer.requestFullscreen();
+                        } else if (videoContainer.webkitRequestFullscreen) {
+                            videoContainer.webkitRequestFullscreen();
+                        } else if (videoContainer.msRequestFullscreen) {
+                            videoContainer.msRequestFullscreen();
+                        }
+                    } else {
+                        // Salir de pantalla completa
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                    }
+                });
+
+                // Cambiar el ícono cuando cambie el estado de pantalla completa
+                document.addEventListener('fullscreenchange', updateFullscreenIcon);
+                document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+                document.addEventListener('msfullscreenchange', updateFullscreenIcon);
+
+                function updateFullscreenIcon() {
+                    const icon = fullscreenBtn.querySelector('i');
+                    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                        icon.className = 'fas fa-compress';
+                        fullscreenBtn.title = 'Salir de pantalla completa';
+                        // Agregar clase al body para ocultar elementos
+                        document.body.classList.add('fullscreen-active');
+                    } else {
+                        icon.className = 'fas fa-expand';
+                        fullscreenBtn.title = 'Pantalla completa';
+                        // Remover clase del body
+                        document.body.classList.remove('fullscreen-active');
+                    }
+                }
+
+                // Mostrar el botón solo cuando hay contenido reproduciéndose
+                function checkIfVideoIsPlaying() {
+                    const iframeSrc = iframe.src;
+                    if (iframeSrc && iframeSrc.trim() !== '') {
+                        fullscreenBtn.style.display = 'block';
+                    } else {
+                        fullscreenBtn.style.display = 'none';
+                    }
+                }
+
+                // Variables para controlar la visibilidad del botón en pantalla completa
+                let fullscreenButtonTimeout;
+                let isFullscreen = false;
+
+                // Función para mostrar temporalmente el botón en pantalla completa
+                function showFullscreenButtonTemporarily() {
+                    if (isFullscreen) {
+                        fullscreenBtn.classList.add('show-temporarily');
+                        
+                        // Ocultar después de 3 segundos
+                        clearTimeout(fullscreenButtonTimeout);
+                        fullscreenButtonTimeout = setTimeout(() => {
+                            if (isFullscreen) {
+                                fullscreenBtn.classList.remove('show-temporarily');
+                            }
+                        }, 3000);
+                    }
+                }
+
+                // Detectar movimiento del mouse en pantalla completa
+                document.addEventListener('mousemove', function() {
+                    if (isFullscreen) {
+                        showFullscreenButtonTemporarily();
+                    }
+                });
+
+                // Detectar eventos del iframe (pausa, play, etc.)
+                iframe.addEventListener('load', function() {
+                    try {
+                        // Intentar acceder al contenido del iframe para detectar eventos
+                        const iframeContent = iframe.contentWindow;
+                        if (iframeContent) {
+                            // Escuchar eventos de teclado que podrían indicar pausa/play
+                            iframeContent.addEventListener('keydown', function(e) {
+                                if (isFullscreen && (e.code === 'Space' || e.code === 'KeyP')) {
+                                    showFullscreenButtonTemporarily();
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        // Error de CORS - no podemos acceder al contenido del iframe
+                        console.log('No se puede acceder al contenido del iframe debido a CORS');
+                    }
+                });
+
+                // Detectar clics en el iframe (podrían indicar pausa/play)
+                iframe.addEventListener('click', function() {
+                    if (isFullscreen) {
+                        showFullscreenButtonTemporarily();
+                    }
+                });
+
+                // Detectar teclas de pausa/play en el documento
+                document.addEventListener('keydown', function(e) {
+                    if (isFullscreen && (e.code === 'Space' || e.code === 'KeyP')) {
+                        showFullscreenButtonTemporarily();
+                    }
+                });
+
+                // Actualizar la función updateFullscreenIcon para manejar el estado
+                const originalUpdateFullscreenIcon = updateFullscreenIcon;
+                function updateFullscreenIcon() {
+                    const icon = fullscreenBtn.querySelector('i');
+                    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                        icon.className = 'fas fa-compress';
+                        fullscreenBtn.title = 'Salir de pantalla completa';
+                        // Agregar clase al body para ocultar elementos
+                        document.body.classList.add('fullscreen-active');
+                        isFullscreen = true;
+                        // Ocultar el botón después de un breve delay
+                        setTimeout(() => {
+                            if (isFullscreen) {
+                                fullscreenBtn.classList.remove('show-temporarily');
+                            }
+                        }, 1000);
+                    } else {
+                        icon.className = 'fas fa-expand';
+                        fullscreenBtn.title = 'Pantalla completa';
+                        // Remover clase del body
+                        document.body.classList.remove('fullscreen-active');
+                        isFullscreen = false;
+                        // Mostrar el botón normalmente
+                        fullscreenBtn.classList.remove('show-temporarily');
+                        clearTimeout(fullscreenButtonTimeout);
+                    }
+                }
+
+                // Verificar cada 2 segundos si hay contenido
+                setInterval(checkIfVideoIsPlaying, 2000);
+                
+                // Verificación inicial
+                checkIfVideoIsPlaying();
+            }
+        });
+    </script>
+</body>
+</html>
+
