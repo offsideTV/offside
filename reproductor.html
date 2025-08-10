@@ -38,7 +38,7 @@
     
         <!-- Contenedor para el iframe -->
         <div id="video-container">
-            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="no-referrer" allowfullscreen></iframe>
+            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
             
             <!-- Botón de pantalla completa -->
             <button id="fullscreen-btn" class="fullscreen-button" title="Pantalla completa">
@@ -65,7 +65,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
             const streams = {
-              "espn-ext": {
+                 "espn-ext": {
                     "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTjJIRA",
                     "sandbox": true
                 },
@@ -396,11 +396,6 @@
 
                   "tyc3-ext": {
                     "repro1": "https://offsidetv.netlify.app/transmi.html?get=VHlDU3BvcnQ",
-                    "sandbox": true
-                },
-
-                  "tycext": {
-                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=VHlDU3BvcnQ",
                     "sandbox": true
                 },
 
@@ -747,10 +742,9 @@
                      "sandbox": true
                 },
             };
-
             // Definición manual de grupos de opciones por canal (sin cambiar claves existentes)
             const channelGroups = {
-                "espn": ["espn-a", "espn-b", "espn-c", "espn-ext", "espn-ext1", "espna-ext"],
+               "espn": ["espn-a", "espn-b", "espn-c", "espn-ext", "espn-ext1", "espna-ext"],
                 "espn2": ["espn2-a", "espn2-b", "espn2-c", "espn2-ext"],
                 "espn3": ["espn3-a", "espn3-b", "espn3-c", "espn3-ext"],
                 "espn4": ["espn4-a", "espn4-b", "espn4-c", "espn4-ext"],
@@ -769,182 +763,190 @@
                 "dsportsplus": ["dsportsplus-a", "dsportsplus-b", "dsportsplus-c"],
                 "telefe": ["telefe-a", "telefe-b", "telefe-c", "telefe-ext"],
                 "vtvplus": ["VTVPlus", "VTVPlus-a", "VTVPlus-ext"],
-               "tyc": ["tyc-a", "tyc-c", "tyc-d", "tyc1-ext", "tyc2-ext", "tyc3-ext"],
+                "tyc": ["tyc-a", "tyc-c", "tyc-d", "tyc1-ext", "tyc2-ext", "tyc3-ext"],
                 "flow": ["flow1", "flow1-ext"],
-                 "MLSSeasonPass": ["mls", "mls1"],
-                  "TNTHD": ["tnt-hd", "tnt-hd-ext"],
-
+                "MLSSeasonPass": ["mls", "mls1"],
+                "TNTHD": ["tnt-hd", "tnt-hd-ext"],
+                
             };
 
 
-            // Obtener parámetros de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const channel = urlParams.get("ch");
-            const group = urlParams.get("multi");
-            const getParam = urlParams.get("get");
-            const iframe = document.getElementById("video-iframe");
-            const errorMessage = document.getElementById("error-message");
-            const fallbackLink = document.getElementById("fallback-link");
-            const fallbackUrl = document.getElementById("fallback-url");
-            const sourceSelector = document.getElementById("source-selector");
-            const sourceOptions = document.getElementById("source-options");
+      // Obtener parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const channel = urlParams.get("ch");
+    const group = urlParams.get("multi");
+    const getParam = urlParams.get("get");
+    const iframe = document.getElementById("video-iframe");
+    const errorMessage = document.getElementById("error-message");
+    const fallbackLink = document.getElementById("fallback-link");
+    const fallbackUrl = document.getElementById("fallback-url");
+    const sourceSelector = document.getElementById("source-selector");
+    const sourceOptions = document.getElementById("source-options");
 
-            // Verificación de elementos
-            if (!iframe || !errorMessage || !fallbackLink || !fallbackUrl) {
-                console.error("Uno o más elementos del DOM no se encontraron.");
-                return;
+    // Verificación de elementos
+    if (!iframe || !errorMessage || !fallbackLink || !fallbackUrl) {
+        console.error("Uno o más elementos del DOM no se encontraron.");
+        return;
+    }
+
+    // Utilidad: obtener base del canal (prefijo antes de -a, -b, ...)
+    function getBaseFromChannelKey(key) {
+        const match = key && key.match(/^(.+)-([a-z])$/);
+        return match ? match[1] : null;
+    }
+
+    // Construir links de opciones (1, 2, 3, ...) a partir de una lista explícita
+    function buildSelectorFromList(optionKeys, currentChannelKey, groupKey) {
+        const keys = (optionKeys || []).filter(k => streams[k]);
+        if (!keys.length) {
+            if (sourceSelector) sourceSelector.style.display = "none";
+            return;
+        }
+        if (sourceOptions) sourceOptions.innerHTML = "";
+        keys.forEach((k, idx) => {
+            const a = document.createElement("a");
+            const baseUrl = new URL(window.location.href);
+            baseUrl.searchParams.set("ch", k);
+            // Detectar si es variante para PC (ext, pc, desktop en distintas posiciones)
+            const kl = String(k).toLowerCase();
+            const isPc = (
+                kl.includes('-ext') || kl.includes('ext-') ||
+                kl.endsWith('-pc') || kl.includes('-pc-') || kl.startsWith('pc-') ||
+                kl.endsWith('-desktop') || kl.includes('-desktop-') || kl.startsWith('desktop-')
+            );
+            // Siempre a reproductor.html
+            if (groupKey) baseUrl.searchParams.set("multi", groupKey); else baseUrl.searchParams.delete("multi");
+            baseUrl.searchParams.delete("get");
+            a.href = "reproductor.html?" + baseUrl.searchParams.toString();
+
+            // Clases
+            const classes = ["source-option"];
+            if (k === currentChannelKey) classes.push("active");
+            if (isPc) classes.push("pc");
+            a.className = classes.join(" ");
+
+            a.textContent = String(idx + 1);
+            a.title = `Opción ${idx + 1}${isPc ? ' (PC)' : ''}`;
+            sourceOptions.appendChild(a);
+        });
+        if (sourceSelector) sourceSelector.style.display = "flex";
+    }
+
+    // Fallback: construir selector por sufijos -a, -b, -c si no hay grupo definido
+    function buildSelectorBySuffix(currentChannelKey) {
+        const base = getBaseFromChannelKey(currentChannelKey);
+        if (!base) {
+            if (sourceSelector) sourceSelector.style.display = "none";
+            return;
+        }
+        const variantKeys = Object.keys(streams)
+            .filter(k => k.startsWith(base + "-") && /^[a-z]$/.test(k.split("-").pop()))
+            .sort((a, b) => a.split("-").pop().localeCompare(b.split("-").pop()));
+        buildSelectorFromList(variantKeys, currentChannelKey, null);
+    }
+
+    function findGroupForChannelKey(key) {
+        for (const [g, list] of Object.entries(channelGroups)) {
+            if (list.includes(key)) return g;
+        }
+        return null;
+    }
+
+    function isOffsideCvattUrl(urlString) {
+        try {
+            const u = new URL(urlString);
+            return (
+                u.hostname === "offsidetv.netlify.app" &&
+                (/cvatt/.test(u.pathname))
+            );
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function loadChannel(chKey) {
+        const url = streams[chKey]["repro1"];
+        iframe.setAttribute("src", url);
+        const shouldSandbox = streams[chKey].sandbox && !isOffsideCvattUrl(url);
+        if (shouldSandbox) {
+            iframe.setAttribute(
+                "sandbox",
+                "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+            );
+        } else {
+            iframe.removeAttribute("sandbox");
+        }
+    }
+
+    // Manejar el canal o el parámetro get
+    let streamUrl = "";
+    if (group && channelGroups[group]) {
+        // Abrir por grupo (multi): usar ch si es válido o el primero disponible
+        const groupList = channelGroups[group].filter(k => streams[k]);
+        const initialKey = (channel && groupList.includes(channel)) ? channel : groupList[0];
+        if (!initialKey) {
+            document.getElementById("video-container").innerHTML = '<p>Grupo sin opciones disponibles.</p>';
+            if (sourceSelector) sourceSelector.style.display = "none";
+            return;
+        }
+        loadChannel(initialKey);
+        buildSelectorFromList(groupList, initialKey, group);
+    } else if (channel && streams[channel]) {
+        loadChannel(channel);
+        // Si pertenece a un grupo, mostrar todas las opciones de ese grupo; si no, fallback por sufijos
+        const inferredGroup = findGroupForChannelKey(channel);
+        if (inferredGroup) {
+            const list = (channelGroups[inferredGroup] || []).filter(k => streams[k]);
+            buildSelectorFromList(list, channel, inferredGroup);
+        } else {
+            buildSelectorBySuffix(channel);
+        }
+    } else if (getParam) {
+        let externalUrl = `https://nebunexa.co/cvatt.php?get=${getParam}`;
+        if (getParam === "Rm94X1Nwb3J0c19QcmVtaXVuX0hE") {
+            externalUrl = `https://nebunexa.co/cvatt2.php?get=${getParam}&start=true`;
+        } else if (["RVNQTjJIRA", "RVNQTjJfQXJn", "RVNQTjM", "RVNQTkhE", "Rm94U3BvcnRzMl9VWQ==", "RXZlbnRvczFIRA"].includes(getParam)) {
+            externalUrl = `https://nebunexa.co/temp.html?get=${getParam}${urlParams.get("lang") ? "&lang=" + urlParams.get("lang") : ""}`;
+        }
+        streamUrl = externalUrl;
+        iframe.setAttribute("src", streamUrl);
+        // No sandbox si es offsidetv.netlify.app/cvatt*. Permisos ampliados para otros orígenes.
+        if (isOffsideCvattUrl(streamUrl)) {
+            iframe.removeAttribute("sandbox");
+        } else {
+            iframe.setAttribute(
+                "sandbox",
+                "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+            );
+        }
+        fallbackUrl.href = externalUrl;
+        fallbackUrl.textContent = externalUrl;
+        // Ocultar selector en modo get
+        if (sourceSelector) sourceSelector.style.display = "none";
+    } else {
+        document.getElementById("video-container").innerHTML = '<p>Canal no disponible o desactivado.</p>';
+        return;
+    }
+
+    // Mostrar mensaje de error y enlace de fallback si el iframe no carga
+    iframe.onerror = function () {
+        if (errorMessage && fallbackLink && fallbackUrl) {
+            errorMessage.style.display = "block";
+            fallbackLink.style.display = "block";
+        } else {
+            console.error("Elementos de error o fallback no disponibles.");
+        }
+    };
+
+    // Verificación adicional tras cargar el iframe
+    iframe.onload = function () {
+        if (iframe.contentDocument && iframe.contentDocument.body.textContent.includes("no se puede reproducir")) {
+            if (errorMessage && fallbackLink && fallbackUrl) {
+                errorMessage.style.display = "block";
+                fallbackLink.style.display = "block";
             }
-
-            // Utilidad: obtener base del canal (prefijo antes de -a, -b, ...)
-            function getBaseFromChannelKey(key) {
-                const match = key && key.match(/^(.+)-([a-z])$/);
-                return match ? match[1] : null;
-            }
-
-            // Construir links de opciones (1, 2, 3, ...) a partir de una lista explícita
-            function buildSelectorFromList(optionKeys, currentChannelKey, groupKey) {
-                const keys = (optionKeys || []).filter(k => streams[k]);
-                if (!keys.length) {
-                    if (sourceSelector) sourceSelector.style.display = "none";
-                    return;
-                }
-                if (sourceOptions) sourceOptions.innerHTML = "";
-                keys.forEach((k, idx) => {
-                    const a = document.createElement("a");
-                    const baseUrl = new URL(window.location.href);
-                    baseUrl.searchParams.set("ch", k);
-                    // Detectar si es variante para PC (ext, pc, desktop en distintas posiciones)
-                    const kl = String(k).toLowerCase();
-                    const isPc = (
-                        kl.includes('-ext') || kl.includes('ext-') ||
-                        kl.endsWith('-pc') || kl.includes('-pc-') || kl.startsWith('pc-') ||
-                        kl.endsWith('-desktop') || kl.includes('-desktop-') || kl.startsWith('desktop-')
-                    );
-                    // Siempre a reproductor.html
-                    if (groupKey) baseUrl.searchParams.set("multi", groupKey); else baseUrl.searchParams.delete("multi");
-                    baseUrl.searchParams.delete("get");
-                    a.href = "reproductor.html?" + baseUrl.searchParams.toString();
-
-                    // Clases
-                    const classes = ["source-option"];
-                    if (k === currentChannelKey) classes.push("active");
-                    if (isPc) classes.push("pc");
-                    a.className = classes.join(" ");
-
-                    a.textContent = String(idx + 1);
-                    a.title = `Opción ${idx + 1}${isPc ? ' (PC)' : ''}`;
-                    sourceOptions.appendChild(a);
-                });
-                if (sourceSelector) sourceSelector.style.display = "flex";
-            }
-
-            // Fallback: construir selector por sufijos -a, -b, -c si no hay grupo definido
-            function buildSelectorBySuffix(currentChannelKey) {
-                const base = getBaseFromChannelKey(currentChannelKey);
-                if (!base) {
-                    if (sourceSelector) sourceSelector.style.display = "none";
-                    return;
-                }
-                const variantKeys = Object.keys(streams)
-                    .filter(k => k.startsWith(base + "-") && /^[a-z]$/.test(k.split("-").pop()))
-                    .sort((a, b) => a.split("-").pop().localeCompare(b.split("-").pop()));
-                buildSelectorFromList(variantKeys, currentChannelKey, null);
-            }
-
-            function findGroupForChannelKey(key) {
-                for (const [g, list] of Object.entries(channelGroups)) {
-                    if (list.includes(key)) return g;
-                }
-                return null;
-            }
-
-            function isOffsideCvattUrl(urlString) {
-                try {
-                    const u = new URL(urlString);
-                    return (
-                        u.hostname === "offsidetv.netlify.app" &&
-                        (/cvatt/.test(u.pathname))
-                    );
-                } catch (e) {
-                    return false;
-                }
-            }
-
-            function loadChannel(chKey) {
-                const url = streams[chKey]["repro1"]; 
-                iframe.setAttribute("src", url);
-                // Respetar configuración original: aplicar sandbox solo si el canal lo requiere
-                if (streams[chKey].sandbox) {
-                    iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
-                } else {
-                    iframe.removeAttribute("sandbox");
-                }
-            }
-
-            // Manejar el canal o el parámetro get
-            let streamUrl = "";
-            if (group && channelGroups[group]) {
-                // Abrir por grupo (multi): usar ch si es válido o el primero disponible
-                const groupList = channelGroups[group].filter(k => streams[k]);
-                const initialKey = (channel && groupList.includes(channel)) ? channel : groupList[0];
-                if (!initialKey) {
-                    document.getElementById("video-container").innerHTML = '<p>Grupo sin opciones disponibles.</p>';
-                    if (sourceSelector) sourceSelector.style.display = "none";
-                    return;
-                }
-                loadChannel(initialKey);
-                buildSelectorFromList(groupList, initialKey, group);
-            } else if (channel && streams[channel]) {
-                loadChannel(channel);
-                // Si pertenece a un grupo, mostrar todas las opciones de ese grupo; si no, fallback por sufijos
-                const inferredGroup = findGroupForChannelKey(channel);
-                if (inferredGroup) {
-                    const list = (channelGroups[inferredGroup] || []).filter(k => streams[k]);
-                    buildSelectorFromList(list, channel, inferredGroup);
-                } else {
-                    buildSelectorBySuffix(channel);
-                }
-            } else if (getParam) {
-                let externalUrl = `https://nebunexa.co/cvatt.php?get=${getParam}`;
-                if (getParam === "Rm94X1Nwb3J0c19QcmVtaXVuX0hE") {
-                    externalUrl = `https://nebunexa.co/cvatt2.php?get=${getParam}&start=true`;
-                } else if (["RVNQTjJIRA", "RVNQTjJfQXJn", "RVNQTjM", "RVNQTkhE", "Rm94U3BvcnRzMl9VWQ==", "RXZlbnRvczFIRA"].includes(getParam)) {
-                    externalUrl = `https://nebunexa.co/temp.html?get=${getParam}${urlParams.get("lang") ? "&lang=" + urlParams.get("lang") : ""}`;
-                }
-                streamUrl = externalUrl;
-                iframe.setAttribute("src", streamUrl);
-                // Para get=..., usar sandbox básico como antes
-                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
-                // Evitar envío de Referer a terceros
-                iframe.setAttribute("referrerpolicy", "no-referrer");
-                fallbackUrl.href = externalUrl;
-                fallbackUrl.textContent = externalUrl;
-                // Ocultar selector en modo get
-                if (sourceSelector) sourceSelector.style.display = "none";
-            } else {
-                document.getElementById("video-container").innerHTML = '<p>Canal no disponible o desactivado.</p>';
-                return;
-            }
-
-            // Mostrar mensaje de error y enlace de fallback si el iframe no carga
-            iframe.onerror = function () {
-                if (errorMessage && fallbackLink && fallbackUrl) {
-                    errorMessage.style.display = "block";
-                    fallbackLink.style.display = "block";
-                } else {
-                    console.error("Elementos de error o fallback no disponibles.");
-                }
-            };
-
-            // Verificación adicional tras cargar el iframe
-            iframe.onload = function () {
-                if (iframe.contentDocument && iframe.contentDocument.body.textContent.includes("no se puede reproducir")) {
-                    if (errorMessage && fallbackLink && fallbackUrl) {
-                        errorMessage.style.display = "block";
-                        fallbackLink.style.display = "block";
-                    }
-                }
-            };
+        }
+    };
 
            
         });
@@ -1251,5 +1253,4 @@
     </script>
 </body>
 </html>
-
 
