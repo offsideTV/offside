@@ -38,7 +38,7 @@
     
         <!-- Contenedor para el iframe -->
         <div id="video-container">
-            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="no-referrer" allowfullscreen></iframe>
             
             <!-- Botón de pantalla completa -->
             <button id="fullscreen-btn" class="fullscreen-button" title="Pantalla completa">
@@ -53,6 +53,11 @@
                 <p>Intenta verlo directamente aquí:</p>
                 <a id="fallback-url" href="#" target="_blank">Ver video</a>
             </div>
+        </div>
+        <!-- Selector de opciones de canal -->
+        <div id="source-selector" class="source-selector" style="display:none;">
+            <span class="source-label">Opciones:</span>
+            <div id="source-options" class="source-options"></div>
         </div>
     </div>
     
@@ -81,8 +86,8 @@
                 },
 
 
-                "espnext": {
-                    "repro1": "https://offsidetv.netlify.app/futcvatt.html?get=RVNQTjJIRA",
+                "espna-ext": {
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=RVNQTjJIRA",
                      "sandbox": true
                 },
 
@@ -131,7 +136,7 @@
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=espn4"
                 },
                 "espn4-ext": {
-                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTkhE&lang=1",
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=RVNQTkhE&lang=1",
                     "sandbox": true
                 },
 
@@ -205,8 +210,8 @@
                     "repro1": "https://la14hd.com/vivo/canal.php?stream=espnpremium"
                 },
 
-                 "espnpremium-d": {
-                    "repro1": "https://thedaddy.click/embed/stream-387.php",
+                 "espnpremium-ext": {
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=Rm94X1Nwb3J0c19QcmVtaXVuX0hE",
                     "sandbox": true
                 },
 
@@ -237,7 +242,7 @@
                 },
               
                  "tntpp-ext": {
-                    "repro1": "https://elcanaldeportivo.com/tntsports.php",
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=VE5UX1Nwb3J0c19IRA",
                     "sandbox": true
                 },
 
@@ -247,6 +252,11 @@
                     "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=Rm94U3BvcnRz&lang=1",
                     "sandbox": true
                 },
+                  "fox1ar-ext2": {
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=Rm94U3BvcnRz&lang=1",
+                    "sandbox": true
+                },
+                
                 "fox1ar-a": {
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=Rm94U3BvcnRz&lang=1",
                     "sandbox": true
@@ -628,8 +638,9 @@
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RXZlbnRvczFIRA&lang=1",
                     "sandbox": true
                 },
+            
                 "flow1-ext": {
-                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RXZlbnRvczFIRA&lang=1",
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=RXZlbnRvczFIRA&lang=1",
                     "sandbox": true
                 },
 
@@ -643,12 +654,12 @@
                     "sandbox": true
                 },
 
-                "tnt-hd-a": {
+                "tnt-hd": {
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VE5UX0hEX0FyZw==&lang=1",
                     "sandbox": true
                 },
-                "tnt-hd-b": {
-                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VE5UX0hEX0FyZw==&lang=1",
+                "tnt-hd-ext": {
+                    "repro1": "https://offsidetv.netlify.app/transmi.html?get=VE5UX0hEX0FyZw==&lang=1",
                     "sandbox": true
                 },
                
@@ -661,20 +672,8 @@
               
                 },
 
-            "telefe-alt": {
-                    "repro1": "https://tvlibreonline.org/en-vivo/telefe/hl.html",
-                    "sandbox": true
-                },
-              
-                "telefe-alt-2": {
-                    "repro1": "https://tvlibreonline.org/html/dash.html?get=aHR0cHM6Ly90ZWxlZmV2aWFjb20xLmFrYW1haXplZC5uZXQvaGxzL2xpdmUvMjAzNzk4Ny92aWFjb21JTlQvVE9LL21hc3Rlci13aWxkMS5tM3U4",
-                    "sandbox": true
-                },
-              
-             "prueba-disney": {
-                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTL4?id=disneyplus2",
-              
-                },
+        
+            
                 "caracoltv": {
                     "repro1": "https://streamtpglobal.com//global1.php?stream=caracoltv",
                 },
@@ -682,26 +681,7 @@
                  "golperu": {
                     "repro1": "https://streamtpglobal.com//global1.php?stream=golperu",
                 },
-                "dsradio": {
-                    "repro1": "https://playerservices.streamtheworld.com/api/livestream-redirect/DSPORTSRADIOAAC.aac",
-                    "type": "audio"
-                },
-
-                "ds-chi": {
-                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTLi?id=directsportchilehd",
-                    "sandbox": true
-                },
-
-          
-                "eventos2-st4": {
-                    "repro1": "https://streamtpglobal.com//global1.php?stream=eventos2",
-                
-                },
-               
-                "eventos1-st4": {
-                    "repro1": "https://streamtpglobal.com//global1.php?stream=eventos1",
-                
-                },
+            
                
                 "evento1": {
                     "repro1": "https://tvlibreonline.org/pc.html?get=EVENTO1",
@@ -750,65 +730,62 @@
                     "sandbox": true
                 },
 
-                  "tigopy": {
-                    "repro1": "https://domainparatodo.online/tigo2.php",
-                    "sandbox": true
-                },
-
-                  "tigopy-a": {
-                    "repro1": "https://bestleague.one/mpdk/?get=aHR0cHM6Ly9kMmpsdXh4Z3g1NTBzdS5jbG91ZGZyb250Lm5ldC9vdXQvdjEvNjJkZTIwNDk1YWY4NGY5MDhmYTg5NjNmNTBjNDRkNDYvaW5kZXgubXBk&key=NDliMmMwZTcwMzcwNDJiMmFmZjlmMDY0ZTBiYjMzMTE=&key2=ODM4NDllMzBhZGY4NTQ0MDU1MDI5MjY5MzE0N2ZiZjc=",
-                    "sandbox": true
-                },
-
-                "directv": {
-                    "repro1": "https://domainparatodo.online/hls/directv2.php",
-              
-                },
+           
                     "mls2": {
                     "repro1": "https://embedsports.top/embed/admin/admin-inter-miami-vs-pumas/1",
                       "sandbox": true   
         
                 },
-                //Uruguay canal
-               "VTVPlus": {
-                    "repro1": "https://offsidetv.netlify.app/cvatt.html?get=VlRWX1BsdXNfSEQ&lang=1",
-                    "sandbox": true
-                },
-
-                    "VTVPlus-a": {
-                    "repro1": "https://streamtpglobal.com/global1.php?stream=vtvplus",
-                },
-                 "VTVPlus-ext": {
-                    "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=VlRWX1BsdXNfSEQ&lang=1",
-                    "sandbox": true
-                },
-                  "fox-depor-usa": {
-                    "repro1": "https://thedaddy.click/embed/stream-643.php",
-                   
-                },
                     "eltrece": {
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=QXJ0ZWFySEQ&lang=1",
                     "sandbox": true
                 },
-                     "goltv": {
-                    "repro1": "https://streamtpglobal.com/global1.php?stream=goltv",
-                   
+                    "barcelonavscomo": {
+                    "repro1": "https://www.youtube.com/watch?v=AWfthXX9NwE",
+                     "sandbox": true
                 },
-                           "vtvplus": {
-                    "repro1": "https://tutvlive.xyz/mpd/tvfhd.php?sTL3?id=391",
-                   
-                },
+            };
+
+            // Definición manual de grupos de opciones por canal (sin cambiar claves existentes)
+            const channelGroups = {
+                "espn": ["espn-a", "espn-b", "espn-c", "espn-ext", "espn-ext1", "espna-ext"],
+                "espn2": ["espn2-a", "espn2-b", "espn2-c", "espn2-ext"],
+                "espn3": ["espn3-a", "espn3-b", "espn3-c", "espn3-ext"],
+                "espn4": ["espn4-a", "espn4-b", "espn4-c", "espn4-ext"],
+                "espn5": ["espn5-a", "espn5-b", "espn5-c", "espn5-ext"],
+                "espn6": ["espn6-a", "espn6-b", "espn6-c", "espn6-ext"],
+                "espn7": ["espn7-a", "espn7-b", "espn7-c", "espn7-ext"],
+                
+                "espnpremium": ["espnpremium-a", "espnpremium-b", "espnpremium-c","espnpremiumext-a", "espnpremiumext-b","espnpremium-ext"],
+                "tntsports": ["tntsports-a", "tntsports-c", "tntsports-d","tntsportsext-a", "tntsportsext-b", "tntpp-ext",],
+                "fox1ar": ["fox1ar-a", "fox1ar-b", "fox1ar-c", "fox1ar-ext", "fox1ar-ext2"],
+                "fox2ar": ["fox2ar-a", "fox2ar-b", "fox2ar-c", "fox2ar-ext"],
+                "fox3ar": ["fox3ar-a", "fox3ar-b", "fox3-c", "fox3ar-ext"],
+                "tvpublica": ["tvpublica-a", "tvpublica-b", "tvpublica-c", "tvpublica-d", "tvpublica-ext"],
+                "dsports": ["dsports-a", "dsports-b", "dsports-c", "dsports-d"],
+                "dsports2": ["dsports2-a", "dsports2-b", "dsports2-c", "dsports2-d"],
+                "dsportsplus": ["dsportsplus-a", "dsportsplus-b", "dsportsplus-c"],
+                "telefe": ["telefe-a", "telefe-b", "telefe-c", "telefe-ext"],
+                "vtvplus": ["VTVPlus", "VTVPlus-a", "VTVPlus-ext"],
+                "tyc": ["tyc-a", "tyc-b", "tyc-c", "tyc-d", "tyc-ext", "tyc-ext-b", "tycext"],
+                "flow": ["flow1", "flow1-ext"],
+                 "MLSSeasonPass": ["mls", "mls1"],
+                  "TNTHD": ["tnt-hd", "tnt-hd-ext"],
+
             };
 
 
             // Obtener parámetros de la URL
             const urlParams = new URLSearchParams(window.location.search);
             const channel = urlParams.get("ch");
+            const group = urlParams.get("multi");
             const getParam = urlParams.get("get");
             const iframe = document.getElementById("video-iframe");
             const errorMessage = document.getElementById("error-message");
             const fallbackLink = document.getElementById("fallback-link");
             const fallbackUrl = document.getElementById("fallback-url");
+            const sourceSelector = document.getElementById("source-selector");
+            const sourceOptions = document.getElementById("source-options");
 
             // Verificación de elementos
             if (!iframe || !errorMessage || !fallbackLink || !fallbackUrl) {
@@ -816,15 +793,114 @@
                 return;
             }
 
-            // Manejar el canal o el parámetro get
-            let streamUrl = "";
-            if (channel && streams[channel]) {
-                streamUrl = streams[channel]["repro1"];
-                iframe.setAttribute("src", streamUrl);
-                if (streams[channel].sandbox) {
+            // Utilidad: obtener base del canal (prefijo antes de -a, -b, ...)
+            function getBaseFromChannelKey(key) {
+                const match = key && key.match(/^(.+)-([a-z])$/);
+                return match ? match[1] : null;
+            }
+
+            // Construir links de opciones (1, 2, 3, ...) a partir de una lista explícita
+            function buildSelectorFromList(optionKeys, currentChannelKey, groupKey) {
+                const keys = (optionKeys || []).filter(k => streams[k]);
+                if (!keys.length) {
+                    if (sourceSelector) sourceSelector.style.display = "none";
+                    return;
+                }
+                if (sourceOptions) sourceOptions.innerHTML = "";
+                keys.forEach((k, idx) => {
+                    const a = document.createElement("a");
+                    const baseUrl = new URL(window.location.href);
+                    baseUrl.searchParams.set("ch", k);
+                    // Detectar si es variante para PC (ext, pc, desktop en distintas posiciones)
+                    const kl = String(k).toLowerCase();
+                    const isPc = (
+                        kl.includes('-ext') || kl.includes('ext-') ||
+                        kl.endsWith('-pc') || kl.includes('-pc-') || kl.startsWith('pc-') ||
+                        kl.endsWith('-desktop') || kl.includes('-desktop-') || kl.startsWith('desktop-')
+                    );
+                    // Siempre a reproductor.html
+                    if (groupKey) baseUrl.searchParams.set("multi", groupKey); else baseUrl.searchParams.delete("multi");
+                    baseUrl.searchParams.delete("get");
+                    a.href = "reproductor.html?" + baseUrl.searchParams.toString();
+
+                    // Clases
+                    const classes = ["source-option"];
+                    if (k === currentChannelKey) classes.push("active");
+                    if (isPc) classes.push("pc");
+                    a.className = classes.join(" ");
+
+                    a.textContent = String(idx + 1);
+                    a.title = `Opción ${idx + 1}${isPc ? ' (PC)' : ''}`;
+                    sourceOptions.appendChild(a);
+                });
+                if (sourceSelector) sourceSelector.style.display = "flex";
+            }
+
+            // Fallback: construir selector por sufijos -a, -b, -c si no hay grupo definido
+            function buildSelectorBySuffix(currentChannelKey) {
+                const base = getBaseFromChannelKey(currentChannelKey);
+                if (!base) {
+                    if (sourceSelector) sourceSelector.style.display = "none";
+                    return;
+                }
+                const variantKeys = Object.keys(streams)
+                    .filter(k => k.startsWith(base + "-") && /^[a-z]$/.test(k.split("-").pop()))
+                    .sort((a, b) => a.split("-").pop().localeCompare(b.split("-").pop()));
+                buildSelectorFromList(variantKeys, currentChannelKey, null);
+            }
+
+            function findGroupForChannelKey(key) {
+                for (const [g, list] of Object.entries(channelGroups)) {
+                    if (list.includes(key)) return g;
+                }
+                return null;
+            }
+
+            function isOffsideCvattUrl(urlString) {
+                try {
+                    const u = new URL(urlString);
+                    return (
+                        u.hostname === "offsidetv.netlify.app" &&
+                        (/cvatt/.test(u.pathname))
+                    );
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function loadChannel(chKey) {
+                const url = streams[chKey]["repro1"]; 
+                iframe.setAttribute("src", url);
+                // Respetar configuración original: aplicar sandbox solo si el canal lo requiere
+                if (streams[chKey].sandbox) {
                     iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
                 } else {
                     iframe.removeAttribute("sandbox");
+                }
+            }
+
+            // Manejar el canal o el parámetro get
+            let streamUrl = "";
+            if (group && channelGroups[group]) {
+                // Abrir por grupo (multi): usar ch si es válido o el primero disponible
+                const groupList = channelGroups[group].filter(k => streams[k]);
+                const initialKey = (channel && groupList.includes(channel)) ? channel : groupList[0];
+                if (!initialKey) {
+                    document.getElementById("video-container").innerHTML = '<p>Grupo sin opciones disponibles.</p>';
+                    if (sourceSelector) sourceSelector.style.display = "none";
+                    return;
+                }
+                loadChannel(initialKey);
+                buildSelectorFromList(groupList, initialKey, group);
+            } else if (channel && streams[channel]) {
+                loadChannel(channel);
+                // Si pertenece a un grupo, mostrar todas las opciones de ese grupo; si no, fallback por sufijos
+                const inferredGroup = findGroupForChannelKey(channel);
+                if (inferredGroup) {
+                    const list = (channelGroups[inferredGroup] || []).filter(k => streams[k]);
+                    buildSelectorFromList(list, channel, inferredGroup);
+                } else {
+                    buildSelectorBySuffix(channel);
                 }
             } else if (getParam) {
                 let externalUrl = `https://nebunexa.co/cvatt.php?get=${getParam}`;
@@ -835,9 +911,14 @@
                 }
                 streamUrl = externalUrl;
                 iframe.setAttribute("src", streamUrl);
-                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin"); // Aplicar sandbox para getParam
+                // Para get=..., usar sandbox básico como antes
+                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin");
+                // Evitar envío de Referer a terceros
+                iframe.setAttribute("referrerpolicy", "no-referrer");
                 fallbackUrl.href = externalUrl;
                 fallbackUrl.textContent = externalUrl;
+                // Ocultar selector en modo get
+                if (sourceSelector) sourceSelector.style.display = "none";
             } else {
                 document.getElementById("video-container").innerHTML = '<p>Canal no disponible o desactivado.</p>';
                 return;
@@ -1168,6 +1249,4 @@
     </script>
 </body>
 </html>
-
-
 
