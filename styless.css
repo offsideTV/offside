@@ -906,20 +906,37 @@ body.fullscreen-active #fullscreen-btn.show-temporarily {
     font-size: 14px;
     color: #333;
 }
-/* Estilo para el botón de donaciones en el header */
+/* Estilo moderno para botones de donar */
 .donate-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    appearance: none;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #ffffff;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 9999px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
     margin-left: 20px;
+    box-shadow: 0 8px 20px rgba(37, 117, 252, 0.25), inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .donate-button:hover {
-    background-color: #5a32c7;
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 12px 26px rgba(37, 117, 252, 0.35);
+}
+
+.donate-button:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(37, 117, 252, 0.28);
+}
+
+.donate-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.55);
 }
 
 .pc-button {
@@ -1482,20 +1499,37 @@ body.fullscreen-active #fullscreen-btn.show-temporarily {
     
     
 .report-button {
-        background-color: #007BFF;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-left: 20px;
-        position: relative; /* Necesario para posicionar el tooltip */
-    }
-    
-    .report-button:hover {
-        background-color: #5a32c7;
-    }
+    appearance: none;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #ffffff;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    margin-left: 20px;
+    position: relative; /* Necesario para posicionar el tooltip */
+    box-shadow: 0 8px 20px rgba(37, 117, 252, 0.25), inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.report-button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 12px 26px rgba(37, 117, 252, 0.35);
+}
+
+.report-button:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(37, 117, 252, 0.28);
+}
+
+.report-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(147, 197, 253, 0.55);
+}
     
     /* Estilo del tooltip */
     .report-button .tooltip {
