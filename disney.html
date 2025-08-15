@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow" />
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+    <title>Verificación de Extensión e Inclusión de Reproductor</title>
+    <link rel="stylesheet" href="https://boxicons.com/css/boxicons.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #player {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Aspect ratio 16:9 */
+            background: #000;
+        }
+
+        #player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+.alert-card {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.alert-card h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.alert-card .boxicon {
+    font-size: 48px;
+    color: #ff0;
+}
+
+.alert-card p {
+    margin: 10px 0;
+    color: #ebebeb;
+}
+
+@media (max-width: 480px) {
+    .alert-card {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .alert-card h2 {
+        font-size: 20px;
+    }
+
+    .alert-card .boxicon {
+        font-size: 36px;
+    }
+
+    .alert-card p {
+        font-size: 14px;
+    }
+}
+
+        a {
+            color: #0f0;
+            text-decoration: underline;
+        }
+
+        .event-not-started {
+            background-color: #444;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+    <div id="player" class="hidden"></div>
+<div id="alerta-extension" class="hidden alert">
+        <i class="bx bx-error-circle boxicon"></i>
+        <center>
+        <div id="jb" class="jumbotron">
+        <div class="image"><img src="https://lh3.googleusercontent.com/CpjFFK0vJQElr4Xo1TAzovP8tCzedGN0h5uzSthqCaRQXlDvU6kIrIc4QTm1sPrxlD29NWLqfT_srE6MK5j7Iy9wkg=s60" width="10%"></div>
+        <h1>Reproductor MPD/M3U8/M3U/EPG</h1>
+        </div>        
+            <p><i style="color:red">NOTA</i>: Para reproducir este canal necesitas instalar la extension: <strong>Reproductor MPD/M3U8/M3U/EPG</strong></p>
+            <h2>Instalacion</h2>
+            <p>Para instalar la extension debes ingresar a <a target="_blank" href="https://chromewebstore.google.com/detail/reproductor-mpdm3u8m3uepg/opmeopcambhfimffbomjgemehjkbbmji">Reproductor MPD/M3U8/M3U/EPG</a> o buscarla en <b>Chrome Web Store o Brave</b></p>
+            <img src="https://star.nebunexa.com/disney/brave.png" width="40%">
+            <p>Una vez instalada la extension recarga la pagina y disfruta del canal.</p>
+            </center>
+    </div>
+    <div id="event-not-started" class="hidden event-not-started">
+        <h2>El evento aún no comienza</h2>
+        <p>Si es la hora del evento y aún no comienza, intente recargar la página. Puede demorar hasta 5 minutos.</p>
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var getURL = getParameterByName('get');
+    var getIMG = getParameterByName('img');
+    var getKEY = getParameterByName('key');
+    var getKEY2 = getParameterByName('key2');
+    if (getURL == "") {alert('Vuelve a la página anterior');}
+
+    var number;
+
+// Función para verificar si es Windows o Linux
+function isWindowsPC() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return (/windows|linux/.test(userAgent)) && !(/mobile|tablet|iphone|ipod|android/.test(userAgent));
+}
+
+// Función para mostrar el mensaje de dispositivo no compatible
+function showUnsupportedDeviceMessage() {
+    const unsupportedMessage = document.createElement('div');
+    unsupportedMessage.classList.add('alert-card');
+    unsupportedMessage.innerHTML = `
+        <i class='bx bx-error-circle boxicon'></i>
+        <h2>Dispositivo no compatible</h2>
+        <p>Este contenido es compatible solo con PC. Por favor, usa un PC para visualizarlo.</p>
+    `;
+    document.body.appendChild(unsupportedMessage);
+}
+
+    // Verificar si es un dispositivo compatible antes de ejecutar el código principal
+    if (!isWindowsPC()) {
+        showUnsupportedDeviceMessage();
+    } else {
+        // Función para verificar si la extensión está instalada
+        function isExtensionInstalled(installedCallback, notInstalledCallback) {
+            const img = document.createElement('img');
+            img.onload = installedCallback;
+            img.onerror = notInstalledCallback;
+            img.src = 'chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/play-on.png';
+        }
+
+        // Mostrar el reproductor o el mensaje de extensión según corresponda
+        const playerDiv = document.getElementById("player");
+        const alertaDiv = document.getElementById("alerta-extension");
+        const eventNotStartedDiv = document.getElementById("event-not-started");
+        isExtensionInstalled(
+            () => {
+                // Si la extensión está instalda, verificar si el evento ha comenzado
+                if (getURL === "stream") {
+                   keyId = "653c550ea1fb4d6c90113cd2ef25b90e";
+                    key = "50adb7278fd278da74d2ad7c23e57897";
+                    mpd = "https://live-ftc-sa-east-2.media.dssott.com/dvt2=exp=1755302591~url=%2Fgru1%2Fva01%2Fdisneyplus%2Fevent%2F2025%2F08%2F15%2FLibertad_PAR_vs_River_Pla_20250815_1755208848024%2F~psid=fe58c9fa-1727-401c-81c3-7f05e743e0d8~aid=f73af040-fc19-4da3-81ec-2e2a14f72f4d~did=bced3976-0a5c-43e5-a2e6-d6099e46fb28~country=AR~kid=k02~hmac=4fc7f7a8701e697bfe0fa046b7317ff7fe9036eea25aeefcc083d4d69624de04/gru1/va01/disneyplus/event/2025/08/15/Libertad_PAR_vs_River_Pla_20250815_1755208848024/ctr-all-hdri-complete.m3u8";
+                } else if (getURL === "EVENTO2") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO3") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+               } else if (getURL === "EVENTO4") {
+                    keyId = "4dd6f61fcade4d83922906fe4cd887f3";
+                    key = "d5a30a8dfe881a71630b1f5293fdb31f";
+                    mpd = "https://live-ftc-sa-east-2.media.dssott.com/dvt2=exp=1751894629~url=%2Fgru1%2Fva01%2Fdisneyplus%2Fevent%2F2025%2F07%2F06%2FF1_GP_Gran_Bretaa_Carrera_20250706_1751797817019%2F~psid=bcae111f-cedc-4966-9be3-60da2bf62b7a~aid=f73af040-fc19-4da3-81ec-2e2a14f72f4d~did=bced3976-0a5c-43e5-a2e6-d6099e46fb28~country=AR~kid=k02~hmac=fb429641c182f61194b6d9059c023d7f9de78a0de9d3a6831e38ab1c944e9a1c/gru1/va01/disneyplus/event/2025/07/06/F1_GP_Gran_Bretaa_Carrera_20250706_1751797817019/ctr-all-hdri-sliding.m3u8";
+               } else if (getURL === "EVENTO5") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+               } else if (getURL === "EVENTO6") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+               } else if (getURL === "EVENTO7") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+               } else if (getURL === "EVENTO8") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO9") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO10") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO11") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO12") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO13") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO14") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO15") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO16") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO17") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO18") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO19") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO20") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO21") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO22") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO23") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } else if (getURL === "EVENTO24") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                }  else if (getURL === "EVENTO25") {
+                    keyId = "";
+                    key = "";
+                    mpd = "";
+                } 
+                
+                // Mostrar mensaje si keyId, key y mpd están vacíos
+                if (!keyId && !key && !mpd) {
+                    eventNotStartedDiv.classList.remove("hidden");
+                } else {
+                    // Convertir keyId y key a una cadena JSON
+                    var keyObj = {};
+                    keyObj[keyId] = key;
+                    var keyJson = JSON.stringify(keyObj);
+                    // Codificar en base64
+                    var base64Key = btoa(keyJson);
+
+                    // Construir la URL con el key ofuscado en base64
+                    var extensionUrl = `chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/pages/player.html#${mpd}?&ck=${encodeURIComponent(base64Key)}`;
+
+                    playerDiv.classList.remove("hidden");
+                    playerDiv.innerHTML = `<iframe id="iframe" allow="encrypted-media" allowfullscreen src="${extensionUrl}"></iframe>`;
+                }
+            },
+            () => {
+                // Si la extensión no está instalada, mostrar el mensaje de instalación
+                alertaDiv.classList.remove("hidden");
+            }
+        );
+    }
+</script>
+</body>
+</html>
