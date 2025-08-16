@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
 // Función para filtrar canales
 function searchChannels() {
     const input = document.getElementById('searchInput');
@@ -85,6 +86,7 @@ document.getElementById('dmcaButton').addEventListener('click', function() {
         dmcaText.style.display = 'none';
     }
 });
+
 // Agrega un evento al botón DMCA para desplazar la página
 document.getElementById('dmcaButton').addEventListener('click', function() {
     document.getElementById('dmcaText').scrollIntoView({ behavior: 'smooth' });
@@ -93,17 +95,14 @@ document.getElementById('dmcaButton').addEventListener('click', function() {
 document.getElementById('donateButton').addEventListener('click', function() {
     window.location.href = 'donaciones.html'; 
 });
+
 document.getElementById('reportButton').addEventListener('click', function() {
     window.location.href = 'fallos.html'; 
 });
-document.getElementById('camButton').addEventListener('click', function() {
-    window.open('multicam.html', '_blank'); // Abre en una nueva pestaña
-});
+
 function closeBanner() {
     document.getElementById("donationBanner").style.display = "none";
-    
 }
-
 
 function filterEvents() {
     // Obtén el valor del campo de búsqueda
@@ -177,6 +176,7 @@ document.getElementById('copyLink').addEventListener('click', function(event) {
         confirmButtonText: 'OK'
     });
 });
+
 document.getElementById('shareQR').addEventListener('click', function(event) {
     event.preventDefault();
     var url = window.location.href;
@@ -209,6 +209,7 @@ document.getElementById('shareQR').addEventListener('click', function(event) {
         }
     });
 });
+
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
