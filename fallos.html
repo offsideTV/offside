@@ -134,6 +134,14 @@
     </style>
 </head>
 <body>
+    <header>
+        <a href="index.html">
+            <img src="https://cdn.jsdelivr.net/gh/OffsideTV/logosweb@main/logotvoriginal-.webp" alt="OffsideTV Logo" class="logo">
+        </a>
+        <button id="chanels" class="donate-button">Canales y agenda</button>
+     
+        <button id="donateButton" class="donate-button">Dejar una donación</button>
+    </header>
     <div class="report-container">
         <div class="report-header">
             <h1><i class="fas fa-bug"></i> ¿Tuviste algún problema? <i class="fas fa-plus-circle"></i> ¿Queres solicitar algún contenido?</h1>
@@ -294,5 +302,16 @@
         handleFormSubmit('reportForm');
         handleFormSubmit('requestForm');
     </script>
+    <button id="chanels" class="donate-button">Canales y agenda</button>
+
+<script>
+  document.getElementById("chanels").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+   document.getElementById("donateButton").addEventListener("click", () => {
+    window.location.href = "donaciones.html";
+  });
+</script>
+
 </body>
 </html>
