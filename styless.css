@@ -1,4 +1,3 @@
-
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #3072d4, #c3cfe2);
@@ -1948,4 +1947,598 @@ body.fullscreen-active #fullscreen-btn.show-temporarily {
     font-size: 18px;
     text-align: center;
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Estilos para el contenedor del reproductor */
+.player-container {
+    margin-bottom: 30px;
+}
+
+/* Estilos para la sección de información debajo del reproductor */
+.info-section-below {
+    margin-top: 30px;
+}
+
+
+
+/* Estilos para el cartel informativo */
+.info-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(37, 117, 252, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: sticky;
+    top: 20px;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(37, 117, 252, 0.1);
+}
+
+.info-header i {
+    font-size: 24px;
+    color: #2575fc;
+}
+
+.info-header h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #1e3a8a;
+    font-weight: 700;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-item {
+    padding: 20px;
+    background: rgba(37, 117, 252, 0.05);
+    border-radius: 12px;
+    border-left: 4px solid #2575fc;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    background: rgba(37, 117, 252, 0.08);
+    transform: translateX(5px);
+}
+
+.info-item h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px 0;
+    font-size: 1.1em;
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+.info-item h4 i {
+    color: #2575fc;
+    font-size: 16px;
+}
+
+.info-item p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    color: #374151;
+    font-size: 14px;
+}
+
+/* Badge para opciones PC */
+.pc-badge {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+}
+
+/* Enlaces de la extensión */
+.extension-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+}
+
+.extension-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 117, 252, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.extension-link i {
+    font-size: 16px;
+}
+
+/* Información del DNS */
+.dns-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(2, 132, 199, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.dns-ip {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.dns-provider {
+    color: #0c4a6e;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Enlace del DNS */
+.dns-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(5, 150, 105, 0.3);
+}
+
+.dns-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.dns-link i {
+    font-size: 14px;
+}
+
+/* Estilos para la sección del video arriba */
+.video-section {
+    margin-bottom: 30px;
+}
+
+/* Estilos para la sección de información debajo del video */
+.info-section {
+    margin-top: 30px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Estilos para las tarjetas de información */
+.info-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(37, 117, 252, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: fit-content;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(37, 117, 252, 0.1);
+    flex-shrink: 0;
+}
+
+.info-header i {
+    font-size: 24px;
+    color: #2575fc;
+    flex-shrink: 0;
+}
+
+.info-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #1e3a8a;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.info-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: #374151;
+    font-size: 14px;
+}
+
+/* Badge para opciones PC */
+.pc-badge {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+    display: inline-block;
+}
+
+/* Enlaces de la extensión */
+.extension-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+    white-space: nowrap;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.extension-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 117, 252, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.extension-link i {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* Información del DNS */
+.dns-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 12px;
+    background: rgba(2, 132, 199, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(2, 132, 199, 0.2);
+    flex-wrap: wrap;
+}
+
+.dns-ip {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.dns-provider {
+    color: #0c4a6e;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Enlace del DNS */
+.dns-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 12px rgba(5, 150, 105, 0.3);
+    white-space: nowrap;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.dns-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.dns-link i {
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+/* Caja de advertencia */
+.warning-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 13px;
+    font-weight: 600;
+    flex-wrap: wrap;
+}
+
+.warning-box i {
+    color: #f59e0b;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1200px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .info-card {
+        padding: 20px;
+        min-height: 180px;
+    }
+    
+    .info-header h3 {
+        font-size: 1.1em;
+    }
+    
+    .extension-link,
+    .dns-link {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .info-card {
+        padding: 18px;
+        min-height: auto;
+    }
+    
+    .info-header {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    .info-header i {
+        font-size: 20px;
+    }
+    
+    .info-header h3 {
+        font-size: 1.1em;
+    }
+    
+    .info-content {
+        gap: 12px;
+    }
+    
+    .info-content p {
+        font-size: 13px;
+    }
+    
+    .extension-link,
+    .dns-link {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        padding: 10px 12px;
+        font-size: 12px;
+        justify-content: center;
+    }
+    
+    .dns-info {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .warning-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section {
+        margin-bottom: 20px;
+    }
+    
+    .info-section {
+        margin-top: 20px;
+    }
+    
+    .info-grid {
+        gap: 12px;
+    }
+    
+    .info-card {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .info-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+    }
+    
+    .info-header i {
+        font-size: 18px;
+    }
+    
+    .info-header h3 {
+        font-size: 1em;
+    }
+    
+    .info-content {
+        gap: 10px;
+    }
+    
+    .info-content p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    .extension-link,
+    .dns-link {
+        width: 100%;
+        max-width: 200px;
+        padding: 8px 10px;
+        font-size: 11px;
+        border-radius: 20px;
+    }
+    
+    .extension-link i,
+    .dns-link i {
+        font-size: 12px;
+    }
+    
+    .dns-info {
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .dns-ip {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    .dns-provider {
+        font-size: 11px;
+    }
+    
+    .warning-box {
+        padding: 10px;
+        font-size: 11px;
+        gap: 6px;
+    }
+    
+    .warning-box i {
+        font-size: 14px;
+    }
+    
+    .pc-badge {
+        font-size: 10px;
+        padding: 1px 6px;
+    }
+}
+
+@media (max-width: 360px) {
+    .info-card {
+        padding: 12px;
+    }
+    
+    .info-header h3 {
+        font-size: 0.95em;
+    }
+    
+    .info-content p {
+        font-size: 11px;
+    }
+    
+    .extension-link,
+    .dns-link {
+        max-width: 180px;
+        padding: 7px 8px;
+        font-size: 10px;
+    }
+    
+    .extension-link i,
+    .dns-link i {
+        font-size: 11px;
+    }
 }
