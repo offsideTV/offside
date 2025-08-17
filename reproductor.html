@@ -36,28 +36,84 @@
     <div class="container">
         <h2>Reproduciendo contenido</h2>
     
-        <!-- Contenedor para el iframe -->
-        <div id="video-container">
-            <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
-            
-            <!-- Botón de pantalla completa -->
-            <button id="fullscreen-btn" class="fullscreen-button" title="Pantalla completa">
-                <i class="fas fa-expand"></i>
-            </button>
-            
-            <!-- Elementos de error, ocultos por defecto -->
-            <div id="error-message" style="display: none;">
-                <p>Este archivo de video no se puede reproducir (Error 102630).</p>
+        <!-- Contenedor del video arriba -->
+        <div class="video-section">
+            <!-- Contenedor para el iframe -->
+            <div id="video-container">
+                <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-write" allowfullscreen></iframe>
+                
+                <!-- Botón de pantalla completa -->
+                <button id="fullscreen-btn" class="fullscreen-button" title="Pantalla completa">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Elementos de error, ocultos por defecto -->
+                <div id="error-message" style="display: none;">
+                    <p>Este archivo de video no se puede reproducir (Error 102630).</p>
+                </div>
+                <div id="fallback-link" style="display: none;">
+                    <p>Intenta verlo directamente aquí:</p>
+                    <a id="fallback-url" href="#" target="_blank">Ver video</a>
+                </div>
             </div>
-            <div id="fallback-link" style="display: none;">
-                <p>Intenta verlo directamente aquí:</p>
-                <a id="fallback-url" href="#" target="_blank">Ver video</a>
+            <!-- Selector de opciones de canal -->
+            <div id="source-selector" class="source-selector" style="display:none;">
+                <span class="source-label">Opciones:</span>
+                <div id="source-options" class="source-options"></div>
             </div>
         </div>
-        <!-- Selector de opciones de canal -->
-        <div id="source-selector" class="source-selector" style="display:none;">
-            <span class="source-label">Opciones:</span>
-            <div id="source-options" class="source-options"></div>
+
+        <!-- Sección de información debajo del video en tres columnas -->
+        <div class="info-section">
+            <div class="info-grid">
+                <!-- Información 1: Opciones PC -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="fas fa-desktop"></i>
+                        <h3>Opciones Exclusivas PC</h3>
+                    </div>
+                    <div class="info-content">
+                        <p>Las opciones marcadas con <span class="pc-badge">PC</span> son exclusivas de la <strong>extensión M3U8</strong> y solo funcionan en computadoras.</p>
+                        <a href="https://chromewebstore.google.com/detail/opmeopcambhfimffbomjgemehjkbbmji?utm_source=item-share-cb" 
+                           class="extension-link" target="_blank">
+                            <i class="fas fa-download"></i> Instalar Extensión
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Información 2: DNS -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>DNS Recomendado</h3>
+                    </div>
+                    <div class="info-content">
+                        <p>Para evitar bloqueos de algunos proveedores de internet, te recomendamos usar el DNS <strong>1.1.1.1</strong> de Cloudflare.</p>
+                        <div class="dns-info">
+                            <span class="dns-ip">1.1.1.1</span>
+                            <span class="dns-provider">Cloudflare</span>
+                        </div>
+                        <a href="https://1.1.1.1/" class="dns-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Configurar DNS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Información 3: Nota importante -->
+                <div class="info-card">
+                    <div class="info-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Nota Importante</h3>
+                    </div>
+                    <div class="info-content">
+                        <p>Algunos canales pueden estar bloqueados por tu proveedor de internet. La extensión y el DNS recomendado te ayudarán a acceder a más contenido.</p>
+                        <div class="warning-box">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Usa la extensión para mejor compatibilidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -646,8 +702,8 @@
 
                
                 
-                "espndeportes": {
-                    "repro1": "https://miztv.top/total/stream-375.php"
+                "espndepor": {
+                    "repro1": "https://streamtp11.com//global1.php?stream=espndeportes"
                 },
                 
                 "espnplus": {
@@ -1301,7 +1357,6 @@
     </script>
 </body>
 </html>
-
 
 
 
