@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Hora de Finalización del Partido</title>
+  <style>
+    /* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fondo general */
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: linear-gradient(135deg, #0077ff, #00c6ff);
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 15px;
+}
+
+/* Caja principal */
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0077ff;
+  font-size: 1.5rem;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus {
+  border-color: #0077ff;
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(0,119,255,0.4);
+}
+
+/* Botón */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0077ff;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #005fd1;
+}
+
+button:active {
+  background: #0040a8;
+}
+
+/* Responsive para celulares */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  input, button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculadora de Partido</h2>
+    <label for="horaInicio">Hora de inicio:</label>
+    <input type="time" id="horaInicio">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <label for="fin15">Hora finalización (15 min entretiempo):</label>
+    <input type="text" id="fin15" readonly>
+
+    <label for="fin18">Hora finalización (18 min entretiempo):</label>
+    <input type="text" id="fin18" readonly>
+  </div>
+
+  <script>
+    function calcular() {
+      const inicio = document.getElementById("horaInicio").value;
+      if (!inicio) {
+        alert("Por favor, ingresa una hora de inicio");
+        return;
+      }
+
+      // Parsear hora y minutos
+      let [h, m] = inicio.split(":").map(Number);
+      let inicioDate = new Date();
+      inicioDate.setHours(h, m, 0, 0);
+
+      // Duración del partido
+      const tiempoJuego = 90; // minutos
+      const entretiempo15 = 15;
+      const entretiempo18 = 18;
+
+      // Calcular finales
+      let fin15 = new Date(inicioDate.getTime() + (tiempoJuego + entretiempo15) * 60000);
+      let fin18 = new Date(inicioDate.getTime() + (tiempoJuego + entretiempo18) * 60000);
+
+      // Formatear a hh:mm
+      function formatHora(date) {
+        let hh = date.getHours().toString().padStart(2, "0");
+        let mm = date.getMinutes().toString().padStart(2, "0");
+        return `${hh}:${mm}`;
+      }
+
+      document.getElementById("fin15").value = formatHora(fin15);
+      document.getElementById("fin18").value = formatHora(fin18);
+    }
+  </script>
+</body>
+</html>
