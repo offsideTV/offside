@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<style>
+    .jw-rightclick {
+        display: none !important;
+    }
+</style>
+
+<style type="text/css">
+    body {margin:0;padding:0}
+</style>
+
+<meta name='referrer' content='no-referrer' />
+<meta name="robots" content="noindex">
+<script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+
+<script>
+    jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+</script>
+
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var get = getParameterByName('get');
+var key = getParameterByName('key');
+var key2 = getParameterByName('key2');
+var getIMG = getParameterByName('img');
+var startParam = getParameterByName('start');
+var autostart = startParam === "true";
+</script>
+
+<div id="player"></div>
+
+<script type="text/javascript">
+var playerInstance = jwplayer("player");
+
+playerInstance.setup({
+    playlist: [{
+        "image": atob(getIMG),
+        "sources": [
+            {
+                "default": false,
+                "type": "dash",
+                "file": atob(get),
+                "drm": {
+                    "clearkey": { "keyId": atob(key), "key": atob(key2) }
+                },
+                "label": "0"
+            }
+        ]
+    }],
+    width: "100%",
+    height: "100%",
+    aspectratio: "16:9",
+    autostart: autostart,
+    cast: {},
+    sharing: {},
+    skin: {
+        name: "modern-edge",
+        url: "modern-edge.css"
+    }
+});
+
+var selectedLanguage = 1;
+var selectedLanguage2 = 0;
+var languageChangedDuringPlay = false;
+
+jwplayer().on('play', function(e) {
+  if (!languageChangedDuringPlay) {
+    var currentLanguage = jwplayer().getCurrentAudioTrack();
+
+    if (currentLanguage !== selectedLanguage) {
+      jwplayer().setCurrentAudioTrack(selectedLanguage);
+      languageChangedDuringPlay = true; 
+    } else if (currentLanguage !== selectedLanguage2) {
+      jwplayer().setCurrentAudioTrack(selectedLanguage2);
+      languageChangedDuringPlay = true; 
+    }
+  }
+});
+
+jwplayer().on('complete', function(e) {
+  languageChangedDuringPlay = false;
+});
+
+if (get === "aHR0cHM6Ly9weWxvY2FsbGl2ZWNoYW5uZWxkYXNoLmxjZG4uY2xhcm90di5jb20ucHkvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9jaGFubmVsKEVTUE4pL21hc3Rlci5tcGQ=") {
+    playerInstance.on("error", function() {
+        var redirectUrl = 'https://streamtp1.com/global2.php?stream=espn1';
+        window.location = redirectUrl;
+    });
+}
+
+else if (get === "aHR0cHM6Ly9weWxvY2FsbGl2ZWNoYW5uZWxkYXNoLmxjZG4uY2xhcm90di5jb20ucHkvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9jaGFubmVsKEVTUE4yKS9tYXN0ZXIubXBk") {
+    playerInstance.on("error", function() {
+        var redirectUrl = 'https://streamtp1.com/global2.php?stream=espn2';
+        window.location = redirectUrl;
+    });
+}
+
+else if (get === "aHR0cHM6Ly9weWxvY2FsbGl2ZWNoYW5uZWxkYXNoLmxjZG4uY2xhcm90di5jb20ucHkvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9jaGFubmVsKEVTUE4zKS9tYXN0ZXIubXBk") {
+    playerInstance.on("error", function() {
+        var redirectUrl = 'https://streamtp1.com/global2.php?stream=espn3';
+        window.location = redirectUrl;
+    });
+}
+
+else if (get === "aHR0cHM6Ly9weWxvY2FsbGl2ZWNoYW5uZWxkYXNoLmxjZG4uY2xhcm90di5jb20ucHkvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9jaGFubmVsKEZPWF9TUE9SVFMpL21hc3Rlci5tcGQ=") {
+    playerInstance.on("error", function() {
+        var redirectUrl = 'https://streamtp1.com/global2.php?stream=fox1ar';
+        window.location = redirectUrl;
+    });
+}
+
+else if (get === "aHR0cHM6Ly9weWxvY2FsbGl2ZWNoYW5uZWxkYXNoLmxjZG4uY2xhcm90di5jb20ucHkvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9jaGFubmVsKEZPWF9TUE9SVFNfMikvbWFzdGVyLm1wZA==") {
+    playerInstance.on("error", function() {
+        var redirectUrl = 'https://streamtp1.com/global2.php?stream=fox2ar';
+        window.location = redirectUrl;
+    });
+}
+
+else if (get === "aHR0cHM6Ly9weWxvY2FsbGl2ZWNoYW5uZWxkYXNoLmxjZG4uY2xhcm90di5jb20ucHkvQ29udGVudC9EQVNIX0RBU0hfRksvTGl2ZS9jaGFubmVsKEZPWF9TUE9SVFNfMykvbWFzdGVyLm1wZA==") {
+    playerInstance.on("error", function() {
+        var redirectUrl = 'https://streamtp1.com/global2.php?stream=fox3ar';
+        window.location = redirectUrl;
+    });
+}
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4bb836cdf13b4afe9ea3705069e97827","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
