@@ -121,7 +121,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Mapa de streams
             const streams = {
-                 "espn-ext": {
+              "espn-ext": {
                     "repro1": "https://offsidetv.netlify.app/cvatt_ext.html?get=RVNQTjJIRA",
                     "sandbox": true
                 },
@@ -135,26 +135,32 @@
                     "sandbox": true
                 },
                 "espn-b": {
-                    "repro1": "https://streamtp22.com//global1.php?stream=espn"
+                    "repro1": "https://streamtp11.com//global1.php?stream=espn"
                 },
                 "espn-c": {
                     "repro1": "https://la14hd.com/vivo/canales.php?stream=espn"
                 },
-                 "espn-d": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=ESPN",
+
+                "espn-d": {
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=ESPN_HD",
                     "sandbox": true
                 },
-                
 
                 "espna-ext": {
                     "repro1": "https://offsidetv.netlify.app/transmi.html?get=RVNQTjJIRA",
                      "sandbox": true
                 },
 
+
                 "espn2": {
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTjJfQXJn&lang=1",
                     "sandbox": true
                 },
+                "espn2-a": {
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=ESPN_2_HD",
+                    "sandbox": true
+                },
+
                 "espn2-b": {
                     "repro1": "https://streamtp11.com//global1.php?stream=espn2"
                 },
@@ -169,11 +175,6 @@
                     "repro1": "https://offsidetv.netlify.app/transmi.html?get=RVNQTjJfQXJn&lang=1",
                     "sandbox": true
                 },
-                    "espn2-f": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=ESPN2",
-                    "sandbox": true
-                },
-                
 
                 
 
@@ -187,13 +188,13 @@
                 "espn3-c": {
                     "repro1": "https://la12hd.com/vivo/canal.php?stream=espn3"
                 },
+                  "espn3-cc": {
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=ESPN_3_HD",
+                    "sandbox": true
+                },
                 
                "espn3-ext": {
                     "repro1": "https://offsidetv.netlify.app/transmi.html?get=RVNQTjM&lang=1",
-                    "sandbox": true
-                },
-                "espn3-cc": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=ESPN3",
                     "sandbox": true
                 },
 
@@ -213,12 +214,10 @@
                     "repro1": "https://offsidetv.netlify.app/transmi.html?get=RVNQTkhE&lang=1",
                     "sandbox": true
                 },
-
-                    "espn4-f": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=ESPN4",
+                   "espn4-f": {
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=ESPN_4_HD",
                     "sandbox": true
                 },
-
                 "espn5": {
                     "repro1": "https://offsidetv.netlify.app/cvatt.html?get=RVNQTjQ=&start=true",
                     "sandbox": true
@@ -295,7 +294,7 @@
                 },
 
                  "espnpremium-d": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=ESPNPremium",
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=ESPN_PREMIUM",
                      "sandbox": true
                 },
 
@@ -344,7 +343,7 @@
 
 
                    "tntsports-f": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=TNTSports",
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=TNT_Sports_HD",
                      "sandbox": true
                 },
 
@@ -557,7 +556,7 @@
                     "sandbox": true
                 },
                  "telefe2": {
-                    "repro1": "https://offsidetv.netlify.app/premiumcanales.html?id=Telefe",
+                    "repro1": "https://offsidetv.netlify.app/anbalancer.html?id=TELEFE",
                     "sandbox": true
                 },
                      "telefe3": {
@@ -944,16 +943,16 @@
             };
             // Definición manual de grupos de opciones por canal (sin cambiar claves existentes)
             const channelGroups = {
-               "espn": ["espn", "espn-d","espn-b", "espn-c", "espn-ext", "espn-ext1", "espna-ext"],
-                "espn2": ["espn2", "espn2-f", "espn2-b", "espn2-c", "espn2-ext", "espn2-pc"],
+              "espn": ["espn", "espn-d","espn-b", "espn-c", "espn-ext", "espn-ext1", "espna-ext"],
+                "espn2": ["espn2", "espn2-a", "espn2-b", "espn2-c", "espn2-ext", "espn2-pc"],
                 "espn3": ["espn3",  "espn3-cc", "espn3-b", "espn3-c", "espn3-ext"],
-                "espn4": ["espn4","espn4-f", "espn4-b", "espn4-c", "espn4-ext"],
+                "espn4": ["espn4", "espn4-f","espn4-b", "espn4-c", "espn4-ext"],
                 "espn5": ["espn5", "espn5-b", "espn5-c", "espn5-ext"],
                 "espn6": ["espn6", "espn6-b", "espn6-c", "espn6-ext"],
                 "espn7": ["espn7", "espn7-b", "espn7-c", "espn7-ext"],
                 
-               "espnpremium": ["espnpremium", "espnpremium-e","espnpremium-b","espnpremium-c","espnpremiumext-a", "espnpremium-desktop","espnpremiumext-b","espnpremium-ext","espnpremium-pc"],
-                "tntsports": ["tntsports","tntsports-e", "tntsports-c", "tntsports-d","tntsportsext-a", "tntsports-pc","tntsportsext-b", "tntpp-ext",],
+               "espnpremium": ["espnpremium", "espnpremium-d","espnpremium-e","espnpremium-b","espnpremium-c","espnpremiumext-a", "espnpremium-desktop","espnpremiumext-b","espnpremium-ext","espnpremium-pc"],
+               "tntsports": ["tntsports","tntsports-f","tntsports-e", "tntsports-c", "tntsports-d","tntsportsext-a", "tntsports-pc","tntsportsext-b", "tntpp-ext"],
                "fox1ar": ["fox1ar", "fox1ar-p","fox1ar-cc", "fox1ar-b", "fox1ar-c", "fox1ar-ext", "fox1ar-ext2","fox1ar-pc"],
                "fox2ar": ["fox2ar", "fox2ar-cc","fox2ar-b", "fox2ar-c", "fox2ar-ext"],
                 "fox3ar": ["fox3ar", "fox3ar-b", "fox3-c", "fox3ar-ext"],
@@ -961,7 +960,7 @@
                 "dsports": ["dsports", "dsports-b", "dsports-c", "dsports-d"],
                 "dsports2": ["dsports2", "dsports2-b", "dsports2-c", "dsports2-d"],
                 "dsportsplus": ["dsportsplus", "dsportsplus-b", "dsportsplus-c", "dsportsplus-d"],
-                 "telefe": ["telefe", "telefe2", "telefe3", "telefe-e", "telefe-d","telefe-b", "telefe-c", "telefe-ext","telefe-pc", "telefe2-pc"],
+                 "telefe": ["telefe", "telefe2", "telefe3", "telefe-d","telefe-b", "telefe-c", "telefe-ext","telefe-pc", "telefe2-pc"],
                 "vtvplus": ["VTVPlus", "VTVPlus-a", "VTVPlus-ext"],
                 "tycsports": ["tycsports", "tyc", "tycsports-c", "tycsports-d", "tycsports-ext", "tycsports-pc", "tycsports-desktop"],
                 "flow": ["flow1","flow1-ext"],
