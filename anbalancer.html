@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>anbalancer</title>
     <!-- Favicon -->
@@ -9,7 +10,10 @@
     <!-- <script>(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://gounodogaptofok.net/tag.min.js',7669975,document.body||document.documentElement)</script> -->
     <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
     <script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
-   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script> 
+
+    <!-- <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script> -->
+
+
     <style>
         html,
         body {
@@ -26,7 +30,7 @@
 
         .jw-button-container .jw-icon {
             color: var(--coloriconos) !important;
-        }e
+        }
 
         .jw-slider-container .jw-progress {
             background-color: var(--colorbarra) !important;
@@ -47,8 +51,8 @@
 <body>
     <div id="player" class="ViostreamIframe"></div>
 
-   
-     <script src="script-configuraciones.js"></script>
+    <!-- <script src="https://canalesonline.netlify.app/js/script-configuraciones.js"></script> -->
+    <script src="script-configuraciones.js"></script>
     <script>
 
         function getParameterByName(name) {
@@ -735,7 +739,7 @@
                     jwplayer("player").setup({
                         playlist: [{
                             title: "",
-                            description: "",
+                            description: "canalesonline.netlify.app",
                             sources: sources
                         }],
                         width: "100%",
@@ -747,24 +751,25 @@
                         // androidhls: true,
                         displaytitle: true,
                         stretching: "uniform",
-                        preload: "auto"
+                        preload: "auto",
+                        liveSyncDuration: 3,
                     });
 
-                    if (!/SmartTV|Tizen|Web0S|SmartHub|Chromecast/i.test(navigator.userAgent)) {
-                        // Esperar a que el reproductor esté listo
-                        jwplayer("player").on("ready", function () {
-                            var videoElement = document.querySelector("#player video");
-                            if (videoElement) {
-                                var audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                                var source = audioContext.createMediaElementSource(videoElement);
-                                var gainNode = audioContext.createGain();
+                    // if (!/SmartTV|Tizen|Web0S|SmartHub|Chromecast/i.test(navigator.userAgent)) {
+                    //     // Esperar a que el reproductor esté listo
+                    //     jwplayer("player").on("ready", function () {
+                    //         var videoElement = document.querySelector("#player video");
+                    //         if (videoElement) {
+                    //             var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    //             var source = audioContext.createMediaElementSource(videoElement);
+                    //             var gainNode = audioContext.createGain();
 
-                                gainNode.gain.value = 2;
-                                source.connect(gainNode);
-                                gainNode.connect(audioContext.destination);
-                            }
-                        });
-                    }
+                    //             gainNode.gain.value = 2;
+                    //             source.connect(gainNode);
+                    //             gainNode.connect(audioContext.destination);
+                    //         }
+                    //     });
+                    // }
 
                     var lang = 1; // Por defecto en español
                     jwplayer().on('play', function (e) {
