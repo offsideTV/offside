@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cvattv pro</title>
+    <style>
+        html,
+        body {
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 100%);
+            color: white;
+        }
+
+        :root {
+            --colorbarra: #51E0C0;
+            --coloriconos: #f0f0f0;
+            --color-primary: #51E0C0;
+            --color-secondary: #2a2a4a;
+            --color-danger: #ff4757;
+        }
+
+        /* Estilos JW Player */
+        .jw-button-container .jw-icon {
+            color: var(--coloriconos) !important;
+        }
+
+        .jw-slider-container .jw-progress {
+            background-color: var(--colorbarra) !important;
+        }
+
+        .jw-icon:hover {
+            color: var(--colorbarra) !important;
+        }
+
+        .jw-featured,
+        .jw-rightclick {
+            display: none !important;
+        }
+
+        /* Estilos para mensajes */
+        .message-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 100%);
+            z-index: 1000;
+        }
+
+        .message-box {
+            background: rgba(42, 42, 74, 0.95);
+            border: 2px solid var(--color-primary);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--color-primary);
+        }
+
+        .message-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .install-button {
+            background: linear-gradient(45deg, var(--color-primary), #3ecf8e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(81, 224, 192, 0.3);
+        }
+
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(81, 224, 192, 0.5);
+        }
+
+        .retry-button {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .retry-button:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(81, 224, 192, 0.1);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #player {
+            width: 100%;
+            height: 100%;
+        }
+
+        .error-box .message-icon {
+            color: var(--color-danger);
+        }
+
+        .error-box .message-title {
+            color: var(--color-danger);
+        }
+
+        .error-box {
+            border-color: var(--color-danger);
+        }
+
+        /* Estilo para el iframe de respaldo */
+        .extension-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+    <link rel="stylesheet" href="style-jw.css">
+    <script src="https://ssl.p.jwpcdn.com/player/v/8.22.1/jwplayer.js"></script>
+    <script src="canalesparatodos-channels.js"></script>
+    <script src="../js/script-configuraciones.js"></script>
+</head>
+
+<body>
+    <!-- Mensaje de carga -->
+    <div id="loading-message" class="message-container">
+        <div class="message-box">
+            <div class="loading-spinner"></div>
+            <div class="message-title">Cargando CVATTV Pro</div>
+            <div class="message-text">Intentando reproducir el contenido...</div>
+        </div>
+    </div>
+
+    <!-- Mensaje de extensión faltante -->
+    <div id="extension-message" class="message-container hidden">
+        <div class="message-box">
+            <div class="message-icon">🔧</div>
+            <div class="message-title">Extensión Requerida</div>
+            <div class="message-text">
+                Para usar este servidor necesitas instalar la extensión requerida en tu navegador.
+                <br><br>
+                La extensión permite reproducir contenido protegido de manera segura.
+            </div>
+            <a href="https://chromewebstore.google.com/detail/videoplayer-mpdm3u8m3uepg/opmeopcambhfimffbomjgemehjkbbmji"
+                class="install-button" target="_blank">
+                Instalar Extensión
+            </a>
+            <button class="retry-button" onclick="tryToPlay()">
+                Reintentar
+            </button>
+        </div>
+    </div>
+
+    <!-- Mensaje de error -->
+    <div id="error-message" class="message-container hidden">
+        <div class="message-box error-box">
+            <div class="message-icon">⚠️</div>
+            <div class="message-title">Error de Reproducción</div>
+            <div class="message-text" id="error-text">
+                Ha ocurrido un error al configurar el reproductor.
+            </div>
+            <button class="retry-button" onclick="tryToPlay()">
+                Reintentar
+            </button>
+        </div>
+    </div>
+
+    <!-- Reproductor -->
+    <div id="player" class="hidden"></div>
+
+    <script>
+        const EXTENSION_URL = "chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/pages/player.html";
+        const STREAM_URL = EXTENSION_URL + "#https://localhost/?headers=eyJPcmlnaW4iOiAiaHR0cHM6Ly9wb3J0YWwuYXBwLmZsb3cuY29tLmFyIiwgIlJlZmVyZXIiOiJodHRwczovL3BvcnRhbC5hcHAuZmxvdy5jb20uYXIifQ==";
+
+        let playerInstance;
+        let currentChannel;
+        let retryAttempts = 0;
+        let iframeAdded = false;
+        const MAX_RETRIES = 3;
+
+        // Función para mostrar/ocultar elementos
+        function showElement(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function hideElement(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function hideAllMessages() {
+            hideElement('loading-message');
+            hideElement('extension-message');
+            hideElement('error-message');
+        }
+
+        function showError(message) {
+            hideAllMessages();
+            document.getElementById('error-text').textContent = message;
+            showElement('error-message');
+        }
+
+        // Función para verificar si la extensión está instalada
+        function isExtensionInstalled(installedCallback, notInstalledCallback) {
+            const img = document.createElement('img');
+            img.onload = installedCallback;
+            img.onerror = notInstalledCallback;
+            img.src = 'chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/play-on.png';
+        }
+
+        // Función wrapper para usar con Promises
+        function checkExtension() {
+            return new Promise((resolve) => {
+                isExtensionInstalled(
+                    () => resolve(true),   // Extensión instalada
+                    () => resolve(false)   // Extensión no instalada
+                );
+            });
+        }
+
+        // Función para obtener parámetros de URL
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Función para agregar el iframe al reproductor cuando hay error
+        // function addIframeToPlayer() {
+        //     if (!iframeAdded) {
+        //         console.log("Agregando iframe de respaldo al reproductor...");
+
+        //         const playerDiv = document.getElementById('player');
+
+        //         // Limpiar contenido previo del reproductor
+        //         playerDiv.innerHTML = '';
+
+        //         // Crear y agregar iframe
+        //         const iframe = document.createElement('iframe');
+        //         iframe.className = 'extension-iframe';
+        //         iframe.src = STREAM_URL;
+        //         iframe.allow = 'encrypted-media *;';
+        //         iframe.frameBorder = '0';
+
+        //         playerDiv.appendChild(iframe);
+
+        //         iframeAdded = true;
+
+        //         // Mostrar el reproductor
+        //         hideAllMessages();
+        //         showElement('player');
+        //     }
+        // }
+
+        // Función para agregar el iframe al reproductor cuando hay error
+        function addIframeToPlayer() {
+            if (!iframeAdded) {
+                console.log("Agregando iframe de respaldo al reproductor...");
+
+                const playerDiv = document.getElementById('player');
+
+                // Limpiar contenido previo del reproductor
+                playerDiv.innerHTML = '';
+
+                // Crear y agregar iframe
+                const iframe = document.createElement('iframe');
+                iframe.className = 'extension-iframe';
+                iframe.src = STREAM_URL;
+                iframe.allow = 'encrypted-media *;';
+                iframe.frameBorder = '0';
+
+                // 👉 lo ocultamos
+                iframe.style.display = "none";
+
+                // 👉 Espera 1 segundo cuando cargue el iframe y reinicia la página
+                iframe.onload = () => {
+                    console.log("Iframe cargado, reiniciando en 1 segundo...");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
+                };
+
+                playerDiv.appendChild(iframe);
+
+                iframeAdded = true;
+
+                // Mostrar el reproductor
+                hideAllMessages();
+                showElement('player');
+            }
+        }
+
+
+        // Función para limpiar iframe si existe
+        function clearIframe() {
+            if (iframeAdded) {
+                const playerDiv = document.getElementById('player');
+                playerDiv.innerHTML = '';
+                iframeAdded = false;
+            }
+        }
+
+        // Configurar el reproductor
+        async function setupPlayer() {
+            try {
+                // Limpiar iframe previo si existe
+                clearIframe();
+
+                // Verificar si channelList existe
+                if (typeof channelList === 'undefined' || typeof getChannelKeys === 'undefined') {
+                    throw new Error('Los archivos de canales no se cargaron correctamente');
+                }
+
+                const channels = getChannelKeys(getParameterByName('get'));
+                if (!channels || channels.length === 0) {
+                    throw new Error('No se encontraron canales válidos');
+                }
+
+                currentChannel = channels[0];
+
+                // Verificar si getValidMpd existe
+                if (typeof getValidMpd === 'undefined') {
+                    throw new Error('Función getValidMpd no disponible');
+                }
+
+                const mpd = await getValidMpd();
+                if (!mpd) {
+                    throw new Error('No se pudo obtener una URL de stream válida');
+                }
+
+                // Configurar JWPlayer
+                if (typeof jwplayer === 'undefined') {
+                    throw new Error('JWPlayer no se cargó correctamente');
+                }
+
+                jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";
+
+                playerInstance = jwplayer("player").setup({
+                    playlist: [{
+                        title: "",
+                        description: "canalesonline.netlify.app",
+                        sources: [{
+                            default: true,
+                            type: "dash",
+                            file: mpd,
+                            drm: {
+                                clearkey: {
+                                    keyId: currentChannel.keyId,
+                                    key: currentChannel.key
+                                }
+                            }
+                        }]
+                    }],
+                    width: "100%",
+                    height: "100%",
+                    autostart: true,
+                    mute: false,
+                    cast: {},
+                    sharing: {},
+                    displaytitle: true,
+                    stretching: "uniform",
+                    preload: "auto",
+                    liveSyncDuration: 3,
+                });
+
+                // Event listeners
+                playerInstance.on("ready", function () {
+                    console.log("Reproductor JWPlayer listo");
+                    hideAllMessages();
+                    showElement('player');
+                });
+
+                playerInstance.on("play", function () {
+                    if (playerInstance.getAudioTracks().length > 1) {
+                        playerInstance.setCurrentAudioTrack(1);
+                    }
+                });
+
+                playerInstance.on("error", function (e) {
+                    console.error("Error del reproductor JWPlayer:", e);
+                    console.log("Intentando usar iframe de respaldo...");
+
+                    // Verificar si el error es por falta de extensión
+                    checkExtension().then(extensionAvailable => {
+                        if (!extensionAvailable) {
+                            hideAllMessages();
+                            showElement('extension-message');
+                        } else {
+                            // Si la extensión está disponible, usar iframe de respaldo
+                            addIframeToPlayer();
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error("Error al configurar el reproductor:", error);
+
+                // En caso de error durante la configuración, verificar extensión
+                checkExtension().then(extensionAvailable => {
+                    if (!extensionAvailable) {
+                        hideAllMessages();
+                        showElement('extension-message');
+                    } else {
+                        // Si la extensión está disponible, usar iframe de respaldo
+                        addIframeToPlayer();
+                    }
+                });
+            }
+        }
+
+        // Función para intentar reproducir y manejar errores
+        async function tryToPlay() {
+            try {
+                retryAttempts++;
+                hideAllMessages();
+                // showElement('loading-message');
+
+                console.log(`Intento ${retryAttempts}: Configurando reproductor...`);
+
+                await setupPlayer();
+                retryAttempts = 0; // Reset en caso de éxito
+
+            } catch (error) {
+                console.error("Error al reproducir:", error);
+
+                // Si hay error, verificar si es por falta de extensión
+                const extensionAvailable = await checkExtension();
+
+                if (!extensionAvailable) {
+                    console.log("Error debido a extensión faltante");
+                    hideAllMessages();
+                    showElement('extension-message');
+                    return;
+                }
+
+                // Si la extensión está presente pero hay otro error
+                if (retryAttempts < MAX_RETRIES) {
+                    console.log(`Reintentando en 2 segundos... (${retryAttempts}/${MAX_RETRIES})`);
+                    setTimeout(tryToPlay, 2000);
+                } else {
+                    // Después de varios intentos fallidos, usar iframe de respaldo
+                    console.log("Máximo de reintentos alcanzado, usando iframe de respaldo...");
+                    addIframeToPlayer();
+                }
+            }
+        }
+
+        // Inicializar cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("Página cargada, intentando reproducir...");
+            tryToPlay();
+        });
+
+        // Manejo de visibilidad de la página
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible' && retryAttempts > 0) {
+                console.log("Página visible nuevamente, verificando estado...");
+                tryToPlay();
+            }
+        });
+    </script>
+</body>
+
+</html>
