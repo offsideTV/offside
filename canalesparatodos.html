@@ -189,7 +189,7 @@
     <link rel="stylesheet" href="style-jw.css">
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.1/jwplayer.js"></script>
     <script src="canalesparatodos-channels.js"></script>
-    <script src="../js/script-configuraciones.js"></script>
+    <script src="script-configuraciones.js"></script>
 </head>
 
 <body>
@@ -247,6 +247,7 @@
         let currentChannel;
         let retryAttempts = 0;
         let iframeAdded = false;
+        let isInitializing = false;
         const MAX_RETRIES = 3;
 
         // Función para mostrar/ocultar elementos
@@ -338,16 +339,8 @@
                 iframe.allow = 'encrypted-media *;';
                 iframe.frameBorder = '0';
 
-                // 👉 lo ocultamos
-                iframe.style.display = "none";
-
-                // 👉 Espera 1 segundo cuando cargue el iframe y reinicia la página
-                iframe.onload = () => {
-                    console.log("Iframe cargado, reiniciando en 1 segundo...");
-                    setTimeout(() => {
-                        location.reload();
-                    }, 500);
-                };
+                // Mostrar el iframe en lugar de ocultarlo
+                iframe.style.display = "block";
 
                 playerDiv.appendChild(iframe);
 
@@ -479,18 +472,27 @@
 
         // Función para intentar reproducir y manejar errores
         async function tryToPlay() {
+            // Prevenir múltiples inicializaciones
+            if (isInitializing) {
+                console.log("Ya se está inicializando, evitando bucle...");
+                return;
+            }
+            
             try {
+                isInitializing = true;
                 retryAttempts++;
                 hideAllMessages();
-                // showElement('loading-message');
+                showElement('loading-message');
 
                 console.log(`Intento ${retryAttempts}: Configurando reproductor...`);
 
                 await setupPlayer();
                 retryAttempts = 0; // Reset en caso de éxito
+                isInitializing = false;
 
             } catch (error) {
                 console.error("Error al reproducir:", error);
+                isInitializing = false;
 
                 // Si hay error, verificar si es por falta de extensión
                 const extensionAvailable = await checkExtension();
@@ -505,7 +507,11 @@
                 // Si la extensión está presente pero hay otro error
                 if (retryAttempts < MAX_RETRIES) {
                     console.log(`Reintentando en 2 segundos... (${retryAttempts}/${MAX_RETRIES})`);
-                    setTimeout(tryToPlay, 2000);
+                    setTimeout(() => {
+                        if (!isInitializing) {
+                            tryToPlay();
+                        }
+                    }, 2000);
                 } else {
                     // Después de varios intentos fallidos, usar iframe de respaldo
                     console.log("Máximo de reintentos alcanzado, usando iframe de respaldo...");
@@ -522,7 +528,7 @@
 
         // Manejo de visibilidad de la página
         document.addEventListener('visibilitychange', function () {
-            if (document.visibilityState === 'visible' && retryAttempts > 0) {
+            if (document.visibilityState === 'visible' && retryAttempts > 0 && !isInitializing) {
                 console.log("Página visible nuevamente, verificando estado...");
                 tryToPlay();
             }
