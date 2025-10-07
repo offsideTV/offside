@@ -60,8 +60,7 @@ const allowedDomains = [
     "https://canalesonlinebk.netlify.app",
     "https://canalesonline-probk.netlify.app",
     "https://canalesonlineprueba.netlify.app",
-    "http://127.0.0.1:5500",
-    "http://127.0.0.1:5501"
+  
 ];
 
 if (bloquearDominio) {
@@ -302,50 +301,8 @@ if (bloquedoInspector) {
 
 
 window.onload = () => {
-    const pro = window.location.pathname.includes('/pro/') ? true : false;
-    if (pro) return;
+    
 
-    let permitido = false;
-    const item = "c2Rh";
-    const clave = atob(item);
-    const guardado = localStorage.getItem(clave);
-
-    if (guardado) {
-        const finCodigo = window.location.pathname.includes('/pro/')
-            ? `../acceso/fin-acceso.html`
-            : `/acceso/fin-acceso.html`;
-        try {
-            const { expira } = JSON.parse(guardado);
-            const ahora = Date.now();
-            if (ahora < expira) {
-                permitido = true;
-            } else {
-                localStorage.removeItem(clave);
-                window.location.href = finCodigo;
-                return;
-            }
-        } catch (e) {
-            // Si hay error al parsear, limpiamos
-            localStorage.removeItem(clave);
-            window.location.href = finCodigo;
-            return;
-        }
-    }
-
-    if (!permitido) {
-        // Evitar bucle si ya estamos en la página de acceso
-        if (window.location.pathname.includes('/acceso/')) return;
-
-        const rutaActual = window.location.href;
-        const nextBase64 = btoa(rutaActual);
-
-        // Redirección según carpeta
-        const destino = window.location.pathname.includes('/pro/')
-            ? `../acceso/acceso.html?next=${nextBase64}`
-            : `/acceso/acceso.html?next=${nextBase64}`;
-
-        window.location.href = destino;
-
-        document.body.innerHTML = "";
-    }
+    
+    
 };
