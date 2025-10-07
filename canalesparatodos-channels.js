@@ -1256,17 +1256,30 @@ function getParameterByName(name) {
 async function getURLwithToken() {
     let token = sessionStorage.getItem('token')
     if (!token) {
-        const url = 'https://chromecast.cvattv.com.ar/live/c7eds/La_Nacion/SA_Live_dash_enc/La_Nacion.m3u8';
-        let response = await fetch(url, {
-            signal: AbortSignal.timeout(5000)
-        });
-        if (response.redirected) {
-            const regex = /(https:\/\/.+?)(?=\/live)/;
-            const match = response.url.match(regex);
-            if (match) {
-                token = match[0]
-                sessionStorage.setItem('token', match[0])
+        try {
+            const url = 'https://chromecast.cvattv.com.ar/live/c7eds/La_Nacion/SA_Live_dash_enc/La_Nacion.m3u8';
+            console.log("Obteniendo token desde:", url);
+            
+            let response = await fetch(url, {
+                signal: AbortSignal.timeout(10000), // Aumentar timeout
+                mode: 'cors' // Asegurar CORS
+            });
+            
+            console.log("Respuesta del servidor:", response.status, response.redirected);
+            
+            if (response.redirected) {
+                const regex = /(https:\/\/.+?)(?=\/live)/;
+                const match = response.url.match(regex);
+                if (match) {
+                    token = match[0]
+                    sessionStorage.setItem('token', match[0])
+                    console.log("Token obtenido:", token);
+                }
             }
+        } catch (error) {
+            console.error("Error obteniendo token:", error);
+            // Usar token por defecto si falla
+            token = 'https://chromecast.cvattv.com.ar';
         }
     }
     return token
