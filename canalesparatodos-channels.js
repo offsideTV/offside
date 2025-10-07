@@ -1323,60 +1323,74 @@ async function getValidMpd(channelInfo) {
     currentChannel = channelToLoad;
     if (channelToLoad.type == 'external')
         return channelToLoad.getURL
-    let getMPDTries = 0
-    // while (mt2.length > 0) {
-    while (getMPDTries < 5) {
-        getMPDTries++
-        let urlWithToken = await getURLwithToken()
-        let url = `${urlWithToken}/live/c${channelToLoad.number || 3}eds/${atob(channelToLoad.getURL)}/SA_Live_dash_enc/${atob(channelToLoad.getURL)}.mpd`;
-
-        async function readStream(streamMPD) {
-            return streamMPD.read().then( ({value}) => {
-                const decoder = new TextDecoder();
-                const mpdProcessed = decoder.decode(value, {
-                    stream: true
-                });
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(mpdProcessed, 'application/xml');
-                const adaptationSets = xmlDoc.getElementsByTagName('AdaptationSet');
-                const repId = adaptationSets[1].getElementsByTagName('Representation')[0].getAttribute('id')
-                const baseURL = adaptationSets[1].getElementsByTagName('SegmentTemplate')[0].getAttribute('initialization')
-                const segmentUrl = baseURL.replace('$RepresentationID$', repId);
-                return segmentUrl
-            }
-            ).catch(error => {
-                console.error('Error reading mpd:', error);
-            }
-            );
-        }
-
+    
+    let getMPDTries = 0;
+    const maxTries = 3; // Reducir intentos para evitar bucles
+    
+    while (getMPDTries < maxTries) {
+        getMPDTries++;
+        
         try {
+            let urlWithToken = await getURLwithToken();
+            if (!urlWithToken) {
+                throw new Error('No se pudo obtener token');
+            }
+            
+            let url = `${urlWithToken}/live/c${channelToLoad.number || 3}eds/${atob(channelToLoad.getURL)}/SA_Live_dash_enc/${atob(channelToLoad.getURL)}.mpd`;
+
+            async function readStream(streamMPD) {
+                return streamMPD.read().then( ({value}) => {
+                    const decoder = new TextDecoder();
+                    const mpdProcessed = decoder.decode(value, {
+                        stream: true
+                    });
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(mpdProcessed, 'application/xml');
+                    const adaptationSets = xmlDoc.getElementsByTagName('AdaptationSet');
+                    if (adaptationSets.length < 2) {
+                        throw new Error('MPD inválido');
+                    }
+                    const repId = adaptationSets[1].getElementsByTagName('Representation')[0].getAttribute('id');
+                    const baseURL = adaptationSets[1].getElementsByTagName('SegmentTemplate')[0].getAttribute('initialization');
+                    const segmentUrl = baseURL.replace('$RepresentationID$', repId);
+                    return segmentUrl;
+                }).catch(error => {
+                    console.error('Error reading mpd:', error);
+                    throw error;
+                });
+            }
+
             let response = await fetch(url, {
+                signal: AbortSignal.timeout(8000) // Aumentar timeout
+            });
+            
+            if (!response.ok || response.status !== 200) {
+                throw new Error(`MPD token caido: ${response.status}`);
+            }
+            
+            const mpd_MP4 = await readStream(response.body.getReader());
+            const mpd_MP4_url = `${response.url.slice(0, response.url.indexOf('SA_Live_dash_enc') + 17)}${mpd_MP4}`;
+            
+            let MP4_response = await fetch(mpd_MP4_url, {
                 signal: AbortSignal.timeout(5000)
             });
-            // Cancel at 5s if response timeout
-            if (!response.ok || response.status !== 200)
-                throw new Error('MPD token caido')
-            const mpd_MP4 = await readStream(response.body.getReader())
-            const mpd_MP4_url = `${response.url.slice(0, response.url.indexOf('SA_Live_dash_enc') + 17)}${mpd_MP4}`
-            let MP4_response = await fetch(mpd_MP4_url)
+            
             if (MP4_response.ok) {
-                getMPDTries = 0
-                audioChanged = false
-                return url
+                console.log('MPD válido encontrado');
+                return url;
             } else {
-                console.log(`Link caido. Error: ${MP4_response.status}. Reintentando... (${getMPDTries})`);
-                throw new Error('MPD Caido')
+                console.log(`Link caido. Error: ${MP4_response.status}. Reintentando... (${getMPDTries}/${maxTries})`);
+                if (getMPDTries >= maxTries) {
+                    throw new Error('MPD Caido después de múltiples intentos');
+                }
             }
         } catch (error) {
-            console.log("Error fetching URL:", error);
+            console.log(`Error en intento ${getMPDTries}:`, error);
+            if (getMPDTries >= maxTries) {
+                throw new Error(`No se pudo obtener MPD válido después de ${maxTries} intentos: ${error.message}`);
+            }
         }
-
     }
-    mt2 = [...mt]
-    const errorMsg = document.querySelector('.homeScreen #appError');
-    errorMsg && (errorMsg.style.display = 'block');
-    const animLoader = document.querySelector('.homeScreen .loader');
-    animLoader && (animLoader.style.display = 'none');
-    throw new Error("No valid MPD URL found. Reloading list...");
+    
+    throw new Error("No valid MPD URL found after maximum retries");
 }
