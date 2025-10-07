@@ -1229,7 +1229,8 @@ function getChannelKeys(getURL) {
         "Q2FuYWxfZGVfbGFfY2l1ZGFk": {
             keyId: "5ee7842b3cf24d1dba088365fa5d0543",
             key: "69cec006409823c06fbf2866a231b4f7"
-        }// El Canal de la Ciudad
+        },
+        // El Canal de la Ciudad
     };
 
     channelList[0].name = atob(getURL);
