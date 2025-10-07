@@ -197,7 +197,7 @@
     <div id="loading-message" class="message-container">
         <div class="message-box">
             <div class="loading-spinner"></div>
-            <div class="message-title">Cargando CVATTV Pro</div>
+            <div class="message-title">Cargando canal</div>
             <div class="message-text">Intentando reproducir el contenido...</div>
         </div>
     </div>
@@ -279,6 +279,13 @@
             img.src = 'chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/play-on.png';
         }
 
+        // Función para detectar si estamos en un servidor
+        function isServerEnvironment() {
+            return window.location.hostname !== 'localhost' && 
+                   window.location.hostname !== '127.0.0.1' && 
+                   !window.location.hostname.startsWith('192.168.');
+        }
+
         // Función wrapper para usar con Promises
         function checkExtension() {
             return new Promise((resolve) => {
@@ -341,6 +348,16 @@
 
                 // Mostrar el iframe en lugar de ocultarlo
                 iframe.style.display = "block";
+
+                // Manejar errores del iframe
+                iframe.onerror = function() {
+                    console.error("Error cargando iframe de respaldo");
+                    showError("No se pudo cargar el contenido. Verifica tu conexión a internet.");
+                };
+
+                iframe.onload = function() {
+                    console.log("Iframe de respaldo cargado correctamente");
+                };
 
                 playerDiv.appendChild(iframe);
 
@@ -485,6 +502,7 @@
                 showElement('loading-message');
 
                 console.log(`Intento ${retryAttempts}: Configurando reproductor...`);
+                console.log("Entorno servidor:", isServerEnvironment());
 
                 await setupPlayer();
                 retryAttempts = 0; // Reset en caso de éxito
@@ -492,7 +510,16 @@
 
             } catch (error) {
                 console.error("Error al reproducir:", error);
+                console.error("Detalles del error:", error.message);
+                console.error("Stack trace:", error.stack);
                 isInitializing = false;
+
+                // Si estamos en servidor, usar iframe directamente
+                if (isServerEnvironment()) {
+                    console.log("Detectado servidor, usando iframe de respaldo directamente...");
+                    addIframeToPlayer();
+                    return;
+                }
 
                 // Si hay error, verificar si es por falta de extensión
                 const extensionAvailable = await checkExtension();
@@ -523,6 +550,9 @@
         // Inicializar cuando la página esté lista
         document.addEventListener('DOMContentLoaded', function () {
             console.log("Página cargada, intentando reproducir...");
+            console.log("URL actual:", window.location.href);
+            console.log("Protocolo:", window.location.protocol);
+            console.log("Host:", window.location.host);
             tryToPlay();
         });
 
