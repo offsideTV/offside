@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telefe api</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/icono.webp" type="image/x-icon">
+  <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+  <script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
+  <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+  <style>
+    html,
+    body {
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --colorbarra: #51E0C0;
+      --coloriconos: #f0f0f0;
+    }
+
+    .jw-button-container .jw-icon {
+      color: var(--coloriconos) !important;
+    }
+
+    .jw-slider-container .jw-progress {
+      background-color: var(--colorbarra) !important;
+    }
+
+    .jw-icon:hover {
+      color: var(--colorbarra) !important;
+    }
+
+    .jw-featured,
+    .jw-rightclick {
+      display: none !important;
+    }
+  </style>
+  <!-- <link rel="stylesheet" href="style-jw.css"> -->
+</head>
+
+<body
+  style="margin:0; padding:0; background:#000; display:flex; justify-content:center; align-items:center; height:100vh;">
+  <div id="player" style="width: 100%; height: 100%;"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- <script src="https://canalesonline.netlify.app/js/script-configuraciones.js"></script> -->
+  <!-- <script src="script-configuraciones.js"></script> -->
+  <script>
+    // Función para mostrar mensaje de carga
+    function showLoadingMessage() {
+      document.getElementById("player").innerHTML = "<div style='color: white; text-align: center; padding: 20px;'>Cargando señal de Telefe...</div>";
+    }
+
+    // Función para manejar errores del reproductor
+    function handlePlayerError(error) {
+      console.error("Error del reproductor:", error);
+      document.getElementById("player").innerHTML = "<div style='color: white; text-align: center; padding: 20px;'>Error al reproducir la señal. Intenta recargar la página.</div>";
+    }
+
+    // Mostrar mensaje de carga inicial
+    showLoadingMessage();
+
+    // Intentar cargar la señal con timeout
+    const fetchTimeout = setTimeout(() => {
+      document.getElementById("player").innerHTML = "<div style='color: white; text-align: center; padding: 20px;'>Timeout: La señal está tardando mucho en cargar.</div>";
+    }, 15000); // 15 segundos de timeout
+
+    fetch("https://teasdleasdfe.netlify.app/.netlify/functions/get-telefe")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        clearTimeout(fetchTimeout);
+        
+        if (!data || !data.url) {
+          throw new Error("No se recibió una URL válida de la API");
+        }
+
+        // Configurar el reproductor
+        jwplayer("player").setup({
+          file: data.url,
+          width: "100%",
+          height: "100%",
+          autostart: true,
+          mute: false,
+          cast: {},
+          sharing: {},
+          displaytitle: true,
+          stretching: "uniform",
+          preload: "auto",
+          volume: 80,
+          controls: true,
+          repeat: false,
+          abouttext: "Telefe API Player",
+          aboutlink: "https://telefe.com"
+        });
+
+        // Manejar errores del reproductor
+        jwplayer("player").on("error", function(error) {
+          handlePlayerError(error);
+        });
+
+        // Manejar cuando el reproductor está listo
+        jwplayer("player").on("ready", function() {
+          console.log("Reproductor listo");
+        });
+
+      })
+      .catch(error => {
+        clearTimeout(fetchTimeout);
+        console.error("Error al cargar la señal:", error);
+        document.getElementById("player").innerHTML = `
+          <div style='color: white; text-align: center; padding: 20px;'>
+            <h2>Error al cargar la señal</h2>
+            <p>${error.message}</p>
+            <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 10px; background: #51E0C0; border: none; border-radius: 5px; cursor: pointer;">
+              Recargar página
+            </button>
+          </div>
+        `;
+      });
+  </script>
+</body>
+
+</html>
