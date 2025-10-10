@@ -54,10 +54,10 @@ function getChannelKeys(getURL) {
             keyId: "93c40cee58a5f415828cc32d0c80d311",
             key: "d00906d71ee69515cd4dca1162d5ae7f"
         },
-        //
-        "": {
-            keyId: "",
-            key: ""
+        //TYC Prueba 
+        "VHlDU3BvcnQ": {
+            keyId: "2b21c8fa9a329cce311a4c4a4aa996a1",
+            key: "cc23ea1fb32629f9e1f48c8deeae3e5b"
         },
         //
         "": {
