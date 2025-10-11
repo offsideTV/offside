@@ -70,7 +70,7 @@
       document.getElementById("player").innerHTML = "<div style='color: white; text-align: center; padding: 20px;'>Timeout: La señal está tardando mucho en cargar.</div>";
     }, 15000); // 15 segundos de timeout
 
-    fetch("https://creensuspropiascosashijosdeputa.netlify.app/.netlify/functions/get-telefe")
+    fetch("https://telefeapi.netlify.app/.netlify/functions/get-telefe")
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -132,3 +132,4 @@
 
 
 </html>
+
