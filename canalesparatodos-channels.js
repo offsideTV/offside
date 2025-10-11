@@ -7,11 +7,11 @@ let channelList = [{
 }]
 
 const CHANNELS = new Map([// Canal 7
-...["RXZlbnRvc18z", "QTNfQ2luZQ==", "QXJpcmFuZw==", "QmFuZGVpcmFudGVz", "QWxsamF6emVyYQ==", "Q2FuYWxfUFJP", "VW5pdmVyc28=", "Q2FuYWxfMTFfUGFyYW5h", "Q0FOQUxfTFVa", "QWxsZWdyb0hE", "QmFieVRW", "RE5ld3M=", "VVNBX05ldHdvcms=", "QTNfU2VyaWVz", "TWVnYV9UVg==", "QW1lcmljYV9UdWN1bWFu", "UFhfU3BvcnRz", "Q2gxMF9UdWN1bWFu", "SG9tZV9hbmRfR2FyZGVu", "REhF", "Rmxvd19NdXNpY19YUA==", "QUVIRA==", "SG9sYV9UVg==", "QVhOSEQ=", "TVRWMDA=", "V2FybmVySEQ=", "R0VOX1RW", "Rm94X1Nwb3J0c19QcmVtaXVuX0hE", "VG9kb05vdGljaWFz", "VHlDU3BvcnQ=", "QW1lcmljYTI0", "QzVO", "TGFfTmFjaW9u", "Q3JvbmljYVRW", "Q2FuYWxfOF9UdWN1bWFu", "UGFyYWd1YXlfVFY=", "UGFyYW1vdW50", "Q29tZWR5Q2VudHJhbA==", "Rmxvd19NdXNpY18x", "Rmxvd19NdXNpY18y", "Rmxvd19NdXNpY18z", "Qm9vbWVyYW5n", "RHJlYW13b3Jrcw==", "QW5pbWFsUGxhbmV0", "SGlzdG9yeUhE", "SUQ=", "QnJhdm9UVg==", "U29ueUhE", "U29ueV9Nb3ZpZXM=", "VHJ1VFY=", "SEJPX1BPUA==", "RGlzY292ZXJ5VHVyYm8=", "RGlzbmV5SnI=", "SW52ZXN0aWdhY2lvbl9QZXJpb2Rpc3RpY2E=", "Rm94U3BvcnRzMl9VWQ==", "RVNQTjQ=", "Rm94U3BvcnRzM19VWQ==", "RXZlbnRvc19IRF9VeQ==", "VGVsZW11bmRvX0hE", "UGFzaW9uZXM="].map(k => [k, 7]), // Canal 6
-...["Q2FibGVfWV9EaWFyaW8=", "VHZfR2FsaWNpYQ==", "RVNQTjJfQXJn", "Q2FuYWxfMjE=", "VGVsZW5vdmVsYXM=", "RVdUTg==", "S1pP", "Vm9ydGVyaXg=", "RFc=", "Q05OX0ludGVybmFjaW9uYWw=", "S2lkb28=", "VG9vbmNhc3Q=", "UGxpbV9QbGlt", "RnJhbmNlXzI0", "Tmlja211c2lj", "U29tb3NfTGFfUGxhdGE=", "QXJ0ZWFyX0ludGVybmFjaW9uYWw=", "RXZlbnRvc18yX0hE", "R29sZGVu", "Q2FuYWxfOV9QYXJhbmE=", "R29sZl9DaGFubmVs", "Q2FuYWxfYQ==", "QW1lcmljYV9TcG9ydHM=", "Q2luZW1heA==", "Q2FuYWxfOF9DQkE=", "MjZfVFZfSEQ=", "RGlwdXRhZG9zX1RW", "QXJnZW50aW5pc2ltYQ==", "TWV0cm8=", "QkJDX1dvcmxkX05ld3M=", "VGhlYXRlcl9IRA==", "R2xpdHo=", "UXVpZXJvX0hE", "RGlzY292ZXJ5X1dvcmxkX0hE", "RXVyb2NoYW5uZWw=", "RGlzY292ZXJ5X1NjaWVuY2U=", "SU5DQUFfVHY=", "VFY1X01vbmRl", "TVRWX0hpdHM=", "TVRWX0hE", "Tmlja19Kcg==", "VFZFX0VzcGFuYQ==", "V09CSQ==", "Vm9sdmVy", "VGVsZXN1cg==", "TGlmZXRpbWU=", "QW50ZW5hXzM=", "Rm94X05ld3M=", "VHZfQ2hpbGU=", "TWFzX0NoaWM=", "U3R1ZGlvX1VuaXZlcnNhbA==", "SVNBVA==", "U3VuX0NoYW5uZWw=", "UkFJ", "VmVudXM=", "U2V4dHJlbWU=", "UGxheWJveQ==", "VE5UX1Nwb3J0c19IRA==", "VGVsZWZlSEQ=", "Q2FuYWw3", "RW5jdWVudHJv", "VGVsZW1heA==", "TmV0X1RW", "Q2FuYWxfMTJfQ0JB", "RWxfR2FyYWdl", "RmlsbV9BcnRz", "VW5pdmVyc2FsX0NoYW5uZWxfSEQ=", "RXVyb3BhX0V1cm9wYQ==", "RXVyb25ld3M=", "Rm9vZF9OZXR3b3Jr", "RV9FbnRlcnRhaW5tZW50X1RlbGV2aXNpb24=", "Q00=", "UEFLQV9QQUtB", "SGlzdG9yeV8y", "U3lGeQ==", "VEJT", "VENN", "SEJPXzI=", "SEJPX1BsdXM=", "SEJPX0ZhbWlseQ==", "SEJPX0V4dHJlbWU=", "SEJPX011bmRp", "SEJPX1NpZ25hdHVyZQ==", "Q2FuYWxfUnVyYWw=", "VExD", "Q2FuYWxfZGVfbGFfY2l1ZGFk", "RGlzY292ZXJ5X0tpZHM=", "SFRW", "TkJBX1RW", "VW5pdmVyc2FsX0NpbmVtYQ==", "VW5pdmVyc2FsX0NvbWVkeQ==", "dW5pdmVyc2FsX0NyaW1l", "VW5pdmVyc2FsX1ByZW1pZXJl", "VW5pdmVyc2FsX1JlYWxpdHk=", "Q05OX2VuX0VzcGFub2w=", "Q2FuYWxfZGVfbGFzX2VzdHJlbGxhcw=="].map(k => [k, 6]), // Canal 5
+...["RXZlbnRvc18z", "QTNfQ2luZQ==", "QXJpcmFuZw==", "QmFuZGVpcmFudGVz", "QWxsamF6emVyYQ==", "Q2FuYWxfUFJP", "VW5pdmVyc28=", "Q2FuYWxfMTFfUGFyYW5h", "Q0FOQUxfTFVa", "QWxsZWdyb0hE", "QmFieVRW", "RE5ld3M=", "VVNBX05ldHdvcms=", "QTNfU2VyaWVz", "TWVnYV9UVg==", "QW1lcmljYV9UdWN1bWFu", "UFhfU3BvcnRz", "Q2gxMF9UdWN1bWFu", "SG9tZV9hbmRfR2FyZGVu", "REhF", "Rmxvd19NdXNpY19YUA==", "QUVIRA==", "SG9sYV9UVg==", "QVhOSEQ=", "TVRWMDA=", "V2FybmVySEQ=", "R0VOX1RW", "Rm94X1Nwb3J0c19QcmVtaXVuX0hE", "VG9kb05vdGljaWFz", "VHlDU3BvcnQ", "QW1lcmljYTI0", "QzVO", "TGFfTmFjaW9u", "Q3JvbmljYVRW", "Q2FuYWxfOF9UdWN1bWFu", "UGFyYWd1YXlfVFY=", "UGFyYW1vdW50", "Q29tZWR5Q2VudHJhbA", "Rmxvd19NdXNpY18x", "Rmxvd19NdXNpY18y", "Rmxvd19NdXNpY18z", "Qm9vbWVyYW5n", "RHJlYW13b3Jrcw==", "QW5pbWFsUGxhbmV0", "SGlzdG9yeUhE", "SUQ=", "QnJhdm9UVg==", "U29ueUhE", "U29ueV9Nb3ZpZXM=", "VHJ1VFY=", "SEJPX1BPUA==", "RGlzY292ZXJ5VHVyYm8=", "RGlzbmV5SnI=", "SW52ZXN0aWdhY2lvbl9QZXJpb2Rpc3RpY2E=", "Rm94U3BvcnRzMl9VWQ==", "RVNQTjQ=", "Rm94U3BvcnRzM19VWQ==", "RXZlbnRvc19IRF9VeQ==", "VGVsZW11bmRvX0hE", "UGFzaW9uZXM="].map(k => [k, 7]), // Canal 6
+...["Q2FibGVfWV9EaWFyaW8=", "VFZfRXNwYW5h", "VHZfR2FsaWNpYQ==", "RVNQTjJfQXJn", "Q2FuYWxfMjE=", "VGVsZW5vdmVsYXM=", "RVdUTg==", "S1pP", "Vm9ydGVyaXg=", "RFc=", "Q05OX0ludGVybmFjaW9uYWw=", "S2lkb28=", "VG9vbmNhc3Q=", "UGxpbV9QbGlt", "RnJhbmNlXzI0", "Tmlja211c2lj", "U29tb3NfTGFfUGxhdGE=", "QXJ0ZWFyX0ludGVybmFjaW9uYWw=", "RXZlbnRvc18yX0hE", "R29sZGVu", "Q2FuYWxfOV9QYXJhbmE=", "R29sZl9DaGFubmVs", "Q2FuYWxfYQ==", "QW1lcmljYV9TcG9ydHM=", "Q2luZW1heA==", "Q2FuYWxfOF9DQkE=", "MjZfVFZfSEQ", "RGlwdXRhZG9zX1RW", "QXJnZW50aW5pc2ltYQ", "TWV0cm8", "QkJDX1dvcmxkX05ld3M", "VGhlYXRlcl9IRA==", "R2xpdHo=", "UXVpZXJvX0hE", "RGlzY292ZXJ5X1dvcmxkX0hE", "RXVyb2NoYW5uZWw=", "RGlzY292ZXJ5X1NjaWVuY2U=", "SU5DQUFfVHY=", "VFY1X01vbmRl", "TVRWX0hpdHM=", "TVRWX0hE", "Tmlja19Kcg==", "VFZFX0VzcGFuYQ==", "V09CSQ==", "Vm9sdmVy", "VGVsZXN1cg==", "TGlmZXRpbWU=", "QW50ZW5hXzM=", "Rm94X05ld3M=", "VHZfQ2hpbGU=", "TWFzX0NoaWM=", "U3R1ZGlvX1VuaXZlcnNhbA==", "SVNBVA==", "U3VuX0NoYW5uZWw=", "UkFJ", "VmVudXM=", "U2V4dHJlbWU", "UGxheWJveQ", "VE5UX1Nwb3J0c19IRA==", "VGVsZWZlSEQ=", "Q2FuYWw3", "RW5jdWVudHJv", "VGVsZW1heA", "TmV0X1RW", "Q2FuYWxfMTJfQ0JB", "RWxfR2FyYWdl", "RmlsbV9BcnRz", "VW5pdmVyc2FsX0NoYW5uZWxfSEQ=", "RXVyb3BhX0V1cm9wYQ", "RXVyb25ld3M=", "Rm9vZF9OZXR3b3Jr", "RV9FbnRlcnRhaW5tZW50X1RlbGV2aXNpb24=", "Q00=", "UEFLQV9QQUtB", "SGlzdG9yeV8y", "U3lGeQ==", "VEJT", "VENN", "SEJPXzI=", "SEJPX1BsdXM=", "SEJPX0ZhbWlseQ==", "SEJPX0V4dHJlbWU=", "SEJPX011bmRp", "SEJPX1NpZ25hdHVyZQ==", "Q2FuYWxfUnVyYWw=", "VExD", "Q2FuYWxfZGVfbGFfY2l1ZGFk", "RGlzY292ZXJ5X0tpZHM=", "SFRW", "TkJBX1RW", "VW5pdmVyc2FsX0NpbmVtYQ==", "VW5pdmVyc2FsX0NvbWVkeQ==", "dW5pdmVyc2FsX0NyaW1l", "VW5pdmVyc2FsX1ByZW1pZXJl", "VW5pdmVyc2FsX1JlYWxpdHk=", "Q05OX2VuX0VzcGFub2w=", "Q2FuYWxfZGVfbGFzX2VzdHJlbGxhcw=="].map(k => [k, 6]), // Canal 5
 ...["QzlOX0M0", "Q2FuYWxfQw==", "U29tb3NfUm9zYXJpbw==", "U29tb3NfU1RG", "QUJDX1RWX0M0"].map(k => [k, 5]), // Canal 4
-...["Q2FuYWxfNV9Sb3Nhcmlv", "VFZfQ2FtYXJh", "Q0hfMTJfUG9zYWRhcw==", "Q0JBMjQ=", "TWl4VFY=", "TG9jYWxfQ2FybG9zX1Bheg==", "Q2FuYWwxMF9DQkFfSEQ=", "VU5JQ0FOQUxfQzQ=", "TGF0YW1fUnVyYWw=", "U29tb3NfQ29ycmllbnRlcw==", "U29tb3NfU2FsdGE=", "U29tb3NfUmFmYWVsYQ==", "U29tb3NfUmVzaXN0ZW5jaWE=", "U29tb3NfRWxfVmFsbGU=", "Q2FuYWxfQ2l1ZGFkX01EUQ==", "NV9EaWFzX1BZ", "VGVsZWZlX0ludGVybmFjaW9uYWw=", "Q0hfMTNfQ29ycmllbnRlcw==", "U2hvd19TcG9ydHM=", "Q0hfOV9SZXNpc3RlbmNpYQ==", "VEVMRUZVVFVST19DNA==", "VGVsZWZlX05ldXF1ZW4=", "VGVsZWZlX1NhbHRh", "U05UX0M0", "UEFSQVZJU0lPTl9DNA==", "Tk9USUNJQVNfUFlfQzQ=", "TEFfVEVMRV9DNA==", "U1VSX1RWX0M0", "Q2FuYWwxMlVSVQ==", "RGlzY292ZXJ5SG9tZUhlYWx0aEhE", "Q2FuYWw0X1VSVQ==", "SEJPSEQ=", "Q2FuYWwxMF9VUlU=", "UlBDX0M0"].map(k => [k, 4]), // Canal 3
-...["SEVJX05PVw==", "Qmxvb21iZXJn", "Q2FuYWxfVQ==", "RnJhbmNlMjRfRmxvdw==", "VFZfTmFjaW9uYWxfVXk=", "UmVkZV9SZWNvcmQ=", "U29tb3NfQmFoaWFfQmxhbmNh", "Q2FuYWxfM19Sb3Nhcmlv", "Q2FuYWw3X0JhaGlhX0JsYW5jYQ==", "Q2FuYWxfMTNfU0ZF", "Q2FuYWw5X0JhaGlhX0JsYW5jYQ==", "TmF0R2VvSEQ=", "VE5UX0hEX0FyZw==", "VE5UU2VyaWVz", "Q2FydG9vbk5ldHdvcms=", "Tmlja2Vsb2Rlb24=", "QWR1bHRfU3dpbQ==", "RXZlbnRvczFIRA=="].map(k => [k, 3])]);
+...["Q2FuYWxfNV9Sb3Nhcmlv", "VFZfQ2FtYXJh", "Q0hfMTJfUG9zYWRhcw==", "Q0JBMjQ=", "TWl4VFY=", "TG9jYWxfQ2FybG9zX1Bheg==", "Q2FuYWwxMF9DQkFfSEQ=", "VU5JQ0FOQUxfQzQ=", "TGF0YW1fUnVyYWw=", "U29tb3NfQ29ycmllbnRlcw==", "U29tb3NfU2FsdGE=", "U29tb3NfUmFmYWVsYQ==", "U29tb3NfUmVzaXN0ZW5jaWE=", "U29tb3NfRWxfVmFsbGU=", "Q2FuYWxfQ2l1ZGFkX01EUQ==", "NV9EaWFzX1BZ", "VGVsZWZlX0ludGVybmFjaW9uYWw=", "Q0hfMTNfQ29ycmllbnRlcw==", "U2hvd19TcG9ydHM=", "Q0hfOV9SZXNpc3RlbmNpYQ==", "VEVMRUZVVFVST19DNA==", "VGVsZWZlX05ldXF1ZW4=", "VGVsZWZlX1NhbHRh", "U05UX0M0", "UEFSQVZJU0lPTl9DNA==", "Tk9USUNJQVNfUFlfQzQ=", "TEFfVEVMRV9DNA==", "U1VSX1RWX0M0", "Q2FuYWwxMlVSVQ==", "Q2FuYWw0X1VSVQ==", "SEJPSEQ=", "Q2FuYWwxMF9VUlU=", "UlBDX0M0"].map(k => [k, 4]), // Canal 3
+...["SEVJX05PVw==", "Qmxvb21iZXJn", "Q2FuYWxfVQ==", "RnJhbmNlMjRfRmxvdw==", "VFZfTmFjaW9uYWxfVXk=", "UmVkZV9SZWNvcmQ=", "U29tb3NfQmFoaWFfQmxhbmNh", "Q2FuYWxfM19Sb3Nhcmlv", "Q2FuYWw3X0JhaGlhX0JsYW5jYQ==", "Q2FuYWxfMTNfU0ZF", "Q2FuYWw5X0JhaGlhX0JsYW5jYQ==", "TmF0R2VvSEQ=", "VE5UX0hEX0FyZw==", "VE5UU2VyaWVz", "Q2FydG9vbk5ldHdvcms=", "Tmlja2Vsb2Rlb24=", "QWR1bHRfU3dpbQ==", "RXZlbnRvczFIRA"].map(k => [k, 3])]);
 
 function getChannelNumber(getURL) {
     return CHANNELS.get(getURL) || 3;
@@ -54,10 +54,10 @@ function getChannelKeys(getURL) {
             keyId: "93c40cee58a5f415828cc32d0c80d311",
             key: "d00906d71ee69515cd4dca1162d5ae7f"
         },
-        //TYC Prueba 
-        "VHlDU3BvcnQ": {
-            keyId: "2b21c8fa9a329cce311a4c4a4aa996a1",
-            key: "cc23ea1fb32629f9e1f48c8deeae3e5b"
+        //
+        "": {
+            keyId: "",
+            key: ""
         },
         //
         "": {
@@ -1256,37 +1256,30 @@ function getParameterByName(name) {
 async function getURLwithToken() {
     let token = sessionStorage.getItem('token')
     if (!token) {
-        try {
-            const url = 'https://chromecast.cvattv.com.ar/live/c7eds/La_Nacion/SA_Live_dash_enc/La_Nacion.m3u8';
-            console.log("Obteniendo token desde:", url);
-            
-            let response = await fetch(url, {
-                signal: AbortSignal.timeout(10000), // Aumentar timeout
-                mode: 'cors' // Asegurar CORS
-            });
-            
-            console.log("Respuesta del servidor:", response.status, response.redirected);
-            
-            if (response.redirected) {
-                const regex = /(https:\/\/.+?)(?=\/live)/;
-                const match = response.url.match(regex);
-                if (match) {
-                    token = match[0]
-                    sessionStorage.setItem('token', match[0])
-                    console.log("Token obtenido:", token);
-                }
+        const url = 'https://chromecast.cvattv.com.ar/live/c7eds/La_Nacion/SA_Live_dash_enc/La_Nacion.m3u8';
+        let response = await fetch(url, {
+            signal: AbortSignal.timeout(5000)
+        });
+        if (response.redirected) {
+            const regex = /(https:\/\/.+?)(?=\/live)/;
+            const match = response.url.match(regex);
+            if (match) {
+                token = match[0]
+                sessionStorage.setItem('token', match[0])
             }
-        } catch (error) {
-            console.error("Error obteniendo token:", error);
-            // Usar token por defecto si falla
-            token = 'https://chromecast.cvattv.com.ar';
         }
     }
     return token
 }
 
 // Dominios
-let mt = ["chromecast", "cdn", "edge-live01-cte", "edge-live02-mun", "edge-mix02-cte", "edge-mix04-coe", "edge-mix05-coe", "edge2-ccast-sl",
+let mt = ["chromecast", "cdn", // "edge-live01-cte",
+// "edge-live02-mun",
+// "edge-mix02-cte",
+// "edge-mix04-coe",
+// "edge-mix05-coe",
+// "edge2-ccast-sl",
+
 //No funciona
 // "edge1-ccast-sl",
 // "edge-live01-mun",
@@ -1336,74 +1329,60 @@ async function getValidMpd(channelInfo) {
     currentChannel = channelToLoad;
     if (channelToLoad.type == 'external')
         return channelToLoad.getURL
-    
-    let getMPDTries = 0;
-    const maxTries = 3; // Reducir intentos para evitar bucles
-    
-    while (getMPDTries < maxTries) {
-        getMPDTries++;
-        
-        try {
-            let urlWithToken = await getURLwithToken();
-            if (!urlWithToken) {
-                throw new Error('No se pudo obtener token');
-            }
-            
-            let url = `${urlWithToken}/live/c${channelToLoad.number || 3}eds/${atob(channelToLoad.getURL)}/SA_Live_dash_enc/${atob(channelToLoad.getURL)}.mpd`;
+    let getMPDTries = 0
+    // while (mt2.length > 0) {
+    while (getMPDTries < 5) {
+        getMPDTries++
+        let urlWithToken = await getURLwithToken()
+        let url = `${urlWithToken}/live/c${channelToLoad.number || 3}eds/${atob(channelToLoad.getURL)}/SA_Live_dash_enc/${atob(channelToLoad.getURL)}.mpd`;
 
-            async function readStream(streamMPD) {
-                return streamMPD.read().then( ({value}) => {
-                    const decoder = new TextDecoder();
-                    const mpdProcessed = decoder.decode(value, {
-                        stream: true
-                    });
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(mpdProcessed, 'application/xml');
-                    const adaptationSets = xmlDoc.getElementsByTagName('AdaptationSet');
-                    if (adaptationSets.length < 2) {
-                        throw new Error('MPD inválido');
-                    }
-                    const repId = adaptationSets[1].getElementsByTagName('Representation')[0].getAttribute('id');
-                    const baseURL = adaptationSets[1].getElementsByTagName('SegmentTemplate')[0].getAttribute('initialization');
-                    const segmentUrl = baseURL.replace('$RepresentationID$', repId);
-                    return segmentUrl;
-                }).catch(error => {
-                    console.error('Error reading mpd:', error);
-                    throw error;
+        async function readStream(streamMPD) {
+            return streamMPD.read().then( ({value}) => {
+                const decoder = new TextDecoder();
+                const mpdProcessed = decoder.decode(value, {
+                    stream: true
                 });
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(mpdProcessed, 'application/xml');
+                const adaptationSets = xmlDoc.getElementsByTagName('AdaptationSet');
+                const repId = adaptationSets[1].getElementsByTagName('Representation')[0].getAttribute('id')
+                const baseURL = adaptationSets[1].getElementsByTagName('SegmentTemplate')[0].getAttribute('initialization')
+                const segmentUrl = baseURL.replace('$RepresentationID$', repId);
+                return segmentUrl
             }
+            ).catch(error => {
+                console.error('Error reading mpd:', error);
+            }
+            );
+        }
 
+        try {
             let response = await fetch(url, {
-                signal: AbortSignal.timeout(8000) // Aumentar timeout
-            });
-            
-            if (!response.ok || response.status !== 200) {
-                throw new Error(`MPD token caido: ${response.status}`);
-            }
-            
-            const mpd_MP4 = await readStream(response.body.getReader());
-            const mpd_MP4_url = `${response.url.slice(0, response.url.indexOf('SA_Live_dash_enc') + 17)}${mpd_MP4}`;
-            
-            let MP4_response = await fetch(mpd_MP4_url, {
                 signal: AbortSignal.timeout(5000)
             });
-            
+            // Cancel at 5s if response timeout
+            if (!response.ok || response.status !== 200)
+                throw new Error('MPD token caido')
+            const mpd_MP4 = await readStream(response.body.getReader())
+            const mpd_MP4_url = `${response.url.slice(0, response.url.indexOf('SA_Live_dash_enc') + 17)}${mpd_MP4}`
+            let MP4_response = await fetch(mpd_MP4_url)
             if (MP4_response.ok) {
-                console.log('MPD válido encontrado');
-                return url;
+                getMPDTries = 0
+                audioChanged = false
+                return url
             } else {
-                console.log(`Link caido. Error: ${MP4_response.status}. Reintentando... (${getMPDTries}/${maxTries})`);
-                if (getMPDTries >= maxTries) {
-                    throw new Error('MPD Caido después de múltiples intentos');
-                }
+                console.log(`Link caido. Error: ${MP4_response.status}. Reintentando... (${getMPDTries})`);
+                throw new Error('MPD Caido')
             }
         } catch (error) {
-            console.log(`Error en intento ${getMPDTries}:`, error);
-            if (getMPDTries >= maxTries) {
-                throw new Error(`No se pudo obtener MPD válido después de ${maxTries} intentos: ${error.message}`);
-            }
+            console.log("Error fetching URL:", error);
         }
+
     }
-    
-    throw new Error("No valid MPD URL found after maximum retries");
+    mt2 = [...mt]
+    const errorMsg = document.querySelector('.homeScreen #appError');
+    errorMsg && (errorMsg.style.display = 'block');
+    const animLoader = document.querySelector('.homeScreen .loader');
+    animLoader && (animLoader.style.display = 'none');
+    throw new Error("No valid MPD URL found. Reloading list...");
 }
