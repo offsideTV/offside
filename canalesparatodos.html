@@ -189,7 +189,7 @@
     <link rel="stylesheet" href="style-jw.css">
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.1/jwplayer.js"></script>
     <script src="canalesparatodos-channels.js"></script>
-    <script src="script-configuraciones.js"></script>
+    <script src="../js/script-configuraciones.js"></script>
 </head>
 
 <body>
@@ -197,7 +197,7 @@
     <div id="loading-message" class="message-container">
         <div class="message-box">
             <div class="loading-spinner"></div>
-            <div class="message-title">Cargando canal</div>
+            <div class="message-title">Cargando CVATTV Pro</div>
             <div class="message-text">Intentando reproducir el contenido...</div>
         </div>
     </div>
@@ -247,7 +247,6 @@
         let currentChannel;
         let retryAttempts = 0;
         let iframeAdded = false;
-        let isInitializing = false;
         const MAX_RETRIES = 3;
 
         // Función para mostrar/ocultar elementos
@@ -277,13 +276,6 @@
             img.onload = installedCallback;
             img.onerror = notInstalledCallback;
             img.src = 'chrome-extension://opmeopcambhfimffbomjgemehjkbbmji/play-on.png';
-        }
-
-        // Función para detectar si estamos en un servidor
-        function isServerEnvironment() {
-            return window.location.hostname !== 'localhost' && 
-                   window.location.hostname !== '127.0.0.1' && 
-                   !window.location.hostname.startsWith('192.168.');
         }
 
         // Función wrapper para usar con Promises
@@ -346,17 +338,15 @@
                 iframe.allow = 'encrypted-media *;';
                 iframe.frameBorder = '0';
 
-                // Mostrar el iframe en lugar de ocultarlo
-                iframe.style.display = "block";
+                // 👉 lo ocultamos
+                iframe.style.display = "none";
 
-                // Manejar errores del iframe
-                iframe.onerror = function() {
-                    console.error("Error cargando iframe de respaldo");
-                    showError("No se pudo cargar el contenido. Verifica tu conexión a internet.");
-                };
-
-                iframe.onload = function() {
-                    console.log("Iframe de respaldo cargado correctamente");
+                // 👉 Espera 1 segundo cuando cargue el iframe y reinicia la página
+                iframe.onload = () => {
+                    console.log("Iframe cargado, reiniciando en 1 segundo...");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
                 };
 
                 playerDiv.appendChild(iframe);
@@ -417,7 +407,7 @@
                 playerInstance = jwplayer("player").setup({
                     playlist: [{
                         title: "",
-                        description: "",
+                        description: "offsidetv",
                         sources: [{
                             default: true,
                             type: "dash",
@@ -489,37 +479,18 @@
 
         // Función para intentar reproducir y manejar errores
         async function tryToPlay() {
-            // Prevenir múltiples inicializaciones
-            if (isInitializing) {
-                console.log("Ya se está inicializando, evitando bucle...");
-                return;
-            }
-            
             try {
-                isInitializing = true;
                 retryAttempts++;
                 hideAllMessages();
-                showElement('loading-message');
+                // showElement('loading-message');
 
                 console.log(`Intento ${retryAttempts}: Configurando reproductor...`);
-                console.log("Entorno servidor:", isServerEnvironment());
 
                 await setupPlayer();
                 retryAttempts = 0; // Reset en caso de éxito
-                isInitializing = false;
 
             } catch (error) {
                 console.error("Error al reproducir:", error);
-                console.error("Detalles del error:", error.message);
-                console.error("Stack trace:", error.stack);
-                isInitializing = false;
-
-                // Si estamos en servidor, usar iframe directamente
-                if (isServerEnvironment()) {
-                    console.log("Detectado servidor, usando iframe de respaldo directamente...");
-                    addIframeToPlayer();
-                    return;
-                }
 
                 // Si hay error, verificar si es por falta de extensión
                 const extensionAvailable = await checkExtension();
@@ -534,11 +505,7 @@
                 // Si la extensión está presente pero hay otro error
                 if (retryAttempts < MAX_RETRIES) {
                     console.log(`Reintentando en 2 segundos... (${retryAttempts}/${MAX_RETRIES})`);
-                    setTimeout(() => {
-                        if (!isInitializing) {
-                            tryToPlay();
-                        }
-                    }, 2000);
+                    setTimeout(tryToPlay, 2000);
                 } else {
                     // Después de varios intentos fallidos, usar iframe de respaldo
                     console.log("Máximo de reintentos alcanzado, usando iframe de respaldo...");
@@ -550,15 +517,12 @@
         // Inicializar cuando la página esté lista
         document.addEventListener('DOMContentLoaded', function () {
             console.log("Página cargada, intentando reproducir...");
-            console.log("URL actual:", window.location.href);
-            console.log("Protocolo:", window.location.protocol);
-            console.log("Host:", window.location.host);
             tryToPlay();
         });
 
         // Manejo de visibilidad de la página
         document.addEventListener('visibilitychange', function () {
-            if (document.visibilityState === 'visible' && retryAttempts > 0 && !isInitializing) {
+            if (document.visibilityState === 'visible' && retryAttempts > 0) {
                 console.log("Página visible nuevamente, verificando estado...");
                 tryToPlay();
             }
